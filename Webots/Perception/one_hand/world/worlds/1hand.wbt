@@ -1,0 +1,123 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.8938879693926352 -0.4478225613721865 0.020475636770704634 0.5010045304082904
+  position -0.9961741142355157 3.2510235793230127 6.010905903700588
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF table Solid {
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 1
+        }
+      }
+      geometry Box {
+        size 4 0.2 2
+      }
+    }
+  ]
+  name "table"
+  boundingObject Box {
+    size 4 0.2 2
+  }
+  locked TRUE
+}
+DEF camera Robot {
+  translation 0 1.5 0
+  children [
+    Solid {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.447059 0.623529 0.811765
+          }
+          geometry Capsule {
+            height 0.1
+            radius 0.05
+          }
+        }
+        Camera {
+          rotation 1 0 0 -1.57
+          name "cam"
+          fieldOfView 1.5
+          width 128
+          height 128
+          antiAliasing TRUE
+          recognition Recognition {
+          }
+        }
+      ]
+    }
+  ]
+  controller "cam"
+  battery [
+    0
+  ]
+}
+DEF hand Robot {
+  translation 0 0.4399999999999995 -0.010000000000000004
+  rotation 1 0 0 -1.15
+  scale 0.003 0.003 0.003
+  children [
+    Connector {
+      name "hand_connector"
+      type "active"
+      distanceTolerance 0.1
+      axisTolerance 3.141
+      rotationTolerance 3.141
+      numberOfRotations 6
+      snap FALSE
+    }
+    Shape {
+      appearance DEF hand_col PBRAppearance {
+        baseColor 0.913725 0.72549 0.431373
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
+        ]
+      }
+    }
+  ]
+  boundingObject Mesh {
+    url [
+      "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
+    ]
+  }
+  controller "my_controller"
+  supervisor TRUE
+}
+DEF ball Solid {
+  translation 0.0031616734373574548 0.12825434979980027 -0.009561134521284494
+  rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+  children [
+    Connector {
+      type "passive"
+      distanceTolerance 0.1
+      axisTolerance 3.14
+      rotationTolerance 3.14
+      numberOfRotations 6
+    }
+    DEF ball Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.937255 0.160784 0.160784
+        }
+      }
+      geometry Sphere {
+        radius 0.03
+      }
+    }
+  ]
+  boundingObject USE ball
+  physics Physics {
+  }
+}
