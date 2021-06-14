@@ -30,6 +30,8 @@ while supervisor.step(timestep) != -1:
     # Get keyboard input
     key = keyboard.getKey()
     dx = 0.01
+    anti_grav = 0
+    trans_field.setSFVec3f([values[0], values[1]+anti_grav, values[2]])
     if key == ord('D'):
         trans_field.setSFVec3f([values[0] + dx, values[1], values[2]])
     elif key == ord('A'):
@@ -43,7 +45,7 @@ while supervisor.step(timestep) != -1:
     elif key == ord('F'):
         trans_field.setSFVec3f([values[0], values[1] - dx, values[2]])
     elif key == ord('Q'):  # set to initial pos
-        trans_field.setSFVec3f([0, 1, 0])
+        trans_field.setSFVec3f([0, 1.3, 0])
     elif key == ord('E'): # enable or disable magnetic link
         if connector.isLocked():
             connector.unlock()
@@ -54,8 +56,10 @@ while supervisor.step(timestep) != -1:
     
     # if the object is grabbed, indicate this by color change of hand
     # print(supervisor.getFromDef("hand_col").getField("baseColor").setSFColor([0,0,0]))
+    print(connector.getPresence(), connector.isLocked())
 
      
-
+# TODO: connector doesn't work
+# TODO: how to notice whether objects are actually locked (to change color as indicator of grabbed)
 
 
