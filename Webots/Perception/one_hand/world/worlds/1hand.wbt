@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 1 0 0 4.71238898038469
-  position 0.4622128290565359 7.456178076291014 0.0957547783329961
+  orientation 0 1 0 0
+  position 0.358433428063562 0.6430025777137713 5.260649782108867
 }
 TexturedBackground {
 }
@@ -61,99 +61,86 @@ DEF camera Robot {
     0
   ]
 }
-DEF arm_base Solid {
-  translation 1.01005 0.199961 0.5
-  children [
-    DEF base Shape {
-      appearance Appearance {
-        material Material {
-          diffuseColor 0 0 0
-        }
-      }
-      geometry Box {
-        size 0.2 0.2 0.2
-      }
-    }
-  ]
-  boundingObject USE base
-  physics Physics {
-    mass 0.1
-  }
-}
 DEF arm Robot {
-  translation 0 1.3 0
-  rotation 0.9999969003860804 0.0013540523329537495 -0.002089440238755386 -1.1596185621017814
-  scale 0.003 0.003 0.003
   children [
-    DEF hand Solid {
+    DEF upper_arm Solid {
+      translation 1.5 0.4999843040000001 0
       children [
-        DEF hand_shape Shape {
-          appearance PBRAppearance {
-            baseColor 0.913725 0.72549 0.431373
-            metalness 0
-          }
-          geometry Mesh {
-            url [
-              "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
-            ]
-          }
-        }
-        BallJoint {
-          jointParameters BallJointParameters {
+        DEF ua_la BallJoint {
+          jointParameters DEF j1 BallJointParameters {
           }
           jointParameters2 JointParameters {
           }
           jointParameters3 JointParameters {
           }
-          endPoint SolidReference {
-            solidName "lower arm"
-          }
-        }
-        Connector {
-          name "hand_connector"
-          boundingObject Sphere {
-            radius 0.001
-          }
-          type "active"
-          isLocked TRUE
-          autoLock TRUE
-          distanceTolerance 0.2
-          axisTolerance 3.141
-          rotationTolerance 3.141
-          numberOfRotations 6
-          snap FALSE
-        }
-      ]
-      boundingObject USE hand_shape
-    }
-    DEF lower_arm Solid {
-      translation 180 -2 6
-      rotation 0 0 1 1.5708
-      children [
-        DEF lower_arm_shape Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 0.913725 0.72549 0.431373
+          endPoint DEF lower_arm Solid {
+            translation -0.5499992686372157 0.5000008044978805 0
+            rotation 0 0 1 1.5707985372756086
+            children [
+              BallJoint {
+                jointParameters BallJointParameters {
+                }
+                jointParameters2 JointParameters {
+                }
+                jointParameters3 JointParameters {
+                }
+                endPoint DEF hand Solid {
+                  translation -8.531327780310323e-07 0.5999999999993936 0
+                  rotation -0.2849888001794463 0.6412235720760928 -0.7124701498212086 1.570798680846595
+                  scale 0.003 0.003 0.003
+                  children [
+                    DEF hand_shape Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.913725 0.72549 0.431373
+                        metalness 0
+                      }
+                      geometry Mesh {
+                        url [
+                          "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
+                        ]
+                      }
+                    }
+                    DEF hand_connector Connector {
+                      name "hand_connector"
+                      boundingObject Sphere {
+                        radius 0.001
+                      }
+                      type "active"
+                      isLocked TRUE
+                      autoLock TRUE
+                      distanceTolerance 0.2
+                      axisTolerance 3.141
+                      rotationTolerance 3.141
+                      numberOfRotations 6
+                      snap FALSE
+                    }
+                  ]
+                  physics Physics {
+                    density -1
+                    mass 1
+                  }
+                }
+              }
+              DEF lower_arm_shape Shape {
+                appearance Appearance {
+                  material Material {
+                    diffuseColor 0.913725 0.72549 0.431373
+                  }
+                }
+                geometry Cylinder {
+                  height 1
+                  radius 0.05
+                }
+              }
+            ]
+            name "lower arm"
+            boundingObject USE lower_arm_shape
+            physics Physics {
+              density -1
+              mass 1
             }
           }
-          geometry Cylinder {
-            height 300
-            radius 12
-          }
         }
-        BallJoint {
-          endPoint SolidReference {
-            solidName "upper arm"
-          }
-        }
-      ]
-      name "lower arm"
-      boundingObject USE lower_arm_shape
-    }
-    DEF upper_arm Solid {
-      translation 330 -150 -110
-      rotation 1 0 0 0.7854003061004253
-      children [
         DEF upper_arm_shape Shape {
           appearance Appearance {
             material Material {
@@ -161,15 +148,28 @@ DEF arm Robot {
             }
           }
           geometry Cylinder {
-            height 300
-            radius 12
+            height 1
+            radius 0.05
           }
         }
       ]
       name "upper arm"
       boundingObject USE upper_arm_shape
+      physics Physics {
+        density -1
+        mass 1
+      }
+      locked TRUE
     }
   ]
+  name "robot(1)"
+  controller "my_controller"
+  supervisor TRUE
+}
+DEF deprecated Robot {
+  translation 0 -40810.057952000934 0
+  rotation 0.9999969003860802 0.0013540523329537498 -0.0020894402387553854 -1.1596185621017814
+  scale 0.003 0.003 0.003
   physics Physics {
     mass 1e-06
   }
@@ -177,8 +177,8 @@ DEF arm Robot {
   supervisor TRUE
 }
 DEF ball Robot {
-  translation 0.000149599 0.2 -0.000452398
-  rotation 0.9494364148977936 5.209756189249499e-19 0.3139593828284552 0.00481579828530482
+  translation 0.005877212182565766 0.11414527163819362 -0.01777634110110836
+  rotation 0.9494643526988232 -2.4914205847791658e-05 0.31387488324726925 -1.3715167160470978
   children [
     Connector {
       type "passive"
@@ -234,8 +234,8 @@ DEF STILL_WATER Fluid {
   boundingObject USE S
 }
 DEF TETRAHEDRON_SOLID Solid {
-  translation 3 -1 0
-  rotation 0.07022487422654634 0.9959673769797767 0.055834138588229526 -1.3036678439191811
+  translation 3.001104739638007 -0.5367459661538119 -0.00018078833929558932
+  rotation 0.05812829493801482 0.9973312607406366 0.0441753061912573 -1.3022685835551655
   scale 2 2 2
   children [
     DEF TETRAHEDRON Shape {

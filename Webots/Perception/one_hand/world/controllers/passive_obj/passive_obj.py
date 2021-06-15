@@ -17,4 +17,4 @@ connector = robot.getDevice("connector")
 connector.enablePresence(timestep)
 
 while robot.step(timestep) != -1:
-    print(connector.isLocked())
+    pass

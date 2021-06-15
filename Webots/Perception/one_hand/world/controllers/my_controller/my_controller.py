@@ -9,12 +9,16 @@ supervisor = Supervisor()
 # get the keyboard
 keyboard = Keyboard()
 # get the active connector on the hand
-connector = Connector("hand_connector")
+#connector = Connector("hand_connector")
+#connector = supervisor.getFromDef("hand_connector")
+#hand = supervisor.getFromDef("hand")
+#connector = supervisor.getDevice("hand_connector")
+print('should contain connector', supervisor.getNumberOfDevices())
 # get the time step of the current world.
 timestep = int(supervisor.getBasicTimeStep())
 
 # init stuff
-connector.enablePresence(timestep)
+#connector.enablePresence(timestep)
 keyboard.enable(timestep)
 robot_node = supervisor.getSelf()
 trans_field = robot_node.getField("translation")
@@ -24,6 +28,10 @@ print()
 
 # Main loop
 while supervisor.step(timestep) != -1:
+    # in principle, this is how we can configure arm joints
+    a = supervisor.getFromDef("j1").getField("position")
+    a.setSFFloat(10.1)
+
     # Get position
     values = trans_field.getSFVec3f()
 
@@ -56,7 +64,7 @@ while supervisor.step(timestep) != -1:
     
     # if the object is grabbed, indicate this by color change of hand
     # print(supervisor.getFromDef("hand_col").getField("baseColor").setSFColor([0,0,0]))
-    print(connector.getPresence(), connector.isLocked())
+    #print(connector.getPresence(), connector.isLocked())
 
      
 # TODO: connector doesn't work
