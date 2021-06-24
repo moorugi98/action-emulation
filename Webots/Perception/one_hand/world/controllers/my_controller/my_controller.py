@@ -3,71 +3,56 @@
 # You may need to import some classes of the controller module. Ex:
 #  from controller import Robot, Motor, DistanceSensor
 from controller import Supervisor, Keyboard, Connector
+import numpy as np
 
 # get the supervisor which is +alpha on the default Robot()
 supervisor = Supervisor()
-# get the keyboard
-keyboard = Keyboard()
-# get the active connector on the hand
-#connector = Connector("hand_connector")
-#connector = supervisor.getFromDef("hand_connector")
-#hand = supervisor.getFromDef("hand")
-#connector = supervisor.getDevice("hand_connector")
-print('should contain connector', supervisor.getNumberOfDevices())
-# get the time step of the current world.
+# get the time step of the current world
 timestep = int(supervisor.getBasicTimeStep())
 
 # init stuff
-#connector.enablePresence(timestep)
-keyboard.enable(timestep)
-robot_node = supervisor.getSelf()
-trans_field = robot_node.getField("translation")
-
-# Inform user about control
-print()
-
-# Main loop
-while supervisor.step(timestep) != -1:
-    # in principle, this is how we can configure arm joints
-    a = supervisor.getFromDef("j1").getField("position")
-    a.setSFFloat(10.1)
-
-    # Get position
-    values = trans_field.getSFVec3f()
-
-    # Get keyboard input
-    key = keyboard.getKey()
-    dx = 0.01
-    anti_grav = 0
-    trans_field.setSFVec3f([values[0], values[1]+anti_grav, values[2]])
-    if key == ord('D'):
-        trans_field.setSFVec3f([values[0] + dx, values[1], values[2]])
-    elif key == ord('A'):
-        trans_field.setSFVec3f([values[0] - dx, values[1], values[2]])
-    elif key == ord('S'):
-        trans_field.setSFVec3f([values[0], values[1], values[2] + dx])
-    elif key == ord('W'):
-        trans_field.setSFVec3f([values[0], values[1], values[2] - dx])
-    elif key == ord('R'):
-        trans_field.setSFVec3f([values[0], values[1] + dx, values[2]])
-    elif key == ord('F'):
-        trans_field.setSFVec3f([values[0], values[1] - dx, values[2]])
-    elif key == ord('Q'):  # set to initial pos
-        trans_field.setSFVec3f([0, 1.3, 0])
-    elif key == ord('E'): # enable or disable magnetic link
-        if connector.isLocked():
-            connector.unlock()
-            print('magnet disabled')
-        else:
-            connector.lock()
-            print('magnet enabled')
-    
-    # if the object is grabbed, indicate this by color change of hand
-    # print(supervisor.getFromDef("hand_col").getField("baseColor").setSFColor([0,0,0]))
-    #print(connector.getPresence(), connector.isLocked())
-
-     
-# TODO: connector doesn't work
-# TODO: how to notice whether objects are actually locked (to change color as indicator of grabbed)
+hand_node = supervisor.getSelf()
+apple_node = supervisor.getFromDef('apple')
+knife_node = supervisor.getFromDef('knife')
 
 
+def hand_reach_apple(n_step, eta=400):
+    hand_pos_field = hand_node.getField('translation')
+    hand_pos = hand_pos_field.getSFVec3f()
+    apple_pos_field = apple_node.getField('translation')
+    apple_pos = apple_pos_field.getSFVec3f()
+    dx = (apple_pos[0] - hand_pos[0]) / (n_step + eta)  # hand shouldn't cover the apple
+    dz = (apple_pos[2] - hand_pos[2]) / (n_step + eta)
+
+    counter = 0
+    while (supervisor.step(timestep) != -1) and (counter < n_step):
+        hand_pos = [hand_pos[0] + dx, hand_pos[1], hand_pos[2] + dz]
+        hand_pos_field.setSFVec3f(hand_pos)
+        counter += 1
+
+
+def hand_cut_apple(n_step):
+    # wanted color at the end
+    cutting_hand_color = [0, 0.65, 1]
+    cut_apple_color = [1, 0.61, 0]
+    # current color
+    hand_color_field = supervisor.getFromDef("hand_appearance").getField("baseColor")
+    hand_color = hand_color_field.getSFColor()
+    apple_color_field = supervisor.getFromDef("apple_appearance").getField("baseColor")
+    apple_color = apple_color_field.getSFColor()
+    # rate of change per timestep
+    dg_hand = (hand_color[1] - cutting_hand_color[1]) / n_step
+    dg_apple = (apple_color[1] - cut_apple_color[1]) / n_step
+
+    # loop
+    counter = 0
+    while (supervisor.step(timestep) != -1) and (counter < n_step):
+        hand_color = [hand_color[0], hand_color[1] - dg_hand, hand_color[2]]
+        hand_color_field.setSFColor(hand_color)
+        apple_color = [apple_color[0], apple_color[1] - dg_apple, apple_color[2]]
+        apple_color_field.setSFColor(apple_color)
+        counter += 1
+
+
+hand_reach_apple(1000)
+hand_cut_apple(500)
