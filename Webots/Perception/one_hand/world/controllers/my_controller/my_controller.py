@@ -16,6 +16,29 @@ apple_node = supervisor.getFromDef('apple')
 knife_node = supervisor.getFromDef('knife')
 
 
+def reset():
+    # starting color
+    hand_color = [0, 0, 1]
+    apple_color = [1, 0.4, 0]
+    knife_color = [0.59, 1, 0]
+    
+    # set original color
+    supervisor.getFromDef("hand_appearance").getField("baseColor").setSFColor(hand_color)
+    supervisor.getFromDef("apple_appearance").getField("baseColor").setSFColor(apple_color)
+    supervisor.getFromDef("knife_appearance").getField("baseColor").setSFColor(knife_color)
+    
+    # starting pos
+    hand_pos = [0.1, 0.2, 0.4]
+    apple_pos = [0.4, 0.2, -0.2]
+    knife_pos = [-0.5, 0.3, 0]
+    
+    # set back to initial pos
+    hand_node.getField('translation').setSFVec3f(hand_pos)
+    apple_node.getField('translation').setSFVec3f(apple_pos)
+    knife_node.getField('translation').setSFVec3f(knife_pos)
+    
+
+
 def hand_reach_apple(n_step, eta=400):
     hand_pos_field = hand_node.getField('translation')
     hand_pos = hand_pos_field.getSFVec3f()
@@ -53,6 +76,6 @@ def hand_cut_apple(n_step):
         apple_color_field.setSFColor(apple_color)
         counter += 1
 
-
+reset()
 hand_reach_apple(1000)
 hand_cut_apple(500)

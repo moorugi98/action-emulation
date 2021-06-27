@@ -3,6 +3,13 @@
         "format": "1"
     },
     "steps": {
+        "cedar.processing.sources.Boost": {
+            "name": "Boost",
+            "strength": "5.1999999999999966",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
         "cedar.processing.steps.ChannelSplit": {
             "name": "Channel Split 2",
             "comments": ""
@@ -305,20 +312,20 @@
                 "0",
                 "0",
                 "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                "8",
+                "5",
                 "10",
-                "8"
+                "5",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
             ],
-            "comments": ""
+            "comments": "synaptic mapping"
         },
         "cedar.processing.ConstVector": {
             "name": "Const Vector 2",
@@ -329,14 +336,14 @@
                 "0",
                 "0",
                 "0",
-                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "5",
                 "10",
-                "8",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
+                "5",
                 "0",
                 "0",
                 "0"
@@ -884,6 +891,15 @@
             "interpolation": "LINEAR",
             "comments": ""
         },
+        "cedar.processing.Resize": {
+            "name": "Resize 3",
+            "output size": [
+                "50",
+                "50"
+            ],
+            "interpolation": "LINEAR",
+            "comments": ""
+        },
         "cedar.dynamics.SpaceCodeToRateMatrix": {
             "name": "Space Code To Rate Matrix",
             "lower limit": "0",
@@ -987,7 +1003,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 25",
-            "gain factor": "4",
+            "gain factor": "0",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -1237,12 +1253,12 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 78",
-            "gain factor": "4",
+            "gain factor": "5.0000000000000071",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 79",
-            "gain factor": "5",
+            "gain factor": "4.0000000000000036",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -1320,9 +1336,8 @@
             "buffer size": "32768",
             "port": "50040",
             "packet timeout (ms)": "3000",
-            "message timeout (ms)": "50",
             "accept interval (steps)": "30",
-            "comments": "- resizing often is problematic, use camera of 50 x 50"
+            "comments": ""
         },
         "cedar.dynamics.NeuralField": {
             "name": "boosted",
@@ -2163,7 +2178,7 @@
         "cedar.processing.sources.Boost": {
             "name": "hue change boost",
             "strength": "20",
-            "active": "false",
+            "active": "true",
             "deactivate on reset": "false",
             "comments": "can remove once space-color wm tracks color change properly\t"
         },
@@ -4933,8 +4948,16 @@
             "target": "Inner Product.input 2"
         },
         {
+            "source": "Const Vector.vector",
+            "target": "Inner Product.input"
+        },
+        {
             "source": "Inner Product.output",
             "target": "tool hand.input"
+        },
+        {
+            "source": "Const Vector 2.vector",
+            "target": "Inner Product 2.input"
         },
         {
             "source": "Inner Product 2.output",
@@ -5249,8 +5272,20 @@
             "target": "Static Gain 72.input"
         },
         {
+            "source": "Channel Split 2.channel 1",
+            "target": "Rate Matrix To Space Code 2.bin map"
+        },
+        {
             "source": "Channel Split 2.channel 2",
             "target": "Threshold 2.input"
+        },
+        {
+            "source": "Threshold 2.thresholded input",
+            "target": "Rate Matrix To Space Code 2.values"
+        },
+        {
+            "source": "Resize 3.output",
+            "target": "Matrix Type Converter 2.matrix"
         },
         {
             "source": "Rate Matrix To Space Code 2.output",
@@ -5409,6 +5444,10 @@
             "target": "tool saliency 2.input"
         },
         {
+            "source": "Webots Camera.output",
+            "target": "Resize 3.input"
+        },
+        {
             "source": "Matrix Type Converter 2.converted matrix",
             "target": "Color Conversion 2.input image"
         },
@@ -5477,38 +5516,18 @@
             "target": "reach int.input"
         },
         {
-            "source": "Static Gain 18.output",
+            "source": "Boost.boost",
             "target": "reach int.input"
         },
         {
-            "source": "reach int.sigmoided activation",
-            "target": "Sum.terms"
-        },
-        {
-            "source": "Channel Split 2.channel 1",
-            "target": "Rate Matrix To Space Code 2.bin map"
-        },
-        {
-            "source": "Threshold 2.thresholded input",
-            "target": "Rate Matrix To Space Code 2.values"
-        },
-        {
-            "source": "Const Vector.vector",
-            "target": "Inner Product.input"
-        },
-        {
-            "source": "Const Vector 2.vector",
-            "target": "Inner Product 2.input"
-        },
-        {
-            "source": "Webots Camera.output",
-            "target": "Matrix Type Converter 2.matrix"
+            "source": "Static Gain 18.output",
+            "target": "reach int.input"
         }
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "true",
-    "time factor": "0.59999999999999998",
+    "is looped": "false",
+    "time factor": "1",
     "ui": [
         {
             "type": "stickyNote",
@@ -5650,12 +5669,12 @@
                     "target slot": "Static Gain 87.input",
                     "anchors": [
                         {
-                            "x": "22",
-                            "y": "71"
+                            "x": "20",
+                            "y": "76"
                         },
                         {
-                            "x": "-943",
-                            "y": "14"
+                            "x": "-946",
+                            "y": "19"
                         }
                     ]
                 },
@@ -5704,26 +5723,6 @@
                     ]
                 },
                 {
-                    "source slot": "cut int.sigmoided activation",
-                    "target slot": "Static Gain 65.input",
-                    "anchors": [
-                        {
-                            "x": "48",
-                            "y": "-358"
-                        }
-                    ]
-                },
-                {
-                    "source slot": "Sum.sum",
-                    "target slot": "Static Gain 21.input",
-                    "anchors": [
-                        {
-                            "x": "132",
-                            "y": "692"
-                        }
-                    ]
-                },
-                {
                     "source slot": "CoD.sigmoided activation",
                     "target slot": "Static Gain 10.input",
                     "anchors": [
@@ -5738,6 +5737,15 @@
                     ]
                 }
             ]
+        },
+        {
+            "type": "step",
+            "step": "Boost",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-1050",
+            "positionY": "-1218"
         },
         {
             "type": "step",
@@ -5817,8 +5825,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "296.15384615384613",
-            "positionY": "-1119.2307692307691"
+            "positionX": "294",
+            "positionY": "-1120"
         },
         {
             "type": "step",
@@ -5826,8 +5834,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "530.76923076923049",
-            "positionY": "-1105.7692307692307"
+            "positionX": "532",
+            "positionY": "-1120"
         },
         {
             "type": "step",
@@ -6042,8 +6050,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-1148",
-            "positionY": "-1232"
+            "positionX": "-980",
+            "positionY": "-910"
         },
         {
             "type": "step",
@@ -6116,6 +6124,15 @@
             "height": "40",
             "positionX": "3220",
             "positionY": "210"
+        },
+        {
+            "type": "step",
+            "step": "Resize 3",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "700",
+            "positionY": "504"
         },
         {
             "type": "step",
@@ -6222,8 +6239,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-1036",
-            "positionY": "-1232"
+            "positionX": "-882",
+            "positionY": "-910"
         },
         {
             "type": "step",
@@ -6258,7 +6275,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-252",
+            "positionX": "-224",
             "positionY": "-756"
         },
         {
@@ -6294,8 +6311,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-1036",
-            "positionY": "-1162"
+            "positionX": "-714",
+            "positionY": "-1064"
         },
         {
             "type": "step",
@@ -6744,7 +6761,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1103.826086956522",
+            "positionX": "1106",
             "positionY": "434"
         },
         {
@@ -6852,8 +6869,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-742",
-            "positionY": "-1414"
+            "positionX": "-826",
+            "positionY": "-1302"
         },
         {
             "type": "step",
@@ -6888,8 +6905,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "552",
-            "positionY": "502"
+            "positionX": "476",
+            "positionY": "504"
         },
         {
             "type": "step",
@@ -7031,8 +7048,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-1750.0000000000002",
-            "positionY": "-716.00000000000011"
+            "positionX": "-1750",
+            "positionY": "-714"
         },
         {
             "type": "step",
@@ -7382,8 +7399,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1271.826086956522",
-            "positionY": "396.3478260869565"
+            "positionX": "1274",
+            "positionY": "392"
         },
         {
             "type": "step",
@@ -7396,11 +7413,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "-462",
-        "ScrollBarY": "-205",
-        "SliderPosX": "-462",
-        "SliderPosY": "-205",
-        "Zoom": "0.32000000000000001"
+        "ScrollBarX": "-908",
+        "ScrollBarY": "-879",
+        "SliderPosX": "-908",
+        "SliderPosY": "-879",
+        "Zoom": "0.46999999999999997"
     },
     "ui generic": {
         "group": "element",
@@ -7904,6 +7921,44 @@
         },
         "architecture widgets": "",
         "robots": {
+            "robot": {
+                "name": "new robot",
+                "template name": "caren",
+                "loaded template configuration": "simulator",
+                "loaded template configuration name": "",
+                "automatic connect": "false",
+                "CAREN arm": {
+                    "initial configurations": {
+                        "zeros": {
+                            "0": "0",
+                            "1": "0",
+                            "2": "0",
+                            "3": "0",
+                            "4": "0",
+                            "5": "0",
+                            "6": "0"
+                        }
+                    },
+                    "current initial configuration": "zeros"
+                },
+                "CAREN head": {
+                    "initial configurations": {
+                        "zeros": {
+                            "0": "0",
+                            "1": "0"
+                        }
+                    },
+                    "current initial configuration": "zeros"
+                },
+                "CAREN trunk": {
+                    "initial configurations": {
+                        "zeros": {
+                            "0": "0"
+                        }
+                    },
+                    "current initial configuration": "zeros"
+                }
+            },
             "robot": {
                 "name": "new robot 2"
             }
