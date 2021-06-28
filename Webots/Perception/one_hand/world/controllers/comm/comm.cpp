@@ -210,7 +210,7 @@ public:
             sendCameraPictures();
             
             //ADD: save camera pic
-            // camera.saveImage("home/minseok/D/webotpic.jpg", 10)
+            // cameraMap["camera_center"]->saveImage("home/minseok/D/webotpic.jpg", 10);
         }
 
         comThread->stop();
