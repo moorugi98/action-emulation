@@ -132,15 +132,15 @@ public:
 
         unsigned int checkSum = generateChecksum(stream.str().c_str(), stream.str().size());
         std::string streamContent = stream.str() + checkSumIndicator + std::to_string(checkSum) + messageEndSequence;
-        
-        
-        //One could retrieve the return of send, but that does not tell us something about the other side
-#ifdef _WIN32
-        send(socket_handle, streamContent.c_str(), streamContent.size(), 0);
-#else
-        send(socket_handle, streamContent.c_str(), streamContent.size(), MSG_NOSIGNAL);
-#endif
 
+        //One could retrieve the return of send, but that does not tell us something about the other side
+        
+#ifdef _WIN32
+    send(socket_handle, streamContent.c_str(), streamContent.size(), 0);
+#else
+    send(socket_handle, streamContent.c_str(), streamContent.size(), MSG_NOSIGNAL);
+#endif
+        
 
         const int mBufferLength = 32768;
         char *readBuffer = (char *) malloc(mBufferLength * sizeof(char));

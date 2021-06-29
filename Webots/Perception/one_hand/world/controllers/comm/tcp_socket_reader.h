@@ -31,7 +31,9 @@ public:
             mOverflowBuffer(""),
             currentReadMatrix(cv::Mat::zeros(42, 1, CV_32F)),
             timeSinceLastConnectTrial(0),
-            waitTime(10)
+            waitTime(10),
+            numberOfFailedReads(0),
+            maxNumberOfFailedReads(50)
     {
         mIsConnected.store(false);
         establishConnection();
@@ -117,6 +119,7 @@ public:
 
             if (msgLength > 0)
             {
+                numberOfFailedReads = 0;
                 std::string concatString = std::string(buffer, msgLength); //This should do it properly
 
                 //Let's see, if we found the end of a Msg. I am not sure why this is sometimes omitted.
@@ -142,7 +145,19 @@ public:
                 }
             } else
             {
-                mOverflowBuffer = "";
+                numberOfFailedReads = numberOfFailedReads +1;
+                
+                if(numberOfFailedReads > maxNumberOfFailedReads)
+                {
+                  numberOfFailedReads = 0;
+                  reconnect();
+                }
+                
+                //Still need to free the Memory here...
+                free(buffer);
+                return;
+                
+                
             }
 
         }
@@ -397,10 +412,11 @@ private:
         std::string timeString(buf);
     
         std::string msgContent = "Reader: " +std::to_string(mPort) + " alive! " + timeString ;
+        
 #ifdef _WIN32
-        send(socket_handle, msgContent.c_str(), msgContent.size(), 0);
+    send(socket_handle, msgContent.c_str(), msgContent.size(), 0);
 #else
-        send(socket_handle, msgContent.c_str(), msgContent.size(), MSG_NOSIGNAL);
+    send(socket_handle, msgContent.c_str(), msgContent.size(), MSG_NOSIGNAL);
 #endif
     }
 
@@ -421,5 +437,7 @@ private:
     int waitTime;
     int debugCounter = 0;
     int debugBlockError = 0;
+    int numberOfFailedReads;
+    int maxNumberOfFailedReads;
     mutable std::shared_timed_mutex mutex; // is neither copyable nor movable.
 };
