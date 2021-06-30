@@ -46,8 +46,8 @@ DEF camera Robot {
           rotation 1 0 0 -1.57
           name "camera_center"
           fieldOfView 1.5
-          width 50
-          height 50
+          width 128
+          height 128
           antiAliasing TRUE
           recognition Recognition {
           }
@@ -64,7 +64,7 @@ DEF hand Robot {
   translation 0.1 0.2 0.4
   rotation 1 0 0 -1.5707953071795862
   children [
-    DEF hand Solid {
+    DEF hand_solid Solid {
       scale 0.003 0.003 0.003
       children [
         DEF hand_shape Shape {
@@ -72,7 +72,7 @@ DEF hand Robot {
             baseColor 0 0 1
             metalness 0
           }
-          geometry Mesh {
+          geometry DEF hand_mesh Mesh {
             url [
               "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
             ]
@@ -162,11 +162,11 @@ DEF distractor_1 Solid {
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0 0.7 0.15
+        baseColor 0 0.9 0.4
         metalness 0
       }
       geometry Box {
-        size 0.1 0.1 0.1
+        size 0.1 0.01 0.1
       }
       castShadows FALSE
     }
