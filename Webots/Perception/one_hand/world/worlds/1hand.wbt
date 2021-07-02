@@ -4,7 +4,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 1 0 0 4.71238898038469
-  position 0.02764895422651295 5.226297338571176 -0.03064472935638566
+  position 0.02764895422651295 4.534236123576614 -0.030644729356385535
 }
 TexturedBackground {
 }
@@ -68,9 +68,10 @@ DEF hand Robot {
       scale 0.003 0.003 0.003
       children [
         DEF hand_shape Shape {
-          appearance DEF hand_appearance PBRAppearance {
-            baseColor 0 0 1
-            metalness 0
+          appearance Appearance {
+            material DEF hand_appearance Material {
+              emissiveColor 0 0 1
+            }
           }
           geometry DEF hand_mesh Mesh {
             url [
@@ -92,9 +93,10 @@ DEF apple Robot {
     Solid {
       children [
         Shape {
-          appearance DEF apple_appearance PBRAppearance {
-            baseColor 1 0.4 0
-            metalness 0
+          appearance Appearance {
+            material DEF apple_appearance Material {
+              emissiveColor 1 0 0
+            }
           }
           geometry Sphere {
             radius 0.06
@@ -109,16 +111,17 @@ DEF apple Robot {
 }
 DEF knife Robot {
   translation -0.5 0.3 0
-  rotation 0 1 0 1.5707996938995747
+  rotation 0.19611613513818404 0.9805806756909201 0 1.5707996938995747
   children [
     Solid {
       rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
       scale 0.1 0.1 0.1
       children [
         Shape {
-          appearance DEF knife_appearance PBRAppearance {
-            baseColor 0.59 1 0
-            metalness 0
+          appearance Appearance {
+            material DEF knife_appearance Material {
+              emissiveColor 0.3 1 0
+            }
           }
           geometry Mesh {
             url [
