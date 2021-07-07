@@ -27,9 +27,21 @@ get_apple_col = getfield_apple_col.getSFColor()
 get_knife_col = getfield_knife_col.getSFColor()
 
 # starting color
-init_hand_color = [0, 0, 1]
-init_apple_color = [1, 0, 0]
-init_knife_color = [0.3, 1, 0]
+color_apple_normal = [1, 0, 0]  # 0 / 16
+color_apple_cut = [1, 0.25, 0]  # 1
+color_apple_grasped = [1, 0.5, 0]  # 2
+color_apple_reached = [1, 0.8, 0]  # 3
+
+color_knife_reaching = [0.5, 1, 0]  # 5
+color_knife_cutting = [0.3, 1, 0]  # 6
+color_knife_normal = [0, 1, 0]  # 7
+color_knife_grasped = [0, 1, 0.3]  # 8
+color_knife_reached = [0, 1, 0.6]  # 9
+
+color_hand_reaching = [0, 0.6, 1]  # 12
+color_hand_grasping = [0, 0.3, 1]  # 13
+color_hand_normal = [0, 0, 1]  # 14
+
 
 # starting pos
 init_hand_pos = [0.1, 0.2, 0.4]
@@ -49,9 +61,9 @@ def reset():
     global get_hand_col 
     global get_apple_col
     global get_knife_col
-    get_hand_col = init_hand_color
-    get_apple_col = init_apple_color
-    get_knife_col = init_knife_color
+    get_hand_col = color_hand_normal
+    get_apple_col = color_apple_normal
+    get_knife_col = color_knife_normal
     getfield_hand_col.setSFColor(get_hand_col)
     getfield_apple_col.setSFColor(get_apple_col)
     getfield_knife_col.setSFColor(get_knife_col)
@@ -82,6 +94,10 @@ def hand_reach_knife(n_step=1000, eta=0.15):
     else:
         dz -= eta / n_step
 
+    # change color while moving as quick fix
+    getfield_hand_col.setSFColor(color_hand_reaching)
+    getfield_knife_col.setSFColor(color_knife_reached)
+
     counter = 0
     while (supervisor.step(timestep) != -1) and (counter < n_step):
         get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
@@ -89,26 +105,20 @@ def hand_reach_knife(n_step=1000, eta=0.15):
         counter += 1
 
 
-def hand_grasp_knife(n_step=1000):
+def hand_grasp_knife(inter_step=300):
     # for user
     print("hand grasps the knife")
 
-    # compute change value
-    global get_hand_col
-    global get_knife_col
-    hand_grasping_col = [0, 0.3, 1]
-    knife_grasped_col = [0, 1, 0]
-    dg_hand = (get_hand_col[1] - hand_grasping_col[1]) / n_step
-    dr_knife = (get_knife_col[0] - knife_grasped_col[0]) / n_step
-
-    # loop
+    # inst. change, but induce arbitrary order
     counter = 0
-    while (supervisor.step(timestep) != -1) and (counter < n_step):
-        get_hand_col = [get_hand_col[0], get_hand_col[1] - dg_hand, get_hand_col[2]]
-        getfield_hand_col.setSFColor(get_hand_col)
-        get_knife_col = [get_knife_col[0] - dr_knife, get_knife_col[1], get_knife_col[2]]
-        getfield_knife_col.setSFColor(get_knife_col)
+    while (supervisor.step(timestep) != -1) and (counter < inter_step):
         counter += 1
+    getfield_hand_col.setSFColor(color_hand_grasping)
+    counter = 0
+    while (supervisor.step(timestep) != -1) and (counter < inter_step):
+        counter += 1
+    getfield_knife_col.setSFColor(color_knife_grasped)
+
 
 
 def knife_reach_apple(n_step=1000, eta=0.15):
@@ -126,6 +136,9 @@ def knife_reach_apple(n_step=1000, eta=0.15):
     else:
         dz -= eta / n_step
 
+    getfield_knife_col.setSFColor(color_knife_reaching)
+    getfield_apple_pos.setSFColor(color_apple_reached)
+
     counter = 0
     while (supervisor.step(timestep) != -1) and (counter < n_step):
         # hand moves together with the knife
@@ -136,26 +149,18 @@ def knife_reach_apple(n_step=1000, eta=0.15):
         counter += 1
 
 
-def knife_cut_apple(n_step=1000):
+def knife_cut_apple(inter_step=300):
     print("knife cuts the apple")
-    # wanted color at the end
-    cutting_knife_color = [0.6, 1, 0]
-    cut_apple_color = [1, 0.3, 0]
 
-    # rate of change per timestep
-    global get_knife_col
-    global get_apple_col
-    dr_knife = (get_knife_col[0] - cutting_knife_color[0]) / n_step
-    dg_apple = (get_apple_col[1] - cut_apple_color[1]) / n_step
-
-    # loop
+    # inst. change, but induce arbitrary order
     counter = 0
-    while (supervisor.step(timestep) != -1) and (counter < n_step):
-        get_knife_col = [get_knife_col[0] - dr_knife, get_knife_col[1], get_knife_col[2]]
-        getfield_knife_col.setSFColor(get_knife_col)
-        get_apple_col = [get_apple_col[0], get_apple_col[1] - dg_apple, get_apple_col[2]]
-        getfield_apple_col.setSFColor(get_apple_col)
+    while (supervisor.step(timestep) != -1) and (counter < inter_step):
         counter += 1
+    getfield_knife_col.setSFColor(color_knife_cutting)
+    counter = 0
+    while (supervisor.step(timestep) != -1) and (counter < inter_step):
+        counter += 1
+    getfield_apple_col.setSFColor(color_apple_cut)
 
 
 def scenario_default():
