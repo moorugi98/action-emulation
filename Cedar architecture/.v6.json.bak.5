@@ -8,7 +8,7 @@
             "comments": "270 degree of color wheel\n270\/16 = 16.875 deg"
         },
         "cedar.processing.StaticGain": {
-            "name": "Co S -> Ordinal",
+            "name": "Co S -> Ordinal 2",
             "gain factor": "-10",
             "comments": ""
         },
@@ -1173,10 +1173,6 @@
             "comments": ""
         },
         "cedar.processing.steps.Noop": {
-            "name": "Noop 5",
-            "comments": ""
-        },
-        "cedar.processing.steps.Noop": {
             "name": "Noop 6",
             "comments": ""
         },
@@ -1657,16 +1653,6 @@
             "comments": ""
         },
         "cedar.processing.Projection": {
-            "name": "Projection 27",
-            "dimension mapping": {
-                "0": "4294967295"
-            },
-            "output dimensionality": "0",
-            "output dimension sizes": "",
-            "compression type": "SUM",
-            "comments": ""
-        },
-        "cedar.processing.Projection": {
             "name": "Projection 28",
             "dimension mapping": {
                 "0": "4294967295"
@@ -1684,6 +1670,26 @@
             "output dimensionality": "0",
             "output dimension sizes": "",
             "compression type": "SUM",
+            "comments": ""
+        },
+        "cedar.processing.Projection": {
+            "name": "Projection 3",
+            "dimension mapping": {
+                "0": "4294967295"
+            },
+            "output dimensionality": "0",
+            "output dimension sizes": "",
+            "compression type": "MAXIMUM",
+            "comments": ""
+        },
+        "cedar.processing.Projection": {
+            "name": "Projection 4",
+            "dimension mapping": {
+                "0": "4294967295"
+            },
+            "output dimensionality": "0",
+            "output dimension sizes": "",
+            "compression type": "MAXIMUM",
             "comments": ""
         },
         "cedar.processing.Projection": {
@@ -1832,11 +1838,6 @@
         "cedar.processing.StaticGain": {
             "name": "Static Gain 111",
             "gain factor": "-5",
-            "comments": ""
-        },
-        "cedar.processing.StaticGain": {
-            "name": "Static Gain 112",
-            "gain factor": "10",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2385,6 +2386,11 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain 60",
+            "gain factor": "1.5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 61",
             "gain factor": "10",
             "comments": ""
@@ -2422,6 +2428,11 @@
         "cedar.processing.StaticGain": {
             "name": "Static Gain 7",
             "gain factor": "5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 70",
+            "gain factor": "1.5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3498,7 +3509,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "1",
+                    "amplitude": "2",
                     "widths": [
                         "1"
                     ]
@@ -3554,7 +3565,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "1",
+                    "amplitude": "2",
                     "widths": [
                         "1"
                     ]
@@ -3610,7 +3621,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "1",
+                    "amplitude": "2",
                     "widths": [
                         "1"
                     ]
@@ -3666,7 +3677,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "1",
+                    "amplitude": "2",
                     "widths": [
                         "1"
                     ]
@@ -3951,7 +3962,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "1",
+                    "amplitude": "2",
                     "widths": [
                         "1"
                     ]
@@ -4007,7 +4018,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "1",
+                    "amplitude": "2",
                     "widths": [
                         "1"
                     ]
@@ -5787,7 +5798,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "reset inhi",
-            "gain factor": "-10",
+            "gain factor": "-15",
             "comments": ""
         },
         "cedar.dynamics.NeuralField": {
@@ -5866,62 +5877,6 @@
                 "limit": "5"
             },
             "comments": "- enter threshold input strength: 5.5\n\n1) grasp\ni) near : 2\nii) tool hue correct: 1\niii) no hue change: 1\niv) target hue slice input: 2\ntotal 6, peak at single slice\n\n2) cut\nanalog\n\n3) reach\ni) near: 2\nii) stopped moving: 5\ntotal 7, peak at all hue values"
-        },
-        "cedar.dynamics.NeuralField": {
-            "name": "sequence CoS",
-            "activation as output": "false",
-            "discrete metric (workaround)": "false",
-            "update stepIcon according to output": "true",
-            "threshold for updating the stepIcon": "0.80000000000000004",
-            "dimensionality": "0",
-            "sizes": "",
-            "time scale": "100",
-            "resting level": "-5",
-            "input noise gain": "0.10000000000000001",
-            "multiplicative noise (input)": "false",
-            "multiplicative noise (activation)": "false",
-            "sigmoid": {
-                "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "0",
-                "beta": "100"
-            },
-            "global inhibition": "0",
-            "lateral kernels": {
-                "cedar.aux.kernel.Box": {
-                    "dimensionality": "1",
-                    "anchor": [
-                        "0"
-                    ],
-                    "amplitude": "1",
-                    "widths": [
-                        "1"
-                    ]
-                }
-            },
-            "lateral kernel convolution": {
-                "borderType": "Zero",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.OpenCV"
-                },
-                "alternate even kernel center": "false"
-            },
-            "noise correlation kernel": {
-                "dimensionality": "1",
-                "anchor": [
-                    "0"
-                ],
-                "amplitude": "0",
-                "sigmas": [
-                    "3"
-                ],
-                "normalize": "true",
-                "shifts": [
-                    "0"
-                ],
-                "limit": "5"
-            },
-            "comments": "- delayed firing to ensure enough time window of Hebb learning\t"
         },
         "cedar.dynamics.NeuralField": {
             "name": "slow offset",
@@ -7694,7 +7649,6 @@
                 "O 3",
                 "O 2",
                 "O 4",
-                "sequence CoS",
                 "start bias",
                 "hand-reach-apple",
                 "hand-reach-knife",
@@ -7961,10 +7915,6 @@
         {
             "source": "Static Gain 42.output",
             "target": "CoS 4.input"
-        },
-        {
-            "source": "CoS 3.sigmoided activation",
-            "target": "Static Gain 42.input"
         },
         {
             "source": "intention 4.sigmoided activation",
@@ -8571,22 +8521,6 @@
             "target": "O 4.input"
         },
         {
-            "source": "Co S -> Ordinal.output",
-            "target": "O 3.input"
-        },
-        {
-            "source": "Co S -> Ordinal.output",
-            "target": "O 4.input"
-        },
-        {
-            "source": "Co S -> Ordinal.output",
-            "target": "O1.input"
-        },
-        {
-            "source": "Co S -> Ordinal.output",
-            "target": "O 2.input"
-        },
-        {
             "source": "lateral inhi.output",
             "target": "O 3.input"
         },
@@ -8605,10 +8539,6 @@
         {
             "source": "M 2.sigmoided activation",
             "target": "M2->O3.input"
-        },
-        {
-            "source": "sequence CoS.sigmoided activation",
-            "target": "Co S -> Ordinal.input"
         },
         {
             "source": "start bias.sigmoided activation",
@@ -8769,18 +8699,6 @@
         {
             "source": "Static Gain 133.output",
             "target": "delay 2.input"
-        },
-        {
-            "source": "sequence CoS.sigmoided activation",
-            "target": "Static Gain 26.input"
-        },
-        {
-            "source": "reset inhi.output",
-            "target": "Noop 5.input"
-        },
-        {
-            "source": "Noop 5.output",
-            "target": "Noop 6.input"
         },
         {
             "source": "Noop 6.output",
@@ -9083,14 +9001,6 @@
             "target": "action concepts.input"
         },
         {
-            "source": "Projection 27.output",
-            "target": "Static Gain 112.input"
-        },
-        {
-            "source": "Static Gain 112.output",
-            "target": "sequence CoS.input"
-        },
-        {
             "source": "desire learn.boost",
             "target": "Noop 2.input"
         },
@@ -9327,10 +9237,6 @@
             "target": "Static Gain 173.input"
         },
         {
-            "source": "action concepts.sigmoided activation",
-            "target": "Projection 27.input"
-        },
-        {
             "source": "Static Gain 79.output",
             "target": "tool repr wm.input"
         },
@@ -9389,10 +9295,6 @@
         {
             "source": "Static Gain 149.output",
             "target": "one-dimensional field 3.input"
-        },
-        {
-            "source": "Co S -> Ordinal.output",
-            "target": "one-dimensional field 2.input"
         },
         {
             "source": "CoS 4.sigmoided activation",
@@ -9705,14 +9607,99 @@
         {
             "source": "tool grasping.sigmoided activation",
             "target": "Sum 5.terms"
+        },
+        {
+            "source": "tool cutting.sigmoided activation",
+            "target": "Sum 5.terms"
+        },
+        {
+            "source": "Sum 5.sum",
+            "target": "Static Gain 160.input"
+        },
+        {
+            "source": "reset inhi.output",
+            "target": "Noop 6.input"
+        },
+        {
+            "source": "action concepts.sigmoided activation",
+            "target": "Projection 3.input"
+        },
+        {
+            "source": "Projection 3.output",
+            "target": "Static Gain 42.input"
+        },
+        {
+            "source": "CoS 4.sigmoided activation",
+            "target": "Co S -> Ordinal 2.input"
+        },
+        {
+            "source": "Co S -> Ordinal 2.output",
+            "target": "one-dimensional field 3.input"
+        },
+        {
+            "source": "Co S -> Ordinal 2.output",
+            "target": "O1.input"
+        },
+        {
+            "source": "Co S -> Ordinal 2.output",
+            "target": "O 2.input"
+        },
+        {
+            "source": "Co S -> Ordinal 2.output",
+            "target": "O 3.input"
+        },
+        {
+            "source": "Co S -> Ordinal 2.output",
+            "target": "O 4.input"
+        },
+        {
+            "source": "CoS 4.sigmoided activation",
+            "target": "Static Gain 26.input"
+        },
+        {
+            "source": "Projection 4.output",
+            "target": "Static Gain 70.input"
+        },
+        {
+            "source": "tool cutting.sigmoided activation",
+            "target": "Static Gain 60.input"
+        },
+        {
+            "source": "Static Gain 60.output",
+            "target": "cut CoS.input"
+        },
+        {
+            "source": "target cut.sigmoided activation",
+            "target": "Projection 4.input"
+        },
+        {
+            "source": "Static Gain 70.output",
+            "target": "cut CoS.input"
+        },
+        {
+            "source": "Static Gain 51.output",
+            "target": "cut CoS.input"
+        },
+        {
+            "source": "Static Gain 52.output",
+            "target": "cut CoS.input"
         }
     ],
     "records": {
         "Webots Camera[OUTPUT].output": "0.1 s"
     },
+    "scripts": [
+        {
+            "type": "cedar.dyn.scripts.ExecuteFunctionOnSteps",
+            "configuration": {
+                "name": "Execute Function On Steps",
+                "FunctionName": "Preshape->resetMemory()"
+            }
+        }
+    ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -9816,7 +9803,7 @@
             "width": "161",
             "height": "70",
             "x": "322",
-            "y": "-1384",
+            "y": "-1386",
             "text": "semantic memory",
             "font size": "14",
             "color red": "190",
@@ -9983,8 +9970,8 @@
             "type": "stickyNote",
             "width": "120",
             "height": "70",
-            "x": "1147",
-            "y": "193",
+            "x": "1148",
+            "y": "196",
             "text": "deleting still happens for 3rd obj",
             "font size": "10",
             "color red": "255",
@@ -10048,11 +10035,21 @@
                 },
                 {
                     "source slot": "reset inhi.output",
+                    "target slot": "Noop 6.input",
+                    "anchors": [
+                        {
+                            "x": "2512",
+                            "y": "6"
+                        }
+                    ]
+                },
+                {
+                    "source slot": "reset inhi.output",
                     "target slot": "Noop 7.input",
                     "anchors": [
                         {
                             "x": "-624",
-                            "y": "20"
+                            "y": "34"
                         }
                     ]
                 },
@@ -10062,7 +10059,7 @@
                     "anchors": [
                         {
                             "x": "-1968",
-                            "y": "6"
+                            "y": "20"
                         }
                     ]
                 },
@@ -10072,7 +10069,7 @@
                     "anchors": [
                         {
                             "x": "272",
-                            "y": "6"
+                            "y": "20"
                         }
                     ]
                 },
@@ -10082,7 +10079,7 @@
                     "anchors": [
                         {
                             "x": "258",
-                            "y": "20"
+                            "y": "34"
                         }
                     ]
                 },
@@ -10171,8 +10168,8 @@
                     "target slot": "prior 3.input",
                     "anchors": [
                         {
-                            "x": "747",
-                            "y": "19"
+                            "x": "748",
+                            "y": "20"
                         }
                     ]
                 },
@@ -10191,8 +10188,8 @@
                     "target slot": "prior.input",
                     "anchors": [
                         {
-                            "x": "4161",
-                            "y": "-56"
+                            "x": "4164",
+                            "y": "-50"
                         }
                     ]
                 },
@@ -10253,16 +10250,6 @@
                     ]
                 },
                 {
-                    "source slot": "Noop 5.output",
-                    "target slot": "Noop 6.input",
-                    "anchors": [
-                        {
-                            "x": "2596",
-                            "y": "6"
-                        }
-                    ]
-                },
-                {
                     "source slot": "CoS 3.sigmoided activation",
                     "target slot": "Static Gain 63.input",
                     "anchors": [
@@ -10303,12 +10290,12 @@
         },
         {
             "type": "step",
-            "step": "Co S -> Ordinal",
+            "step": "Co S -> Ordinal 2",
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1750",
-            "positionY": "-1974"
+            "positionX": "1834",
+            "positionY": "-2058"
         },
         {
             "type": "step",
@@ -10506,7 +10493,7 @@
             "width": "40",
             "height": "40",
             "positionX": "2380",
-            "positionY": "-308"
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -10811,8 +10798,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2884",
-            "positionY": "-168"
+            "positionX": "2856",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -10852,21 +10839,12 @@
         },
         {
             "type": "step",
-            "step": "Noop 5",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "2352",
-            "positionY": "-2912"
-        },
-        {
-            "type": "step",
             "step": "Noop 6",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4998",
-            "positionY": "-1190"
+            "positionX": "4956",
+            "positionY": "-1260"
         },
         {
             "type": "step",
@@ -10982,8 +10960,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2884",
-            "positionY": "-238"
+            "positionX": "2856",
+            "positionY": "-154"
         },
         {
             "type": "step",
@@ -11063,8 +11041,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3248",
-            "positionY": "-308"
+            "positionX": "3220",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -11072,8 +11050,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2884",
-            "positionY": "-98"
+            "positionX": "2856",
+            "positionY": "-14"
         },
         {
             "type": "step",
@@ -11081,8 +11059,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3248",
-            "positionY": "-168"
+            "positionX": "3220",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -11090,8 +11068,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3626",
-            "positionY": "-308"
+            "positionX": "3598",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -11101,15 +11079,6 @@
             "height": "40",
             "positionX": "1820",
             "positionY": "0"
-        },
-        {
-            "type": "step",
-            "step": "Projection 27",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "1988",
-            "positionY": "-1890"
         },
         {
             "type": "step",
@@ -11128,6 +11097,24 @@
             "height": "40",
             "positionX": "3416",
             "positionY": "462"
+        },
+        {
+            "type": "step",
+            "step": "Projection 3",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "2548",
+            "positionY": "-1680"
+        },
+        {
+            "type": "step",
+            "step": "Projection 4",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "3374",
+            "positionY": "-1176"
         },
         {
             "type": "step",
@@ -11181,7 +11168,7 @@
             "width": "40",
             "height": "40",
             "positionX": "2478",
-            "positionY": "-308"
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -11225,8 +11212,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-238"
+            "positionX": "2940",
+            "positionY": "-154"
         },
         {
             "type": "step",
@@ -11317,15 +11304,6 @@
             "height": "40",
             "positionX": "1498",
             "positionY": "-1904"
-        },
-        {
-            "type": "step",
-            "step": "Static Gain 112",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "2086",
-            "positionY": "-1890"
         },
         {
             "type": "step",
@@ -11549,8 +11527,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3346",
-            "positionY": "-308"
+            "positionX": "3318",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -11603,8 +11581,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-168"
+            "positionX": "2940",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -11630,8 +11608,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-98"
+            "positionX": "2940",
+            "positionY": "-14"
         },
         {
             "type": "step",
@@ -11639,8 +11617,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3346",
-            "positionY": "-168"
+            "positionX": "3318",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -11648,8 +11626,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3486",
-            "positionY": "-308"
+            "positionX": "3458",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -11657,8 +11635,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3710",
-            "positionY": "-308"
+            "positionX": "3682",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -11666,8 +11644,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3710",
-            "positionY": "-378"
+            "positionX": "3682",
+            "positionY": "-294"
         },
         {
             "type": "step",
@@ -11702,7 +11680,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1946",
+            "positionX": "1932",
             "positionY": "-56"
         },
         {
@@ -11972,8 +11950,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2226",
-            "positionY": "-1820"
+            "positionX": "2604",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -12188,8 +12166,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-308"
+            "positionX": "2940",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -12224,7 +12202,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
+            "positionX": "3248",
             "positionY": "-1260"
         },
         {
@@ -12233,7 +12211,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
+            "positionX": "3248",
             "positionY": "-1330"
         },
         {
@@ -12242,8 +12220,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3710",
-            "positionY": "-448"
+            "positionX": "3682",
+            "positionY": "-364"
         },
         {
             "type": "step",
@@ -12307,6 +12285,15 @@
             "height": "40",
             "positionX": "5936",
             "positionY": "-854"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 60",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "3458",
+            "positionY": "-1106"
         },
         {
             "type": "step",
@@ -12379,6 +12366,15 @@
             "height": "40",
             "positionX": "6076",
             "positionY": "-924"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 70",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "3458",
+            "positionY": "-1176"
         },
         {
             "type": "step",
@@ -13042,8 +13038,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3808",
-            "positionY": "-308"
+            "positionX": "3780",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -13124,7 +13120,7 @@
             "width": "124",
             "height": "40",
             "positionX": "2562",
-            "positionY": "-308"
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -13213,8 +13209,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2184",
-            "positionY": "-1750"
+            "positionX": "2380",
+            "positionY": "-1554"
         },
         {
             "type": "step",
@@ -13222,8 +13218,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1848",
-            "positionY": "-1750"
+            "positionX": "2044",
+            "positionY": "-1554"
         },
         {
             "type": "step",
@@ -13232,7 +13228,7 @@
             "width": "124",
             "height": "40",
             "positionX": "2310",
-            "positionY": "-2828"
+            "positionY": "-2842"
         },
         {
             "type": "step",
@@ -13242,15 +13238,6 @@
             "height": "40",
             "positionX": "1890",
             "positionY": "-182"
-        },
-        {
-            "type": "step",
-            "step": "sequence CoS",
-            "display style": "ICON_AND_TEXT",
-            "width": "124",
-            "height": "40",
-            "positionX": "2184",
-            "positionY": "-1890"
         },
         {
             "type": "step",
@@ -13276,8 +13263,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-238"
+            "positionX": "3416",
+            "positionY": "-154"
         },
         {
             "type": "step",
@@ -13348,8 +13335,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-168"
+            "positionX": "3024",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -13429,8 +13416,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-308"
+            "positionX": "3024",
+            "positionY": "-224"
         },
         {
             "type": "step",
@@ -13497,11 +13484,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "2204",
-        "ScrollBarY": "-668",
-        "SliderPosX": "2204",
-        "SliderPosY": "-668",
-        "Zoom": "0.84999999999999998"
+        "ScrollBarX": "288",
+        "ScrollBarY": "-487",
+        "SliderPosX": "288",
+        "SliderPosY": "-487",
+        "Zoom": "0.32000000000000001"
     },
     "ui generic": {
         "group": "element",
@@ -14164,6 +14151,41 @@
                         }
                     ]
                 },
+                "CoS 4Widget0": {
+                    "step": "CoS 4",
+                    "position_x": "965",
+                    "position_y": "398",
+                    "width": "206",
+                    "height": "200",
+                    "position_relative_x": "0.50260416666666663",
+                    "position_relative_y": "0.39173228346456695",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19685039370078741",
+                    "data_list": [
+                        {
+                            "id": "OUTPUT",
+                            "name": "sigmoided activation",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
                 "Webots CameraWidget0": {
                     "step": "Webots Camera",
                     "position_x": "0",
@@ -14234,41 +14256,6 @@
                                 "color jet": "PlotDefault",
                                 "sliced dimension": "2",
                                 "desired columns": "4"
-                            }
-                        }
-                    ]
-                },
-                "sequence CoSWidget0": {
-                    "step": "sequence CoS",
-                    "position_x": "976",
-                    "position_y": "408",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.5083333333333333",
-                    "position_relative_y": "0.40157480314960631",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
                             }
                         }
                     ]
