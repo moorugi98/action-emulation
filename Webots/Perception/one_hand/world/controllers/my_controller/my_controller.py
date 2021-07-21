@@ -137,7 +137,7 @@ def knife_reach_apple(n_step=1000, eta=0.15):
         dz -= eta / n_step
 
     getfield_knife_col.setSFColor(color_knife_reaching)
-    getfield_apple_pos.setSFColor(color_apple_reached)
+    getfield_apple_col.setSFColor(color_apple_reached)
 
     counter = 0
     while (supervisor.step(timestep) != -1) and (counter < n_step):
