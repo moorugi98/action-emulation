@@ -790,6 +790,28 @@
             ],
             "comments": ""
         },
+        "cedar.processing.sources.GaussInput": {
+            "name": "Gauss Input",
+            "dimensionality": "3",
+            "sizes": [
+                "50",
+                "50",
+                "16"
+            ],
+            "amplitude": "4",
+            "centers": [
+                "20",
+                "38",
+                "1"
+            ],
+            "sigma": [
+                "1",
+                "1",
+                "0.29999999999999999"
+            ],
+            "cyclic": "false",
+            "comments": ""
+        },
         "cedar.dynamics.HebbianConnection": {
             "name": "Hebbian Connection",
             "source dimension": "0",
@@ -1871,6 +1893,17 @@
             "comments": ""
         },
         "cedar.processing.Projection": {
+            "name": "Projection 27",
+            "dimension mapping": {
+                "0": "4294967295",
+                "1": "4294967295"
+            },
+            "output dimensionality": "0",
+            "output dimension sizes": "",
+            "compression type": "MAXIMUM",
+            "comments": ""
+        },
+        "cedar.processing.Projection": {
             "name": "Projection 28",
             "dimension mapping": {
                 "0": "4294967295"
@@ -2393,7 +2426,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 158",
-            "gain factor": "3",
+            "gain factor": "4",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2477,8 +2510,13 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain 24",
+            "gain factor": "3",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 25",
-            "gain factor": "0.69999999999999996",
+            "gain factor": "1.5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2524,6 +2562,11 @@
         "cedar.processing.StaticGain": {
             "name": "Static Gain 33",
             "gain factor": "-5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 34",
+            "gain factor": "3",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2658,7 +2701,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 64",
-            "gain factor": "3",
+            "gain factor": "10",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2708,7 +2751,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 77",
-            "gain factor": "10",
+            "gain factor": "19.000000000000014",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2763,7 +2806,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 88",
-            "gain factor": "0.69999999999999996",
+            "gain factor": "1.5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3385,7 +3428,7 @@
         "cedar.processing.sources.Boost": {
             "name": "desire learn",
             "strength": "5",
-            "active": "true",
+            "active": "false",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -4978,7 +5021,7 @@
                 ],
                 "limit": "5"
             },
-            "comments": ""
+            "comments": "- should fire for knife-apple, but not for hand-apple"
         },
         "cedar.processing.sources.GaussInput": {
             "name": "near spatial template",
@@ -4987,7 +5030,7 @@
                 "50",
                 "50"
             ],
-            "amplitude": "3",
+            "amplitude": "1",
             "centers": [
                 "24",
                 "24"
@@ -5120,7 +5163,7 @@
             "multiplicative noise (activation)": "false",
             "sigmoid": {
                 "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "-0.30000000000000004",
+                "threshold": "0",
                 "beta": "100"
             },
             "global inhibition": "0",
@@ -5159,7 +5202,7 @@
                 ],
                 "limit": "5"
             },
-            "comments": "- function: fires when no spatial movement is detected for short interval\n- sigmoid threshold slightly negative to account for some fluctuation at transient detector\t"
+            "comments": "- function: fires when no spatial movement is detected for short interval\t"
         },
         "cedar.dynamics.NeuralField": {
             "name": "node",
@@ -6605,7 +6648,7 @@
                 "threshold": "0",
                 "beta": "100"
             },
-            "global inhibition": "-0.5",
+            "global inhibition": "-1",
             "lateral kernels": {
                 "cedar.aux.kernel.Gauss": {
                     "dimensionality": "1",
@@ -6614,7 +6657,7 @@
                     ],
                     "amplitude": "1",
                     "sigmas": [
-                        "1"
+                        "0.10000000000000001"
                     ],
                     "normalize": "true",
                     "shifts": [
@@ -6670,7 +6713,7 @@
                 "threshold": "0",
                 "beta": "100"
             },
-            "global inhibition": "-0.52999999999999958",
+            "global inhibition": "-1.0099999999999996",
             "lateral kernels": {
                 "cedar.aux.kernel.Gauss": {
                     "dimensionality": "3",
@@ -6679,7 +6722,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "20",
+                    "amplitude": "25",
                     "sigmas": [
                         "0.90000000000000002",
                         "0.90000000000000002",
@@ -7062,6 +7105,62 @@
                         "0"
                     ],
                     "amplitude": "5",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "stopped and not near",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "100",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "1",
                     "widths": [
                         "1"
                     ]
@@ -8499,7 +8598,8 @@
                 "precondition 2",
                 "tool AND target",
                 "stable change detection",
-                "Search obj 2"
+                "Search obj 2",
+                "stopped and not near"
             ]
         }
     },
@@ -10687,6 +10787,26 @@
         {
             "source": "Sum 13.sum",
             "target": "Static Gain 20.input"
+        },
+        {
+            "source": "stopped movement.sigmoided activation",
+            "target": "Static Gain 24.input"
+        },
+        {
+            "source": "Static Gain 24.output",
+            "target": "stopped and not near.input"
+        },
+        {
+            "source": "Static Gain 34.output",
+            "target": "stopped and not near.input"
+        },
+        {
+            "source": "near.sigmoided activation",
+            "target": "Projection 27.input"
+        },
+        {
+            "source": "Projection 27.output",
+            "target": "Static Gain 34.input"
         }
     ],
     "records": {
@@ -10694,7 +10814,7 @@
     },
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -10905,9 +11025,21 @@
             "type": "stickyNote",
             "width": "120",
             "height": "70",
-            "x": "1736",
-            "y": "392",
-            "text": "tool and target same obj??",
+            "x": "630",
+            "y": "560",
+            "text": "make input more interesting by playing with timing of col change",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "194",
+            "height": "79",
+            "x": "4298",
+            "y": "-392",
+            "text": "possible CoD: if stopped moving and no near",
             "font size": "10",
             "color red": "255",
             "color green": "255",
@@ -10990,7 +11122,7 @@
                     "anchors": [
                         {
                             "x": "1042",
-                            "y": "-8"
+                            "y": "48"
                         }
                     ]
                 },
@@ -11416,8 +11548,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6720",
-            "positionY": "-882"
+            "positionX": "-532",
+            "positionY": "-42"
         },
         {
             "type": "step",
@@ -11427,6 +11559,15 @@
             "height": "40",
             "positionX": "2240",
             "positionY": "14"
+        },
+        {
+            "type": "step",
+            "step": "Gauss Input",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "784",
+            "positionY": "84"
         },
         {
             "type": "step",
@@ -12087,6 +12228,15 @@
         },
         {
             "type": "step",
+            "step": "Projection 27",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4032",
+            "positionY": "-504"
+        },
+        {
+            "type": "step",
             "step": "Projection 28",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -12172,8 +12322,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6762",
-            "positionY": "-784"
+            "positionX": "-490",
+            "positionY": "56"
         },
         {
             "type": "step",
@@ -12834,6 +12984,15 @@
         },
         {
             "type": "step",
+            "step": "Static Gain 24",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4256",
+            "positionY": "-588"
+        },
+        {
+            "type": "step",
             "step": "Static Gain 25",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -12921,6 +13080,15 @@
             "height": "40",
             "positionX": "1246",
             "positionY": "-686"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 34",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4116",
+            "positionY": "-504"
         },
         {
             "type": "step",
@@ -14062,7 +14230,7 @@
             "width": "124",
             "height": "40",
             "positionX": "2562",
-            "positionY": "-56"
+            "positionY": "-112"
         },
         {
             "type": "step",
@@ -14268,8 +14436,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6566",
-            "positionY": "-924"
+            "positionX": "-686",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -14286,8 +14454,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6538",
-            "positionY": "-1008"
+            "positionX": "-714",
+            "positionY": "-168"
         },
         {
             "type": "step",
@@ -14304,8 +14472,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6734",
-            "positionY": "-1022"
+            "positionX": "-518",
+            "positionY": "-182"
         },
         {
             "type": "step",
@@ -14414,6 +14582,15 @@
             "height": "40",
             "positionX": "378",
             "positionY": "-1834"
+        },
+        {
+            "type": "step",
+            "step": "stopped and not near",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "4214",
+            "positionY": "-504"
         },
         {
             "type": "step",
@@ -14606,646 +14783,25 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "481",
-        "ScrollBarY": "-192",
-        "SliderPosX": "481",
-        "SliderPosY": "-192",
-        "Zoom": "0.88"
+        "ScrollBarX": "1364",
+        "ScrollBarY": "-618",
+        "SliderPosX": "1364",
+        "SliderPosY": "-618",
+        "Zoom": "0.59999999999999998"
     },
     "ui generic": {
         "group": "element",
         "open plots": "",
         "plot groups": {
-            "reach check": {
-                "CoDWidget0": {
-                    "step": "CoD",
-                    "position_x": "638",
-                    "position_y": "246",
-                    "width": "206",
-                    "height": "204",
-                    "position_relative_x": "0.33229166666666665",
-                    "position_relative_y": "0.24212598425196849",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.20078740157480315",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "Webots CameraWidget0": {
-                    "step": "Webots Camera",
-                    "position_x": "0",
-                    "position_y": "228",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0",
-                    "position_relative_y": "0.22440944881889763",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "output",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "true",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "nearWidget0": {
-                    "step": "near",
-                    "position_x": "424",
-                    "position_y": "234",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.22083333333333333",
-                    "position_relative_y": "0.23031496062992127",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "now bWidget0": {
-                    "step": "stopped movement",
-                    "position_x": "856",
-                    "position_y": "247",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.44583333333333336",
-                    "position_relative_y": "0.24311023622047245",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "INPUT",
-                            "name": "input",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "selected targetWidget0": {
-                    "step": "selected target",
-                    "position_x": "635",
-                    "position_y": "414",
-                    "width": "369",
-                    "height": "330",
-                    "position_relative_x": "0.33072916666666669",
-                    "position_relative_y": "0.40748031496062992",
-                    "width_relative": "0.19218750000000001",
-                    "height_relative": "0.32480314960629919",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault",
-                                "sliced dimension": "2",
-                                "desired columns": "4"
-                            }
-                        }
-                    ]
-                },
-                "tool centered targetsWidget0": {
-                    "step": "tool centered targets",
-                    "position_x": "222",
-                    "position_y": "233",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.11562500000000001",
-                    "position_relative_y": "0.22933070866141733",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "visible": "false"
-            },
-            "learned weights": {
-                "Webots CameraWidget0": {
-                    "step": "Webots Camera",
-                    "position_x": "0",
-                    "position_y": "450",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0",
-                    "position_relative_y": "0.44291338582677164",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "output",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "true",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "action conceptsWidget0": {
-                    "step": "action concepts",
-                    "position_x": "418",
-                    "position_y": "456",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.21770833333333334",
-                    "position_relative_y": "0.44881889763779526",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "action-o 2Widget0": {
-                    "step": "action-o 2",
-                    "position_x": "201",
-                    "position_y": "232",
-                    "width": "206",
-                    "height": "193",
-                    "position_relative_x": "0.1046875",
-                    "position_relative_y": "0.2283464566929134",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.18996062992125984",
-                    "data_list": [
-                        {
-                            "id": "BUFFER",
-                            "name": "weights",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "action-o 3Widget0": {
-                    "step": "action-o 3",
-                    "position_x": "410",
-                    "position_y": "236",
-                    "width": "206",
-                    "height": "193",
-                    "position_relative_x": "0.21354166666666666",
-                    "position_relative_y": "0.23228346456692914",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.18996062992125984",
-                    "data_list": [
-                        {
-                            "id": "BUFFER",
-                            "name": "weights",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "action-o 4Widget0": {
-                    "step": "action-o 4",
-                    "position_x": "607",
-                    "position_y": "232",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.31614583333333335",
-                    "position_relative_y": "0.2283464566929134",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "BUFFER",
-                            "name": "weights",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "action-o1Widget0": {
-                    "step": "action-o1",
-                    "position_x": "5",
-                    "position_y": "230",
-                    "width": "206",
-                    "height": "199",
-                    "position_relative_x": "0.0026041666666666665",
-                    "position_relative_y": "0.2263779527559055",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19586614173228348",
-                    "data_list": [
-                        {
-                            "id": "BUFFER",
-                            "name": "weights",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "one-dimensional field 2Widget0": {
-                    "step": "one-dimensional field 2",
-                    "position_x": "183",
-                    "position_y": "448",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.095312499999999994",
-                    "position_relative_y": "0.44094488188976377",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "ordinal - action weightsWidget0": {
-                    "step": "ordinal - action weights",
-                    "position_x": "627",
-                    "position_y": "448",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.32656249999999998",
-                    "position_relative_y": "0.44094488188976377",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "BUFFER",
-                            "name": "weights",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "true",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "visible": "false"
-            },
-            "debug_col": {
-                "space-color perceptionWidget0": {
-                    "step": "space-color perception",
-                    "position_x": "169",
-                    "position_y": "404",
-                    "width": "354",
-                    "height": "324",
-                    "position_relative_x": "0.08802083333333334",
-                    "position_relative_y": "0.39763779527559057",
-                    "width_relative": "0.18437500000000001",
-                    "height_relative": "0.31889763779527558",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault",
-                                "sliced dimension": "2",
-                                "desired columns": "4"
-                            }
-                        }
-                    ]
-                },
-                "target color extractionWidget0": {
-                    "step": "target color extraction",
-                    "position_x": "897",
-                    "position_y": "401",
-                    "width": "338",
-                    "height": "323",
-                    "position_relative_x": "0.46718749999999998",
-                    "position_relative_y": "0.39468503937007876",
-                    "width_relative": "0.17604166666666668",
-                    "height_relative": "0.31791338582677164",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault",
-                                "sliced dimension": "2",
-                                "desired columns": "4"
-                            }
-                        }
-                    ]
-                },
-                "tool color extractionWidget0": {
-                    "step": "tool color extraction",
-                    "position_x": "558",
-                    "position_y": "405",
-                    "width": "330",
-                    "height": "314",
-                    "position_relative_x": "0.29062500000000002",
-                    "position_relative_y": "0.3986220472440945",
-                    "width_relative": "0.171875",
-                    "height_relative": "0.30905511811023623",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault",
-                                "sliced dimension": "2",
-                                "desired columns": "4"
-                            }
-                        }
-                    ]
-                },
-                "visible": "false"
-            },
             "default": {
                 "multi object WMWidget0": {
                     "step": "multi object WM",
-                    "position_x": "205",
-                    "position_y": "187",
+                    "position_x": "212",
+                    "position_y": "225",
                     "width": "206",
                     "height": "200",
-                    "position_relative_x": "0.10677083333333333",
-                    "position_relative_y": "0.18405511811023623",
+                    "position_relative_x": "0.11041666666666666",
+                    "position_relative_y": "0.22145669291338582",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.19685039370078741",
                     "data_list": [
@@ -15276,12 +14832,12 @@
                 },
                 "target repr wm Widget0": {
                     "step": "target repr wm ",
-                    "position_x": "896",
-                    "position_y": "176",
+                    "position_x": "976",
+                    "position_y": "220",
                     "width": "206",
                     "height": "200",
-                    "position_relative_x": "0.46666666666666667",
-                    "position_relative_y": "0.17322834645669291",
+                    "position_relative_x": "0.5083333333333333",
+                    "position_relative_y": "0.21653543307086615",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.19685039370078741",
                     "data_list": [
@@ -15310,86 +14866,16 @@
                         }
                     ]
                 },
-                "CoS 4Widget0": {
-                    "step": "CoS 4",
-                    "position_x": "1235",
-                    "position_y": "184",
-                    "width": "206",
-                    "height": "193",
-                    "position_relative_x": "0.64322916666666663",
-                    "position_relative_y": "0.18110236220472442",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.18996062992125984",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
-                "CoDWidget0": {
-                    "step": "CoD",
-                    "position_x": "1041",
-                    "position_y": "185",
-                    "width": "206",
-                    "height": "193",
-                    "position_relative_x": "0.54218750000000004",
-                    "position_relative_y": "0.18208661417322836",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.18996062992125984",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "autoscaling": "true",
-                                "major grid visible": "false",
-                                "minor grid visible": "false",
-                                "y axis limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "discrete plot": "false"
-                            }
-                        }
-                    ]
-                },
                 "Webots CameraWidget0": {
                     "step": "Webots Camera",
-                    "position_x": "0",
-                    "position_y": "187",
+                    "position_x": "7",
+                    "position_y": "226",
                     "width": "206",
-                    "height": "193",
-                    "position_relative_x": "0",
-                    "position_relative_y": "0.18405511811023623",
+                    "height": "200",
+                    "position_relative_x": "0.0036458333333333334",
+                    "position_relative_y": "0.22244094488188976",
                     "width_relative": "0.10729166666666666",
-                    "height_relative": "0.18996062992125984",
+                    "height_relative": "0.19685039370078741",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -15416,14 +14902,49 @@
                         }
                     ]
                 },
-                "selected hueWidget0": {
-                    "step": "selected hue",
-                    "position_x": "797",
-                    "position_y": "388",
+                "action conceptsWidget0": {
+                    "step": "action concepts",
+                    "position_x": "1177",
+                    "position_y": "224",
                     "width": "206",
                     "height": "200",
-                    "position_relative_x": "0.41510416666666666",
-                    "position_relative_y": "0.38188976377952755",
+                    "position_relative_x": "0.61302083333333335",
+                    "position_relative_y": "0.22047244094488189",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19685039370078741",
+                    "data_list": [
+                        {
+                            "id": "OUTPUT",
+                            "name": "sigmoided activation",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "selected hueWidget0": {
+                    "step": "selected hue",
+                    "position_x": "748",
+                    "position_y": "414",
+                    "width": "206",
+                    "height": "200",
+                    "position_relative_x": "0.38958333333333334",
+                    "position_relative_y": "0.40748031496062992",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.19685039370078741",
                     "data_list": [
@@ -15453,14 +14974,14 @@
                 },
                 "single object selectionWidget0": {
                     "step": "single object selection",
-                    "position_x": "404",
-                    "position_y": "186",
-                    "width": "396",
-                    "height": "384",
-                    "position_relative_x": "0.21041666666666667",
-                    "position_relative_y": "0.18307086614173229",
-                    "width_relative": "0.20624999999999999",
-                    "height_relative": "0.37795275590551181",
+                    "position_x": "421",
+                    "position_y": "226",
+                    "width": "363",
+                    "height": "336",
+                    "position_relative_x": "0.21927083333333333",
+                    "position_relative_y": "0.22244094488188976",
+                    "width_relative": "0.18906249999999999",
+                    "height_relative": "0.33070866141732286",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -15491,12 +15012,12 @@
                 },
                 "tool repr wmWidget0": {
                     "step": "tool repr wm",
-                    "position_x": "721",
-                    "position_y": "183",
+                    "position_x": "773",
+                    "position_y": "224",
                     "width": "206",
                     "height": "193",
-                    "position_relative_x": "0.37552083333333336",
-                    "position_relative_y": "0.18011811023622049",
+                    "position_relative_x": "0.40260416666666665",
+                    "position_relative_y": "0.22047244094488189",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.18996062992125984",
                     "data_list": [
@@ -15521,6 +15042,149 @@
                                     "upper limit": "1"
                                 },
                                 "color jet": "PlotDefault"
+                            }
+                        }
+                    ]
+                },
+                "visible": "false"
+            },
+            "learned weights": {
+                "action-o 2Widget0": {
+                    "step": "action-o 2",
+                    "position_x": "228",
+                    "position_y": "257",
+                    "width": "206",
+                    "height": "201",
+                    "position_relative_x": "0.11874999999999999",
+                    "position_relative_y": "0.25295275590551181",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19783464566929135",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 3Widget0": {
+                    "step": "action-o 3",
+                    "position_x": "435",
+                    "position_y": "259",
+                    "width": "206",
+                    "height": "200",
+                    "position_relative_x": "0.2265625",
+                    "position_relative_y": "0.25492125984251968",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19685039370078741",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 4Widget0": {
+                    "step": "action-o 4",
+                    "position_x": "637",
+                    "position_y": "260",
+                    "width": "206",
+                    "height": "200",
+                    "position_relative_x": "0.33177083333333335",
+                    "position_relative_y": "0.25590551181102361",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19685039370078741",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o1Widget0": {
+                    "step": "action-o1",
+                    "position_x": "22",
+                    "position_y": "263",
+                    "width": "206",
+                    "height": "193",
+                    "position_relative_x": "0.011458333333333333",
+                    "position_relative_y": "0.25885826771653542",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.18996062992125984",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
                             }
                         }
                     ]

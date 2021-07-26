@@ -3,13 +3,6 @@
         "format": "1"
     },
     "steps": {
-        "cedar.processing.sources.Boost": {
-            "name": "Boost",
-            "strength": "1",
-            "active": "false",
-            "deactivate on reset": "false",
-            "comments": ""
-        },
         "cedar.processing.steps.ChannelSplit": {
             "name": "Channel Split 2",
             "comments": "270 degree of color wheel\n270\/16 = 16.875 deg"
@@ -80,14 +73,14 @@
             "comments": ""
         },
         "cedar.dynamics.NeuralField": {
-            "name": "CoD",
+            "name": "CoD: stopped and not near",
             "activation as output": "false",
             "discrete metric (workaround)": "false",
             "update stepIcon according to output": "true",
             "threshold for updating the stepIcon": "0.80000000000000004",
             "dimensionality": "0",
             "sizes": "",
-            "time scale": "3000",
+            "time scale": "100",
             "resting level": "-5",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
@@ -133,7 +126,7 @@
                 ],
                 "limit": "5"
             },
-            "comments": "- delayed firing, function as timer\t"
+            "comments": ""
         },
         "cedar.dynamics.NeuralField": {
             "name": "CoS",
@@ -694,19 +687,6 @@
             "comments": ""
         },
         "cedar.processing.steps.Convolution": {
-            "name": "Convolution 2",
-            "kernels": "",
-            "convolution": {
-                "borderType": "Cyclic",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.FFTW"
-                },
-                "alternate even kernel center": "false"
-            },
-            "comments": ""
-        },
-        "cedar.processing.steps.Convolution": {
             "name": "Convolution 3",
             "kernels": "",
             "convolution": {
@@ -1090,6 +1070,94 @@
         "cedar.processing.steps.InnerProduct": {
             "name": "Inner Product 9",
             "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "IoR",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "2",
+            "sizes": [
+                "50",
+                "50"
+            ],
+            "time scale": "100",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "-0.01",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "25.000000000000071",
+                    "sigmas": [
+                        "1",
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                },
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "-25",
+                    "sigmas": [
+                        "2",
+                        "2"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "2",
+                "anchor": [
+                    "0",
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3",
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0",
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": "- goal: keep memory of hypothses about tool and inhibit them from being selected again\n\n- input: boost from action primitive check CoD,  +tool repr wm\n\n- output: -tool saliency\n\n- sustained, tracking\n\n"
         },
         "cedar.processing.steps.LinearLateralShift": {
             "name": "Linear Lateral Shift",
@@ -1753,21 +1821,6 @@
             "comments": ""
         },
         "cedar.processing.Projection": {
-            "name": "Projection 16",
-            "dimension mapping": {
-                "0": "0",
-                "1": "1"
-            },
-            "output dimensionality": "3",
-            "output dimension sizes": [
-                "50",
-                "50",
-                "16"
-            ],
-            "compression type": "SUM",
-            "comments": ""
-        },
-        "cedar.processing.Projection": {
             "name": "Projection 17",
             "dimension mapping": {
                 "0": "4294967295",
@@ -1890,6 +1943,17 @@
         },
         "cedar.processing.Projection": {
             "name": "Projection 26",
+            "dimension mapping": {
+                "0": "4294967295",
+                "1": "4294967295"
+            },
+            "output dimensionality": "0",
+            "output dimension sizes": "",
+            "compression type": "MAXIMUM",
+            "comments": ""
+        },
+        "cedar.processing.Projection": {
+            "name": "Projection 27",
             "dimension mapping": {
                 "0": "4294967295",
                 "1": "4294967295"
@@ -2034,15 +2098,6 @@
         },
         "cedar.processing.Resize": {
             "name": "Resize",
-            "output size": [
-                "50",
-                "50"
-            ],
-            "interpolation": "LINEAR",
-            "comments": ""
-        },
-        "cedar.processing.Resize": {
-            "name": "Resize 2",
             "output size": [
                 "50",
                 "50"
@@ -2431,11 +2486,6 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
-            "name": "Static Gain 162",
-            "gain factor": "-10",
-            "comments": ""
-        },
-        "cedar.processing.StaticGain": {
             "name": "Static Gain 17",
             "gain factor": "5",
             "comments": ""
@@ -2506,6 +2556,11 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain 24",
+            "gain factor": "6",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 25",
             "gain factor": "1.5",
             "comments": ""
@@ -2556,13 +2611,13 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
-            "name": "Static Gain 36",
-            "gain factor": "10",
+            "name": "Static Gain 34",
+            "gain factor": "-3",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
-            "name": "Static Gain 37",
-            "gain factor": "-10",
+            "name": "Static Gain 36",
+            "gain factor": "10",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -2593,11 +2648,6 @@
         "cedar.processing.StaticGain": {
             "name": "Static Gain 42",
             "gain factor": "4.0000000000000027",
-            "comments": ""
-        },
-        "cedar.processing.StaticGain": {
-            "name": "Static Gain 43",
-            "gain factor": "5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3414,7 +3464,7 @@
         "cedar.processing.sources.Boost": {
             "name": "desire learn",
             "strength": "5",
-            "active": "true",
+            "active": "false",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -5007,7 +5057,7 @@
                 ],
                 "limit": "5"
             },
-            "comments": ""
+            "comments": "- should fire for knife-apple, but not for hand-apple"
         },
         "cedar.processing.sources.GaussInput": {
             "name": "near spatial template",
@@ -5149,7 +5199,7 @@
             "multiplicative noise (activation)": "false",
             "sigmoid": {
                 "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "-0.30000000000000004",
+                "threshold": "0",
                 "beta": "100"
             },
             "global inhibition": "0",
@@ -5188,7 +5238,7 @@
                 ],
                 "limit": "5"
             },
-            "comments": "- function: fires when no spatial movement is detected for short interval\n- sigmoid threshold slightly negative to account for some fluctuation at transient detector\t"
+            "comments": "- function: fires when no spatial movement is detected for short interval\t"
         },
         "cedar.dynamics.NeuralField": {
             "name": "node",
@@ -5588,76 +5638,6 @@
             "weight init value": "0",
             "weight init noise": "0.001",
             "comments": "- for some reason the weight decays although the corresponding ordinal node isn't active anymore"
-        },
-        "cedar.dynamics.NeuralField": {
-            "name": "original coord targets",
-            "activation as output": "false",
-            "discrete metric (workaround)": "false",
-            "update stepIcon according to output": "true",
-            "threshold for updating the stepIcon": "0.80000000000000004",
-            "dimensionality": "2",
-            "sizes": [
-                "50",
-                "50"
-            ],
-            "time scale": "100",
-            "resting level": "-2",
-            "input noise gain": "0.10000000000000001",
-            "multiplicative noise (input)": "false",
-            "multiplicative noise (activation)": "false",
-            "sigmoid": {
-                "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "0",
-                "beta": "100"
-            },
-            "global inhibition": "-0.01",
-            "lateral kernels": {
-                "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "2",
-                    "anchor": [
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "1",
-                    "sigmas": [
-                        "1",
-                        "1"
-                    ],
-                    "normalize": "true",
-                    "shifts": [
-                        "0",
-                        "0"
-                    ],
-                    "limit": "5"
-                }
-            },
-            "lateral kernel convolution": {
-                "borderType": "Zero",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.OpenCV"
-                },
-                "alternate even kernel center": "false"
-            },
-            "noise correlation kernel": {
-                "dimensionality": "2",
-                "anchor": [
-                    "0",
-                    "0"
-                ],
-                "amplitude": "0",
-                "sigmas": [
-                    "3",
-                    "3"
-                ],
-                "normalize": "true",
-                "shifts": [
-                    "0",
-                    "0"
-                ],
-                "limit": "5"
-            },
-            "comments": ""
         },
         "cedar.dynamics.NeuralField": {
             "name": "precondition 2",
@@ -6605,7 +6585,7 @@
         "cedar.processing.sources.Boost": {
             "name": "reset boost",
             "strength": "10",
-            "active": "false",
+            "active": "true",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -7768,94 +7748,6 @@
             "comments": ""
         },
         "cedar.dynamics.NeuralField": {
-            "name": "tool IoR",
-            "activation as output": "false",
-            "discrete metric (workaround)": "false",
-            "update stepIcon according to output": "true",
-            "threshold for updating the stepIcon": "0.80000000000000004",
-            "dimensionality": "2",
-            "sizes": [
-                "50",
-                "50"
-            ],
-            "time scale": "100",
-            "resting level": "-5",
-            "input noise gain": "0.10000000000000001",
-            "multiplicative noise (input)": "false",
-            "multiplicative noise (activation)": "false",
-            "sigmoid": {
-                "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "0",
-                "beta": "100"
-            },
-            "global inhibition": "-0.01",
-            "lateral kernels": {
-                "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "2",
-                    "anchor": [
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "25.000000000000071",
-                    "sigmas": [
-                        "1",
-                        "1"
-                    ],
-                    "normalize": "true",
-                    "shifts": [
-                        "0",
-                        "0"
-                    ],
-                    "limit": "5"
-                },
-                "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "2",
-                    "anchor": [
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "-25",
-                    "sigmas": [
-                        "2",
-                        "2"
-                    ],
-                    "normalize": "true",
-                    "shifts": [
-                        "0",
-                        "0"
-                    ],
-                    "limit": "5"
-                }
-            },
-            "lateral kernel convolution": {
-                "borderType": "Zero",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.OpenCV"
-                },
-                "alternate even kernel center": "false"
-            },
-            "noise correlation kernel": {
-                "dimensionality": "2",
-                "anchor": [
-                    "0",
-                    "0"
-                ],
-                "amplitude": "0",
-                "sigmas": [
-                    "3",
-                    "3"
-                ],
-                "normalize": "true",
-                "shifts": [
-                    "0",
-                    "0"
-                ],
-                "limit": "5"
-            },
-            "comments": "- goal: keep memory of hypothses about tool and inhibit them from being selected again\n\n- input: boost from action primitive check CoD,  +tool repr wm\n\n- output: -tool saliency\n\n- sustained, tracking\n\n"
-        },
-        "cedar.dynamics.NeuralField": {
             "name": "tool centered targets",
             "activation as output": "false",
             "discrete metric (workaround)": "false",
@@ -8432,7 +8324,6 @@
                 "CoS 4",
                 "prior 4",
                 "intention 4",
-                "CoD",
                 "new hypo",
                 "tool knife",
                 "target knife",
@@ -8444,7 +8335,7 @@
                 "selected hue",
                 "Search obj1",
                 "tool repr wm",
-                "tool IoR",
+                "IoR",
                 "reset",
                 "reach check",
                 "near",
@@ -8501,7 +8392,6 @@
                 "one-dimensional field 2",
                 "one-dimensional field 3",
                 "ordinal - action weights",
-                "original coord targets",
                 "onset energy > offset energy",
                 "reach CoS",
                 "cut CoS",
@@ -8528,7 +8418,8 @@
                 "precondition 2",
                 "tool AND target",
                 "stable change detection",
-                "Search obj 2"
+                "Search obj 2",
+                "CoD: stopped and not near"
             ]
         }
     },
@@ -8694,10 +8585,6 @@
             "target": "new hypo.input"
         },
         {
-            "source": "CoD.sigmoided activation",
-            "target": "Static Gain 46.input"
-        },
-        {
             "source": "new hypo.sigmoided activation",
             "target": "new hypo inhi.input"
         },
@@ -8815,19 +8702,11 @@
         },
         {
             "source": "Static Gain 87.output",
-            "target": "tool IoR.input"
-        },
-        {
-            "source": "tool IoR.sigmoided activation",
-            "target": "Projection 16.input"
-        },
-        {
-            "source": "CoD.sigmoided activation",
-            "target": "Static Gain 10.input"
+            "target": "IoR.input"
         },
         {
             "source": "Static Gain 10.output",
-            "target": "tool IoR.input"
+            "target": "IoR.input"
         },
         {
             "source": "Static Gain 72.output",
@@ -8870,14 +8749,6 @@
             "target": "Search obj1.input"
         },
         {
-            "source": "tool IoR.sigmoided activation",
-            "target": "Static Gain 37.input"
-        },
-        {
-            "source": "Static Gain 37.output",
-            "target": "tool repr wm.input"
-        },
-        {
             "source": "space-color perception.sigmoided activation",
             "target": "Projection 6.input"
         },
@@ -8887,7 +8758,7 @@
         },
         {
             "source": "Static Gain 45.output",
-            "target": "tool IoR.input"
+            "target": "IoR.input"
         },
         {
             "source": "near spatial template.Gauss input",
@@ -8908,14 +8779,6 @@
         {
             "source": "Static Gain 64.output",
             "target": "near.input"
-        },
-        {
-            "source": "Convolution 2.result",
-            "target": "Resize 2.input"
-        },
-        {
-            "source": "near.sigmoided activation",
-            "target": "Convolution 2.kernel"
         },
         {
             "source": "Flip.output",
@@ -9151,7 +9014,7 @@
         },
         {
             "source": "reset inhi.output",
-            "target": "tool IoR.input"
+            "target": "IoR.input"
         },
         {
             "source": "slow onset.sigmoided activation",
@@ -9630,18 +9493,6 @@
             "target": "one-dimensional field 3.input"
         },
         {
-            "source": "CoS 4.sigmoided activation",
-            "target": "Static Gain 162.input"
-        },
-        {
-            "source": "Static Gain 162.output",
-            "target": "CoD.input"
-        },
-        {
-            "source": "Resize 2.output",
-            "target": "original coord targets.input"
-        },
-        {
             "source": "Projection 28.output",
             "target": "Static Gain 178.input"
         },
@@ -9794,10 +9645,6 @@
             "target": "Static Gain 90.input"
         },
         {
-            "source": "Static Gain 43.output",
-            "target": "CoD.input"
-        },
-        {
             "source": "cut check.sigmoided activation",
             "target": "Static Gain 53.input"
         },
@@ -9828,10 +9675,6 @@
         {
             "source": "reach check.sigmoided activation",
             "target": "node.input"
-        },
-        {
-            "source": "node.sigmoided activation",
-            "target": "Static Gain 158.input"
         },
         {
             "source": "Const Vector 6.vector",
@@ -10614,10 +10457,6 @@
             "target": "Flip.input"
         },
         {
-            "source": "Noop 6.output",
-            "target": "Convolution 2.matrix"
-        },
-        {
             "source": "Noop 9.output",
             "target": "Projection 23.input"
         },
@@ -10718,8 +10557,40 @@
             "target": "Static Gain 20.input"
         },
         {
-            "source": "Boost.boost",
-            "target": "Sum 3.terms"
+            "source": "stopped movement.sigmoided activation",
+            "target": "Static Gain 24.input"
+        },
+        {
+            "source": "Static Gain 24.output",
+            "target": "CoD: stopped and not near.input"
+        },
+        {
+            "source": "Static Gain 34.output",
+            "target": "CoD: stopped and not near.input"
+        },
+        {
+            "source": "near.sigmoided activation",
+            "target": "Projection 27.input"
+        },
+        {
+            "source": "Projection 27.output",
+            "target": "Static Gain 34.input"
+        },
+        {
+            "source": "CoD: stopped and not near.sigmoided activation",
+            "target": "Static Gain 10.input"
+        },
+        {
+            "source": "IoR.sigmoided activation",
+            "target": "Static Gain 84.input"
+        },
+        {
+            "source": "Static Gain 84.output",
+            "target": "multi object WM.input"
+        },
+        {
+            "source": "node.sigmoided activation",
+            "target": "Static Gain 158.input"
         }
     ],
     "records": {
@@ -10727,15 +10598,15 @@
     },
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
             "type": "stickyNote",
             "width": "161",
             "height": "70",
-            "x": "5852",
-            "y": "-1092",
+            "x": "6538",
+            "y": "-1106",
             "text": "match",
             "font size": "14",
             "color red": "190",
@@ -10794,8 +10665,8 @@
             "type": "stickyNote",
             "width": "142",
             "height": "98",
-            "x": "3738",
-            "y": "126",
+            "x": "4424",
+            "y": "112",
             "text": "transient\ndetector",
             "font size": "14",
             "color red": "190",
@@ -10806,8 +10677,8 @@
             "type": "stickyNote",
             "width": "211",
             "height": "354",
-            "x": "5236",
-            "y": "-28",
+            "x": "5922",
+            "y": "-42",
             "text": "[Color code]\n0: apple normal\n1: apple cut\n2: apple grasped\n3: apple reached\n\n5: knife reaching\n6:knife cutting\n7: knife normal\n8: knife grasped\n9: knife reached\n\n12: hand reaching\n13: hand grasping\n14: hand normal",
             "font size": "14",
             "color red": "110",
@@ -10842,8 +10713,8 @@
             "type": "stickyNote",
             "width": "161",
             "height": "70",
-            "x": "4018",
-            "y": "-350",
+            "x": "4704",
+            "y": "-364",
             "text": "match CoS",
             "font size": "14",
             "color red": "190",
@@ -10852,22 +10723,10 @@
         },
         {
             "type": "stickyNote",
-            "width": "232",
-            "height": "117",
-            "x": "4578",
-            "y": "-966",
-            "text": "when CoD fires, relevant transients aren't there anymore\n\nEven if one can find the correct tool eventually, one has to keep track of new action as well",
-            "font size": "10",
-            "color red": "255",
-            "color green": "110",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
             "width": "1553",
             "height": "374",
-            "x": "4690",
-            "y": "-476",
+            "x": "5376",
+            "y": "-490",
             "text": "[Discuss with Jan]\n\n- had to use simpler knife model to ensure that tool WM doesn't die out when knife is moving\n- no need to stabilize transients \/ it doesn't solve the problem of delay and energy difference?\n- using oscilation for timer  (e.g. for no movement stable)\n- using condition-specific CoD? (e.g. when knife passes over the apple and hand stops above apple, hand reach-apple)\n-> tool candidate WM\n  when the tool stops moving toward target for certain amount of time, new tool is searched by activating remaining candidate\n- tool\/target is distinguished only in terms of their colors (one really sees 'cutting knife' instead of 'knife' + 'cutting')\n\n- reach as part of other actions? reach is the probably the only action where only the tool moves. It isn't really spearate action prior to grasp, cut etc...\n\n- not possible to use multiple camera? (need to move the camera \/ control for angled pov)\n\n\n\n[ Discuss with Gregor]\n\n0. Distinguishing tool and target\n- both changes, but since actions unfolds in time both can be attended sequentially -> is there any fixed order or contingent on primitive?\n- currently solved by always changing tool hue first then the target hue\n-  is there really different repr for tool X and target X? In my implementation yes, different synaptic mapping from hue field to concept nodes",
             "font size": "14",
             "color red": "110",
@@ -10892,18 +10751,18 @@
             "height": "70",
             "x": "756",
             "y": "-1596",
-            "text": "use norm to make peak become 1",
+            "text": "used norm to make peak become 1",
             "font size": "10",
-            "color red": "255",
+            "color red": "110",
             "color green": "255",
-            "color blue": "110"
+            "color blue": "255"
         },
         {
             "type": "stickyNote",
             "width": "174",
             "height": "70",
-            "x": "1932",
-            "y": "42",
+            "x": "1834",
+            "y": "-126",
             "text": "removal of registered obj isn't clean (for moving obj)",
             "font size": "10",
             "color red": "255",
@@ -10912,56 +10771,8 @@
         },
         {
             "type": "stickyNote",
-            "width": "120",
-            "height": "70",
-            "x": "4144",
-            "y": "-1022",
-            "text": "should check inhibit whenever CoD fires?",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
-            "width": "120",
-            "height": "70",
-            "x": "274",
-            "y": "56",
-            "text": "need of CoD when found obj isn't involved (e.g. in 3rd action, finding hand as tool instead of knife)",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
-            "width": "120",
-            "height": "70",
-            "x": "1736",
-            "y": "392",
-            "text": "tool and target same obj??",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
-            "width": "120",
-            "height": "70",
-            "x": "1022",
-            "y": "-126",
-            "text": "both 3d  and 1d field isn't single object sleective",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
-            "width": "120",
-            "height": "70",
+            "width": "242",
+            "height": "79",
             "x": "630",
             "y": "560",
             "text": "make input more interesting by playing with timing of col change",
@@ -10972,15 +10783,27 @@
         },
         {
             "type": "stickyNote",
-            "width": "120",
-            "height": "70",
-            "x": "4215",
-            "y": "-518",
-            "text": "possible CoD: if stopped moving and no near",
+            "width": "197",
+            "height": "86",
+            "x": "5096",
+            "y": "-588",
+            "text": "Reach CoD fires when moving stops and two objs aren't near each other",
             "font size": "10",
-            "color red": "255",
+            "color red": "110",
             "color green": "255",
-            "color blue": "110"
+            "color blue": "255"
+        },
+        {
+            "type": "stickyNote",
+            "width": "148",
+            "height": "70",
+            "x": "-676",
+            "y": "361",
+            "text": "action",
+            "font size": "14",
+            "color red": "190",
+            "color green": "242",
+            "color blue": "161"
         },
         {
             "type": "connections",
@@ -11010,16 +10833,6 @@
                         {
                             "x": "-1422",
                             "y": "146"
-                        }
-                    ]
-                },
-                {
-                    "source slot": "reset inhi.output",
-                    "target slot": "tool IoR.input",
-                    "anchors": [
-                        {
-                            "x": "-1968",
-                            "y": "20"
                         }
                     ]
                 },
@@ -11058,8 +10871,18 @@
                     "target slot": "Projection.input",
                     "anchors": [
                         {
-                            "x": "1042",
-                            "y": "-8"
+                            "x": "1198",
+                            "y": "333"
+                        }
+                    ]
+                },
+                {
+                    "source slot": "memory 3.sigmoided activation",
+                    "target slot": "Static Gain 30.input",
+                    "anchors": [
+                        {
+                            "x": "-254",
+                            "y": "29"
                         }
                     ]
                 },
@@ -11118,33 +10941,24 @@
                     ]
                 },
                 {
-                    "source slot": "CoD.sigmoided activation",
+                    "source slot": "CoD: stopped and not near.sigmoided activation",
                     "target slot": "Static Gain 10.input",
                     "anchors": [
                         {
-                            "x": "6",
-                            "y": "1812"
+                            "x": "216",
+                            "y": "1308"
                         },
                         {
-                            "x": "-4544",
-                            "y": "1798"
+                            "x": "-5048",
+                            "y": "1392"
                         },
                         {
-                            "x": "-4544",
-                            "y": "1126"
+                            "x": "-5048",
+                            "y": "692"
                         }
                     ]
                 }
             ]
-        },
-        {
-            "type": "step",
-            "step": "Boost",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "616",
-            "positionY": "-140"
         },
         {
             "type": "step",
@@ -11184,12 +10998,12 @@
         },
         {
             "type": "step",
-            "step": "CoD",
+            "step": "CoD: stopped and not near",
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4424",
-            "positionY": "-966"
+            "positionX": "4900",
+            "positionY": "-518"
         },
         {
             "type": "step",
@@ -11197,8 +11011,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6034",
-            "positionY": "-854"
+            "positionX": "6720",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -11251,8 +11065,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2366",
-            "positionY": "-56"
+            "positionX": "2898",
+            "positionY": "-350"
         },
         {
             "type": "step",
@@ -11260,8 +11074,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3234",
-            "positionY": "-434"
+            "positionX": "3920",
+            "positionY": "-448"
         },
         {
             "type": "step",
@@ -11278,8 +11092,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3626",
-            "positionY": "-434"
+            "positionX": "4312",
+            "positionY": "-448"
         },
         {
             "type": "step",
@@ -11350,8 +11164,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3150",
-            "positionY": "-644"
+            "positionX": "3836",
+            "positionY": "-658"
         },
         {
             "type": "step",
@@ -11359,8 +11173,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3150",
-            "positionY": "-434"
+            "positionX": "3836",
+            "positionY": "-448"
         },
         {
             "type": "step",
@@ -11431,8 +11245,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "-434"
+            "positionX": "4228",
+            "positionY": "-448"
         },
         {
             "type": "step",
@@ -11440,8 +11254,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "-644"
+            "positionX": "4228",
+            "positionY": "-658"
         },
         {
             "type": "step",
@@ -11472,21 +11286,12 @@
         },
         {
             "type": "step",
-            "step": "Convolution 2",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "2380",
-            "positionY": "-224"
-        },
-        {
-            "type": "step",
             "step": "Convolution 3",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2366",
-            "positionY": "14"
+            "positionX": "2898",
+            "positionY": "-280"
         },
         {
             "type": "step",
@@ -11494,8 +11299,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6720",
-            "positionY": "-882"
+            "positionX": "-532",
+            "positionY": "-42"
         },
         {
             "type": "step",
@@ -11503,8 +11308,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2240",
-            "positionY": "14"
+            "positionX": "2772",
+            "positionY": "-280"
         },
         {
             "type": "step",
@@ -11593,8 +11398,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3234",
-            "positionY": "-644"
+            "positionX": "3920",
+            "positionY": "-658"
         },
         {
             "type": "step",
@@ -11656,8 +11461,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3626",
-            "positionY": "-644"
+            "positionX": "4312",
+            "positionY": "-658"
         },
         {
             "type": "step",
@@ -11694,6 +11499,15 @@
             "height": "40",
             "positionX": "1694",
             "positionY": "-1456"
+        },
+        {
+            "type": "step",
+            "step": "IoR",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "476",
+            "positionY": "154"
         },
         {
             "type": "step",
@@ -11854,8 +11668,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "588"
+            "positionX": "3654",
+            "positionY": "574"
         },
         {
             "type": "step",
@@ -11863,8 +11677,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2856",
-            "positionY": "-84"
+            "positionX": "3542",
+            "positionY": "-98"
         },
         {
             "type": "step",
@@ -11872,8 +11686,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4158",
-            "positionY": "-588"
+            "positionX": "4844",
+            "positionY": "-602"
         },
         {
             "type": "step",
@@ -11908,8 +11722,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "-1288"
+            "positionX": "4228",
+            "positionY": "-1302"
         },
         {
             "type": "step",
@@ -11917,8 +11731,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2324",
-            "positionY": "294"
+            "positionX": "2856",
+            "positionY": "0"
         },
         {
             "type": "step",
@@ -11944,8 +11758,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2688",
-            "positionY": "308"
+            "positionX": "3220",
+            "positionY": "14"
         },
         {
             "type": "step",
@@ -12007,8 +11821,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3752",
-            "positionY": "-1176"
+            "positionX": "4438",
+            "positionY": "-1190"
         },
         {
             "type": "step",
@@ -12052,8 +11866,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2856",
-            "positionY": "-154"
+            "positionX": "3542",
+            "positionY": "-168"
         },
         {
             "type": "step",
@@ -12066,21 +11880,12 @@
         },
         {
             "type": "step",
-            "step": "Projection 16",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "1582",
-            "positionY": "28"
-        },
-        {
-            "type": "step",
             "step": "Projection 17",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3374",
-            "positionY": "294"
+            "positionX": "4060",
+            "positionY": "280"
         },
         {
             "type": "step",
@@ -12088,8 +11893,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3374",
-            "positionY": "546"
+            "positionX": "4060",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -12097,8 +11902,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4074",
-            "positionY": "518"
+            "positionX": "4760",
+            "positionY": "504"
         },
         {
             "type": "step",
@@ -12106,8 +11911,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-1190"
+            "positionX": "3654",
+            "positionY": "-1204"
         },
         {
             "type": "step",
@@ -12115,8 +11920,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3808",
-            "positionY": "294"
+            "positionX": "4494",
+            "positionY": "280"
         },
         {
             "type": "step",
@@ -12124,8 +11929,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3416",
-            "positionY": "378"
+            "positionX": "4102",
+            "positionY": "364"
         },
         {
             "type": "step",
@@ -12133,8 +11938,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3220",
-            "positionY": "-224"
+            "positionX": "3906",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -12142,8 +11947,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2856",
-            "positionY": "-14"
+            "positionX": "3542",
+            "positionY": "-28"
         },
         {
             "type": "step",
@@ -12151,8 +11956,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3220",
-            "positionY": "-84"
+            "positionX": "3906",
+            "positionY": "-98"
         },
         {
             "type": "step",
@@ -12160,8 +11965,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3598",
-            "positionY": "-224"
+            "positionX": "4284",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -12174,12 +11979,21 @@
         },
         {
             "type": "step",
+            "step": "Projection 27",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4718",
+            "positionY": "-518"
+        },
+        {
+            "type": "step",
             "step": "Projection 28",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3808",
-            "positionY": "546"
+            "positionX": "4494",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -12187,8 +12001,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3416",
-            "positionY": "462"
+            "positionX": "4102",
+            "positionY": "448"
         },
         {
             "type": "step",
@@ -12205,8 +12019,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3374",
-            "positionY": "-1176"
+            "positionX": "4060",
+            "positionY": "-1190"
         },
         {
             "type": "step",
@@ -12259,8 +12073,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6762",
-            "positionY": "-784"
+            "positionX": "-490",
+            "positionY": "56"
         },
         {
             "type": "step",
@@ -12286,17 +12100,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2464",
-            "positionY": "14"
-        },
-        {
-            "type": "step",
-            "step": "Resize 2",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "2478",
-            "positionY": "-224"
+            "positionX": "2996",
+            "positionY": "-280"
         },
         {
             "type": "step",
@@ -12340,8 +12145,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3864",
-            "positionY": "-1176"
+            "positionX": "4550",
+            "positionY": "-1190"
         },
         {
             "type": "step",
@@ -12367,8 +12172,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2940",
-            "positionY": "-154"
+            "positionX": "3626",
+            "positionY": "-168"
         },
         {
             "type": "step",
@@ -12484,8 +12289,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4004",
-            "positionY": "-1106"
+            "positionX": "4690",
+            "positionY": "-1120"
         },
         {
             "type": "step",
@@ -12520,8 +12325,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3206",
-            "positionY": "350"
+            "positionX": "3892",
+            "positionY": "336"
         },
         {
             "type": "step",
@@ -12529,8 +12334,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3066",
-            "positionY": "350"
+            "positionX": "3752",
+            "positionY": "336"
         },
         {
             "type": "step",
@@ -12538,8 +12343,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3458",
-            "positionY": "294"
+            "positionX": "4144",
+            "positionY": "280"
         },
         {
             "type": "step",
@@ -12547,8 +12352,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3206",
-            "positionY": "602"
+            "positionX": "3892",
+            "positionY": "588"
         },
         {
             "type": "step",
@@ -12556,8 +12361,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3458",
-            "positionY": "546"
+            "positionX": "4144",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -12565,8 +12370,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3066",
-            "positionY": "602"
+            "positionX": "3752",
+            "positionY": "588"
         },
         {
             "type": "step",
@@ -12574,8 +12379,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3724",
-            "positionY": "350"
+            "positionX": "4410",
+            "positionY": "336"
         },
         {
             "type": "step",
@@ -12583,8 +12388,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3724",
-            "positionY": "490"
+            "positionX": "4410",
+            "positionY": "476"
         },
         {
             "type": "step",
@@ -12592,8 +12397,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4158",
-            "positionY": "518"
+            "positionX": "4844",
+            "positionY": "504"
         },
         {
             "type": "step",
@@ -12610,8 +12415,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4438",
-            "positionY": "462"
+            "positionX": "5124",
+            "positionY": "448"
         },
         {
             "type": "step",
@@ -12619,8 +12424,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3500",
-            "positionY": "378"
+            "positionX": "4186",
+            "positionY": "364"
         },
         {
             "type": "step",
@@ -12628,8 +12433,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4214",
-            "positionY": "308"
+            "positionX": "4900",
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -12637,8 +12442,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4214",
-            "positionY": "378"
+            "positionX": "4900",
+            "positionY": "364"
         },
         {
             "type": "step",
@@ -12646,8 +12451,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3318",
-            "positionY": "-224"
+            "positionX": "4004",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -12664,8 +12469,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-714"
+            "positionX": "3738",
+            "positionY": "-728"
         },
         {
             "type": "step",
@@ -12673,8 +12478,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-784"
+            "positionX": "3738",
+            "positionY": "-798"
         },
         {
             "type": "step",
@@ -12700,8 +12505,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2940",
-            "positionY": "-84"
+            "positionX": "3626",
+            "positionY": "-98"
         },
         {
             "type": "step",
@@ -12709,8 +12514,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-504"
+            "positionX": "3738",
+            "positionY": "-518"
         },
         {
             "type": "step",
@@ -12718,8 +12523,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-574"
+            "positionX": "3738",
+            "positionY": "-588"
         },
         {
             "type": "step",
@@ -12727,8 +12532,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2940",
-            "positionY": "-14"
+            "positionX": "3626",
+            "positionY": "-28"
         },
         {
             "type": "step",
@@ -12736,8 +12541,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3318",
-            "positionY": "-84"
+            "positionX": "4004",
+            "positionY": "-98"
         },
         {
             "type": "step",
@@ -12745,8 +12550,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3458",
-            "positionY": "-224"
+            "positionX": "4144",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -12754,8 +12559,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3682",
-            "positionY": "-224"
+            "positionX": "4368",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -12763,8 +12568,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3682",
-            "positionY": "-294"
+            "positionX": "4368",
+            "positionY": "-308"
         },
         {
             "type": "step",
@@ -12772,8 +12577,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2464",
-            "positionY": "-126"
+            "positionX": "2996",
+            "positionY": "-420"
         },
         {
             "type": "step",
@@ -12783,15 +12588,6 @@
             "height": "40",
             "positionX": "798",
             "positionY": "-896"
-        },
-        {
-            "type": "step",
-            "step": "Static Gain 162",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "4312",
-            "positionY": "-1050"
         },
         {
             "type": "step",
@@ -12835,8 +12631,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3934",
-            "positionY": "532"
+            "positionX": "4620",
+            "positionY": "518"
         },
         {
             "type": "step",
@@ -12844,8 +12640,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3500",
-            "positionY": "462"
+            "positionX": "4186",
+            "positionY": "448"
         },
         {
             "type": "step",
@@ -12853,8 +12649,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4816",
-            "positionY": "-756"
+            "positionX": "5502",
+            "positionY": "-770"
         },
         {
             "type": "step",
@@ -12862,8 +12658,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3724",
-            "positionY": "420"
+            "positionX": "4410",
+            "positionY": "406"
         },
         {
             "type": "step",
@@ -12880,8 +12676,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3864",
-            "positionY": "-1106"
+            "positionX": "4550",
+            "positionY": "-1120"
         },
         {
             "type": "step",
@@ -12898,8 +12694,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "5936",
-            "positionY": "-784"
+            "positionX": "6622",
+            "positionY": "-798"
         },
         {
             "type": "step",
@@ -12918,6 +12714,15 @@
             "height": "40",
             "positionX": "1344",
             "positionY": "-840"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 24",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4942",
+            "positionY": "-602"
         },
         {
             "type": "step",
@@ -12970,8 +12775,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-1120"
+            "positionX": "3738",
+            "positionY": "-1134"
         },
         {
             "type": "step",
@@ -12979,8 +12784,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2646",
-            "positionY": "-896"
+            "positionX": "2660",
+            "positionY": "-924"
         },
         {
             "type": "step",
@@ -13011,21 +12816,21 @@
         },
         {
             "type": "step",
+            "step": "Static Gain 34",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4802",
+            "positionY": "-518"
+        },
+        {
+            "type": "step",
             "step": "Static Gain 36",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
             "positionX": "784",
             "positionY": "-238"
-        },
-        {
-            "type": "step",
-            "step": "Static Gain 37",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "868",
-            "positionY": "266"
         },
         {
             "type": "step",
@@ -13083,15 +12888,6 @@
         },
         {
             "type": "step",
-            "step": "Static Gain 43",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "4326",
-            "positionY": "-966"
-        },
-        {
-            "type": "step",
             "step": "Static Gain 45",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -13114,8 +12910,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2940",
-            "positionY": "-224"
+            "positionX": "3626",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -13123,8 +12919,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "5796",
-            "positionY": "-924"
+            "positionX": "6482",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -13132,8 +12928,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-1190"
+            "positionX": "3738",
+            "positionY": "-1204"
         },
         {
             "type": "step",
@@ -13141,8 +12937,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3248",
-            "positionY": "-1260"
+            "positionX": "3934",
+            "positionY": "-1274"
         },
         {
             "type": "step",
@@ -13150,8 +12946,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3248",
-            "positionY": "-1330"
+            "positionX": "3934",
+            "positionY": "-1344"
         },
         {
             "type": "step",
@@ -13159,8 +12955,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3682",
-            "positionY": "-364"
+            "positionX": "4368",
+            "positionY": "-378"
         },
         {
             "type": "step",
@@ -13168,8 +12964,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3206",
-            "positionY": "210"
+            "positionX": "3892",
+            "positionY": "196"
         },
         {
             "type": "step",
@@ -13177,8 +12973,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4732",
-            "positionY": "-714"
+            "positionX": "5418",
+            "positionY": "-728"
         },
         {
             "type": "step",
@@ -13186,8 +12982,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-574"
+            "positionX": "4130",
+            "positionY": "-588"
         },
         {
             "type": "step",
@@ -13195,8 +12991,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-714"
+            "positionX": "4130",
+            "positionY": "-728"
         },
         {
             "type": "step",
@@ -13204,8 +13000,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-504"
+            "positionX": "4130",
+            "positionY": "-518"
         },
         {
             "type": "step",
@@ -13213,8 +13009,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-784"
+            "positionX": "4130",
+            "positionY": "-798"
         },
         {
             "type": "step",
@@ -13222,8 +13018,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "5936",
-            "positionY": "-854"
+            "positionX": "6622",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -13231,8 +13027,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3458",
-            "positionY": "-1106"
+            "positionX": "4144",
+            "positionY": "-1120"
         },
         {
             "type": "step",
@@ -13240,8 +13036,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3906",
-            "positionY": "294"
+            "positionX": "4592",
+            "positionY": "280"
         },
         {
             "type": "step",
@@ -13249,8 +13045,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2464",
-            "positionY": "-56"
+            "positionX": "2996",
+            "positionY": "-350"
         },
         {
             "type": "step",
@@ -13267,8 +13063,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "6076",
-            "positionY": "-924"
+            "positionX": "6762",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -13276,8 +13072,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3458",
-            "positionY": "-1176"
+            "positionX": "4144",
+            "positionY": "-1190"
         },
         {
             "type": "step",
@@ -13366,8 +13162,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "5936",
-            "positionY": "-924"
+            "positionX": "6622",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -13375,8 +13171,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4256",
-            "positionY": "-742"
+            "positionX": "4942",
+            "positionY": "-756"
         },
         {
             "type": "step",
@@ -13456,8 +13252,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "5110",
-            "positionY": "-812"
+            "positionX": "5796",
+            "positionY": "-826"
         },
         {
             "type": "step",
@@ -13465,8 +13261,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3808",
-            "positionY": "-686"
+            "positionX": "4494",
+            "positionY": "-700"
         },
         {
             "type": "step",
@@ -13474,8 +13270,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4088",
-            "positionY": "-686"
+            "positionX": "4774",
+            "positionY": "-700"
         },
         {
             "type": "step",
@@ -13492,8 +13288,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4130",
-            "positionY": "-812"
+            "positionX": "4816",
+            "positionY": "-826"
         },
         {
             "type": "step",
@@ -13501,8 +13297,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4130",
-            "positionY": "-882"
+            "positionX": "4816",
+            "positionY": "-896"
         },
         {
             "type": "step",
@@ -13564,8 +13360,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3752",
-            "positionY": "-1260"
+            "positionX": "4438",
+            "positionY": "-1274"
         },
         {
             "type": "step",
@@ -13627,8 +13423,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2926",
-            "positionY": "-434"
+            "positionX": "3612",
+            "positionY": "-448"
         },
         {
             "type": "step",
@@ -13636,8 +13432,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2940",
-            "positionY": "-630"
+            "positionX": "3626",
+            "positionY": "-644"
         },
         {
             "type": "step",
@@ -13798,8 +13594,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3556",
-            "positionY": "-1036"
+            "positionX": "4242",
+            "positionY": "-1050"
         },
         {
             "type": "step",
@@ -13807,8 +13603,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3556",
-            "positionY": "-966"
+            "positionX": "4242",
+            "positionY": "-980"
         },
         {
             "type": "trigger",
@@ -13824,8 +13620,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4032",
-            "positionY": "308"
+            "positionX": "4718",
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -13833,8 +13629,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4312",
-            "positionY": "308"
+            "positionX": "4998",
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -13860,8 +13656,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3164",
-            "positionY": "546"
+            "positionX": "3850",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -13869,8 +13665,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3164",
-            "positionY": "294"
+            "positionX": "3850",
+            "positionY": "280"
         },
         {
             "type": "step",
@@ -13878,8 +13674,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-378"
+            "positionX": "4130",
+            "positionY": "-392"
         },
         {
             "type": "step",
@@ -13896,8 +13692,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3150",
-            "positionY": "-1036"
+            "positionX": "3836",
+            "positionY": "-1050"
         },
         {
             "type": "step",
@@ -13905,8 +13701,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3150",
-            "positionY": "-966"
+            "positionX": "3836",
+            "positionY": "-980"
         },
         {
             "type": "step",
@@ -13959,8 +13755,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "5754",
-            "positionY": "-854"
+            "positionX": "6440",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -14058,8 +13854,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4312",
-            "positionY": "378"
+            "positionX": "4998",
+            "positionY": "364"
         },
         {
             "type": "step",
@@ -14067,8 +13863,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6034",
-            "positionY": "-994"
+            "positionX": "6720",
+            "positionY": "-1008"
         },
         {
             "type": "step",
@@ -14112,8 +13908,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4242",
-            "positionY": "518"
+            "positionX": "4928",
+            "positionY": "504"
         },
         {
             "type": "step",
@@ -14121,8 +13917,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3822",
-            "positionY": "420"
+            "positionX": "4508",
+            "positionY": "406"
         },
         {
             "type": "step",
@@ -14130,8 +13926,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4214",
-            "positionY": "-812"
+            "positionX": "4900",
+            "positionY": "-826"
         },
         {
             "type": "step",
@@ -14148,8 +13944,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2562",
-            "positionY": "-56"
+            "positionX": "3094",
+            "positionY": "-420"
         },
         {
             "type": "step",
@@ -14157,8 +13953,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2282",
-            "positionY": "-56"
+            "positionX": "2814",
+            "positionY": "-350"
         },
         {
             "type": "step",
@@ -14184,8 +13980,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3780",
-            "positionY": "-224"
+            "positionX": "4466",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -14193,8 +13989,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3892",
-            "positionY": "-686"
+            "positionX": "4578",
+            "positionY": "-700"
         },
         {
             "type": "step",
@@ -14202,8 +13998,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-868"
+            "positionX": "3654",
+            "positionY": "-882"
         },
         {
             "type": "step",
@@ -14211,8 +14007,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "546"
+            "positionX": "4228",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -14238,8 +14034,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "294"
+            "positionX": "4228",
+            "positionY": "280"
         },
         {
             "type": "step",
@@ -14247,8 +14043,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "420"
+            "positionX": "4228",
+            "positionY": "406"
         },
         {
             "type": "step",
@@ -14258,15 +14054,6 @@
             "height": "40",
             "positionX": "770",
             "positionY": "-2240"
-        },
-        {
-            "type": "step",
-            "step": "original coord targets",
-            "display style": "ICON_AND_TEXT",
-            "width": "124",
-            "height": "40",
-            "positionX": "2562",
-            "positionY": "-224"
         },
         {
             "type": "step",
@@ -14283,8 +14070,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "5754",
-            "positionY": "-994"
+            "positionX": "6440",
+            "positionY": "-1008"
         },
         {
             "type": "step",
@@ -14337,8 +14124,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3962",
-            "positionY": "-1036"
+            "positionX": "4648",
+            "positionY": "-1050"
         },
         {
             "type": "step",
@@ -14346,8 +14133,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3962",
-            "positionY": "-966"
+            "positionX": "4648",
+            "positionY": "-980"
         },
         {
             "type": "step",
@@ -14355,8 +14142,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6566",
-            "positionY": "-924"
+            "positionX": "-686",
+            "positionY": "-84"
         },
         {
             "type": "step",
@@ -14373,8 +14160,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6538",
-            "positionY": "-1008"
+            "positionX": "-714",
+            "positionY": "-168"
         },
         {
             "type": "step",
@@ -14391,8 +14178,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "6734",
-            "positionY": "-1022"
+            "positionX": "-518",
+            "positionY": "-182"
         },
         {
             "type": "step",
@@ -14454,8 +14241,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3164",
-            "positionY": "658"
+            "positionX": "3850",
+            "positionY": "644"
         },
         {
             "type": "step",
@@ -14463,8 +14250,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3164",
-            "positionY": "406"
+            "positionX": "3850",
+            "positionY": "392"
         },
         {
             "type": "step",
@@ -14472,8 +14259,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3416",
-            "positionY": "-154"
+            "positionX": "4102",
+            "positionY": "-168"
         },
         {
             "type": "step",
@@ -14490,8 +14277,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3360",
-            "positionY": "182"
+            "positionX": "4046",
+            "positionY": "168"
         },
         {
             "type": "step",
@@ -14508,8 +14295,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "4214",
-            "positionY": "-686"
+            "positionX": "4900",
+            "positionY": "-700"
         },
         {
             "type": "step",
@@ -14517,8 +14304,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3164",
-            "positionY": "126"
+            "positionX": "3850",
+            "positionY": "112"
         },
         {
             "type": "step",
@@ -14544,8 +14331,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3024",
-            "positionY": "-84"
+            "positionX": "3710",
+            "positionY": "-98"
         },
         {
             "type": "step",
@@ -14553,8 +14340,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "-504"
+            "positionX": "4228",
+            "positionY": "-518"
         },
         {
             "type": "step",
@@ -14562,8 +14349,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3150",
-            "positionY": "-504"
+            "positionX": "3836",
+            "positionY": "-518"
         },
         {
             "type": "step",
@@ -14603,21 +14390,12 @@
         },
         {
             "type": "step",
-            "step": "tool IoR",
-            "display style": "ICON_AND_TEXT",
-            "width": "124",
-            "height": "40",
-            "positionX": "476",
-            "positionY": "154"
-        },
-        {
-            "type": "step",
             "step": "tool centered targets",
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2562",
-            "positionY": "14"
+            "positionX": "3094",
+            "positionY": "-280"
         },
         {
             "type": "step",
@@ -14634,8 +14412,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3024",
-            "positionY": "-224"
+            "positionX": "3710",
+            "positionY": "-238"
         },
         {
             "type": "step",
@@ -14643,8 +14421,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3542",
-            "positionY": "-714"
+            "positionX": "4228",
+            "positionY": "-728"
         },
         {
             "type": "step",
@@ -14652,8 +14430,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3150",
-            "positionY": "-714"
+            "positionX": "3836",
+            "positionY": "-728"
         },
         {
             "type": "step",
@@ -14693,11 +14471,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "27",
-        "ScrollBarY": "-501",
-        "SliderPosX": "27",
-        "SliderPosY": "-501",
-        "Zoom": "0.52000000000000002"
+        "ScrollBarX": "107",
+        "ScrollBarY": "-450",
+        "SliderPosX": "107",
+        "SliderPosY": "-450",
+        "Zoom": "0.23000000000000001"
     },
     "ui generic": {
         "group": "element",
@@ -14920,44 +14698,6 @@
                         }
                     ]
                 },
-                "single object selectionWidget1": {
-                    "step": "single object selection",
-                    "position_x": "438",
-                    "position_y": "549",
-                    "width": "571",
-                    "height": "431",
-                    "position_relative_x": "0.22812499999999999",
-                    "position_relative_y": "0.54035433070866146",
-                    "width_relative": "0.29739583333333336",
-                    "height_relative": "0.42421259842519687",
-                    "data_list": [
-                        {
-                            "id": "BUFFER",
-                            "name": "activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "true",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault",
-                                "sliced dimension": "2",
-                                "desired columns": "4"
-                            }
-                        }
-                    ]
-                },
                 "tool repr wmWidget0": {
                     "step": "tool repr wm",
                     "position_x": "773",
@@ -14990,6 +14730,149 @@
                                     "upper limit": "1"
                                 },
                                 "color jet": "PlotDefault"
+                            }
+                        }
+                    ]
+                },
+                "visible": "true"
+            },
+            "learned weights": {
+                "action-o 2Widget0": {
+                    "step": "action-o 2",
+                    "position_x": "228",
+                    "position_y": "257",
+                    "width": "206",
+                    "height": "201",
+                    "position_relative_x": "0.11874999999999999",
+                    "position_relative_y": "0.25295275590551181",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19783464566929135",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 3Widget0": {
+                    "step": "action-o 3",
+                    "position_x": "435",
+                    "position_y": "259",
+                    "width": "206",
+                    "height": "200",
+                    "position_relative_x": "0.2265625",
+                    "position_relative_y": "0.25492125984251968",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19685039370078741",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 4Widget0": {
+                    "step": "action-o 4",
+                    "position_x": "637",
+                    "position_y": "260",
+                    "width": "206",
+                    "height": "200",
+                    "position_relative_x": "0.33177083333333335",
+                    "position_relative_y": "0.25590551181102361",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.19685039370078741",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o1Widget0": {
+                    "step": "action-o1",
+                    "position_x": "22",
+                    "position_y": "263",
+                    "width": "206",
+                    "height": "193",
+                    "position_relative_x": "0.011458333333333333",
+                    "position_relative_y": "0.25885826771653542",
+                    "width_relative": "0.10729166666666666",
+                    "height_relative": "0.18996062992125984",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
                             }
                         }
                     ]
