@@ -121,19 +121,19 @@ private:
             }
         }
 
-        if (configMap.find("camera_center_port_snd") != configMap.end() )
-        {
-            std::cout << "Initialize the Center Camera" << std::endl;
-            //You define this identifier by yourself, but there cannot be duplicates!
-            std::string cameraIdentifier = "camera_center";
-            //The device names come from the webots world file
-            cameraMap[cameraIdentifier] = getCamera("camera_center");
+        // if (configMap.find("camera_center_port_snd") != configMap.end() )
+        // {
+            // std::cout << "Initialize the Center Camera" << std::endl;
+            // //You define this identifier by yourself, but there cannot be duplicates!
+            // std::string cameraIdentifier = "camera_center";
+            // //The device names come from the webots world file
+            // cameraMap[cameraIdentifier] = getCamera("camera_center");
 
-            if (configMap.find("camera_center_port_snd") != configMap.end())
-            {
-                comThread->addWriteSocket(cameraIdentifier, std::stoi(configMap["camera_center_port_snd"]), configMap["cedar_ip"]);
-            }
-        }
+            // if (configMap.find("camera_center_port_snd") != configMap.end())
+            // {
+                // comThread->addWriteSocket(cameraIdentifier, std::stoi(configMap["camera_center_port_snd"]), configMap["cedar_ip"]);
+            // }
+        // }
 
         if (configMap.find("caren_camera_port_snd") != configMap.end() )
         {
@@ -269,7 +269,7 @@ public:
         //Create the Communication Thread
         comThread = std::make_unique<ComLooper>();
 
-        auto camCenter = getCamera("camera_center");
+        auto camCenter = getCamera("caren_camera");
         int camTimeStep = 4 * (int) this->getBasicTimeStep();
         camCenter->enable(camTimeStep);
     }

@@ -110,9 +110,6 @@ def hand_grasp_knife(inter_step=300):
     print("hand grasps the knife")
 
     # inst. change, but induce arbitrary order
-    counter = 0
-    while (supervisor.step(timestep) != -1) and (counter < inter_step):
-        counter += 1
     getfield_hand_col.setSFColor(color_hand_grasping)
     counter = 0
     while (supervisor.step(timestep) != -1) and (counter < inter_step):
@@ -153,9 +150,6 @@ def knife_cut_apple(inter_step=300):
     print("knife cuts the apple")
 
     # inst. change, but induce arbitrary order
-    counter = 0
-    while (supervisor.step(timestep) != -1) and (counter < inter_step):
-        counter += 1
     getfield_knife_col.setSFColor(color_knife_cutting)
     counter = 0
     while (supervisor.step(timestep) != -1) and (counter < inter_step):
@@ -165,14 +159,14 @@ def knife_cut_apple(inter_step=300):
 
 def scenario_default():
     reset()
-    pause()
+    pause(500)
     hand_reach_knife()
-    pause()
-    hand_grasp_knife()
-    pause()
+    pause(500)
+    hand_grasp_knife(0)
+    pause(500)
     knife_reach_apple()
-    pause()
-    knife_cut_apple()
+    pause(500)
+    knife_cut_apple(0)
 
 
 scenario_default()
