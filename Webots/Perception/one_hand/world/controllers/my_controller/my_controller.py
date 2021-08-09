@@ -133,7 +133,7 @@ def knife_reach_apple(n_step=1000, eta=0.15):
     else:
         dz -= eta / n_step
 
-    getfield_knife_col.setSFColor(color_knife_reaching)
+    
     getfield_apple_col.setSFColor(color_apple_reached)
 
     counter = 0
@@ -141,8 +141,12 @@ def knife_reach_apple(n_step=1000, eta=0.15):
         # hand moves together with the knife
         get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
         getfield_hand_pos.setSFVec3f(get_hand_pos)
+        
+        #if counter > 100:
+        getfield_knife_col.setSFColor(color_knife_reaching)
         get_knife_pos = [get_knife_pos[0] + dx, get_knife_pos[1], get_knife_pos[2] + dz]
         getfield_knife_pos.setSFVec3f(get_knife_pos)
+        
         counter += 1
 
 

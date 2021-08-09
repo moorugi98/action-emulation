@@ -2560,6 +2560,11 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain 35",
+            "gain factor": "20",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 36",
             "gain factor": "10",
             "comments": ""
@@ -3395,7 +3400,7 @@
         "cedar.processing.sources.Boost": {
             "name": "desire learn",
             "strength": "5",
-            "active": "true",
+            "active": "false",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -5035,7 +5040,7 @@
             "threshold for updating the stepIcon": "0.80000000000000004",
             "dimensionality": "0",
             "sizes": "",
-            "time scale": "800",
+            "time scale": "1000",
             "resting level": "0",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
@@ -6484,7 +6489,7 @@
         "cedar.processing.sources.Boost": {
             "name": "reset boost",
             "strength": "10",
-            "active": "false",
+            "active": "true",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -6866,6 +6871,62 @@
                 "limit": "5"
             },
             "comments": "works   "
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "stabilized",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "200",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "1",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
         },
         "cedar.dynamics.NeuralField": {
             "name": "start bias",
@@ -8250,7 +8311,8 @@
                 "precondition 2",
                 "tool AND target",
                 "Search obj 2",
-                "reach CoD"
+                "reach CoD",
+                "stabilized"
             ]
         }
     },
@@ -9361,10 +9423,6 @@
         },
         {
             "source": "Static Gain 180.output",
-            "target": "mismatch detection.input"
-        },
-        {
-            "source": "Static Gain 180.output",
             "target": "delay.input"
         },
         {
@@ -9478,10 +9536,6 @@
         {
             "source": "Static Gain 53.output",
             "target": "no hue change.input"
-        },
-        {
-            "source": "mismatch (hue change).sigmoided activation",
-            "target": "Static Gain 55.input"
         },
         {
             "source": "grasp check.sigmoided activation",
@@ -10402,6 +10456,18 @@
         {
             "source": "reach CoD.sigmoided activation",
             "target": "Static Gain 46.input"
+        },
+        {
+            "source": "mismatch (hue change).sigmoided activation",
+            "target": "Static Gain 35.input"
+        },
+        {
+            "source": "Static Gain 35.output",
+            "target": "stabilized.input"
+        },
+        {
+            "source": "stabilized.sigmoided activation",
+            "target": "Static Gain 55.input"
         }
     ],
     "records": {
@@ -10610,7 +10676,7 @@
             "height": "596",
             "x": "4900",
             "y": "-532",
-            "text": "[Technical]\n\n- using simpler knife model: the detailed model has a shape which is hard to track in tool WM field\n- using multiple cameras: alternatively, move the camera to needed location depending on which desire is given\n-> getcamera looks only within \n- using oscilation as timer instead of time scale?\n- didn't check that CoD works yet as the current scenario bind the correct tool\n\n\n[Conceptual]\n- primitive-specific CoD: without CoD, there is no way to reassign object-roles\n\n- reach as subaction: reach is arguably the only action for which the target doesn't change its shape\/location. Currently dealt by changing color of reached object. Also reach doesn't happen prior to grasp, but simultaneously\n\n- Distinguishing tool and target\ni) How does human identify tool and target as such?\nIn v7, I assumed that even the same object have different signatures of shape\/location change when used as tool vs. used as target. \nThis is compatible with the fact that we have separate nodes\/synaptic mappings for 'tool X' and 'target X'\nIn v6, I used fixed ordering to encode tool and target role\n\nii) order of binding: fixed vs. dependent on saliency\nIn V7, I use the flexible version, where the size of transients give competetive advantage entering the selection field\nIn V6, used fixed ordering\n",
+            "text": "[Technical]\n\n- using simpler knife model: the detailed model has a shape which is hard to track in tool WM field\n- using multiple cameras: alternatively, move the camera to needed location depending on which desire is given\n-> getcamera looks only within inside the code, but actually better to use just one camera\n- using oscilation as timer instead of time scale?\n- didn't check that CoD works yet as the current scenario bind the correct tool\n- adding light source change perception of color (single object spanning multiple hues)\n\n\n[Conceptual]\n- primitive-specific CoD: without CoD, there is no way to reassign object-roles\nCoD should however only inhibit the current tool-target pair, as the architecture has no way of knowing i) tool ii) target iii) both were wrong. \ne.g.) imagine a hammer moving towards a nail. hammer-hit-nail could be an initial hypo. But then hand could grasp a nail (i), hammer can hit other object (ii), or hand can grasp other object (iii).\n\n- reach as subaction: reach is arguably the only action for which the target doesn't change its shape\/location. Currently dealt by changing color of reached object. Also reach doesn't happen prior to grasp, but simultaneously\n\n- Distinguishing tool and target\ni) How does human identify tool and target as such?\nIn v7, I assumed that even the same object have different signatures of shape\/location change when used as tool vs. used as target. \nThis is compatible with the fact that we have separate nodes\/synaptic mappings for 'tool X' and 'target X'\nIn v6, I used fixed ordering to encode tool and target role\n\nii) order of binding: fixed vs. dependent on saliency\nIn V7, I use the flexible version, where the size of transients give competetive advantage entering the selection field\nIn V6, used fixed ordering\n",
             "font size": "14",
             "color red": "110",
             "color green": "110",
@@ -10650,6 +10716,18 @@
             "font size": "10",
             "color red": "255",
             "color green": "255",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "933",
+            "height": "497",
+            "x": "5138",
+            "y": "378",
+            "text": "[Todo]\n\n1. make sure that CoD works (x)\n\n2. make screenshot of video and explain the idea behind color coding, what the scene is about\n\n3. make video of neural fields\n\n4. write down discussion points",
+            "font size": "20",
+            "color red": "255",
+            "color green": "110",
             "color blue": "110"
         },
         {
@@ -12587,6 +12665,15 @@
         },
         {
             "type": "step",
+            "step": "Static Gain 35",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4704",
+            "positionY": "546"
+        },
+        {
+            "type": "step",
             "step": "Static Gain 36",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -14008,6 +14095,15 @@
         },
         {
             "type": "step",
+            "step": "stabilized",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "4816",
+            "positionY": "546"
+        },
+        {
+            "type": "step",
             "step": "start bias",
             "display style": "ICON_AND_TEXT",
             "width": "124",
@@ -14197,11 +14293,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "18",
-        "ScrollBarY": "-1650",
-        "SliderPosX": "18",
-        "SliderPosY": "-1650",
-        "Zoom": "0.65000000000000002"
+        "ScrollBarX": "2452",
+        "ScrollBarY": "-1394",
+        "SliderPosX": "2452",
+        "SliderPosY": "-1394",
+        "Zoom": "0.85999999999999999"
     },
     "ui generic": {
         "group": "element",
@@ -14711,7 +14807,7 @@
                         }
                     ]
                 },
-                "visible": "true"
+                "visible": "false"
             }
         },
         "architecture widgets": "",
