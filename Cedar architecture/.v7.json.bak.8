@@ -1765,6 +1765,21 @@
             "comments": ""
         },
         "cedar.processing.Projection": {
+            "name": "Projection 16",
+            "dimension mapping": {
+                "0": "0",
+                "1": "1",
+                "2": "4294967295"
+            },
+            "output dimensionality": "2",
+            "output dimension sizes": [
+                "50",
+                "50"
+            ],
+            "compression type": "MAXIMUM",
+            "comments": ""
+        },
+        "cedar.processing.Projection": {
             "name": "Projection 17",
             "dimension mapping": {
                 "0": "4294967295",
@@ -2570,6 +2585,11 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain 37",
+            "gain factor": "3",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 38",
             "gain factor": "5",
             "comments": ""
@@ -2597,6 +2617,11 @@
         "cedar.processing.StaticGain": {
             "name": "Static Gain 42",
             "gain factor": "4.0000000000000027",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 43",
+            "gain factor": "3",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3400,7 +3425,7 @@
         "cedar.processing.sources.Boost": {
             "name": "desire learn",
             "strength": "5",
-            "active": "false",
+            "active": "true",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -4836,6 +4861,76 @@
                 "limit": "5"
             },
             "comments": "- fires and sustain when there's a movement before it stops\t"
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "movement at toolz",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "2",
+            "sizes": [
+                "50",
+                "50"
+            ],
+            "time scale": "100",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "-0.01",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "1",
+                    "sigmas": [
+                        "3",
+                        "3"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "2",
+                "anchor": [
+                    "0",
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3",
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0",
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
         },
         "cedar.dynamics.NeuralField": {
             "name": "near",
@@ -6489,7 +6584,7 @@
         "cedar.processing.sources.Boost": {
             "name": "reset boost",
             "strength": "10",
-            "active": "true",
+            "active": "false",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -8312,7 +8407,8 @@
                 "tool AND target",
                 "Search obj 2",
                 "reach CoD",
-                "stabilized"
+                "stabilized",
+                "movement at toolz"
             ]
         }
     },
@@ -10468,6 +10564,26 @@
         {
             "source": "stabilized.sigmoided activation",
             "target": "Static Gain 55.input"
+        },
+        {
+            "source": "fast onset.sigmoided activation",
+            "target": "Projection 16.input"
+        },
+        {
+            "source": "Projection 16.output",
+            "target": "Static Gain 37.input"
+        },
+        {
+            "source": "Static Gain 37.output",
+            "target": "movement at toolz.input"
+        },
+        {
+            "source": "Noop 6.output",
+            "target": "Static Gain 43.input"
+        },
+        {
+            "source": "Static Gain 43.output",
+            "target": "movement at toolz.input"
         }
     ],
     "records": {
@@ -10552,8 +10668,8 @@
         },
         {
             "type": "stickyNote",
-            "width": "211",
-            "height": "354",
+            "width": "301",
+            "height": "370",
             "x": "2590",
             "y": "-532",
             "text": "[Color code]\n0: apple normal\n1: apple cut\n2: apple grasped\n3: apple reached\n\n5: knife reaching\n6:knife cutting\n7: knife normal\n8: knife grasped\n9: knife reached\n\n12: hand reaching\n13: hand grasping\n14: hand normal",
@@ -10674,9 +10790,9 @@
             "type": "stickyNote",
             "width": "1271",
             "height": "596",
-            "x": "4900",
-            "y": "-532",
-            "text": "[Technical]\n\n- using simpler knife model: the detailed model has a shape which is hard to track in tool WM field\n- using multiple cameras: alternatively, move the camera to needed location depending on which desire is given\n-> getcamera looks only within inside the code, but actually better to use just one camera\n- using oscilation as timer instead of time scale?\n- didn't check that CoD works yet as the current scenario bind the correct tool\n- adding light source change perception of color (single object spanning multiple hues)\n\n\n[Conceptual]\n- primitive-specific CoD: without CoD, there is no way to reassign object-roles\nCoD should however only inhibit the current tool-target pair, as the architecture has no way of knowing i) tool ii) target iii) both were wrong. \ne.g.) imagine a hammer moving towards a nail. hammer-hit-nail could be an initial hypo. But then hand could grasp a nail (i), hammer can hit other object (ii), or hand can grasp other object (iii).\n\n- reach as subaction: reach is arguably the only action for which the target doesn't change its shape\/location. Currently dealt by changing color of reached object. Also reach doesn't happen prior to grasp, but simultaneously\n\n- Distinguishing tool and target\ni) How does human identify tool and target as such?\nIn v7, I assumed that even the same object have different signatures of shape\/location change when used as tool vs. used as target. \nThis is compatible with the fact that we have separate nodes\/synaptic mappings for 'tool X' and 'target X'\nIn v6, I used fixed ordering to encode tool and target role\n\nii) order of binding: fixed vs. dependent on saliency\nIn V7, I use the flexible version, where the size of transients give competetive advantage entering the selection field\nIn V6, used fixed ordering\n",
+            "x": "4914",
+            "y": "-504",
+            "text": "[Technical]\n\n- using simpler knife model: the detailed model has a shape which is hard to track in tool WM field\n- using multiple cameras: alternatively, move the camera to needed location depending on which desire is given\n-> getcamera looks only within inside the code, but actually better to use just one camera\n- using oscilation as timer instead of time scale?\n- didn't check that CoD works yet as the current scenario bind the correct tool\n- adding light source change perception of color (single object spanning multiple hues)\n\n\n[Conceptual]\n- primitive-specific CoD: without CoD, there is no way to reassign object-roles\nCoD should however only inhibit the current tool-target pair, as the architecture has no way of knowing i) tool ii) target iii) both were wrong. \ne.g.) imagine a hammer moving towards a nail. hammer-hit-nail could be an initial hypo. But then hand could grasp a nail (i), hammer can hit other object (ii), or hand can grasp other object (iii).\n\n- reach as subaction: reach is arguably the only action for which the target doesn't change its shape\/location. Currently dealt by changing color of reached object. Also reach doesn't happen prior to grasp, but simultaneously\n\n- Distinguishing tool and target\ni) How does human identify tool and target as such?\nIn v7, I assumed that even the same object have different signatures of shape\/location change when used as tool vs. used as target. \nThis is compatible with the fact that we have separate nodes\/synaptic mappings for 'tool X' and 'target X'\nIn v6, I used fixed ordering to encode tool and target role\n\nii) order of binding: fixed vs. dependent on saliency\nIn V7, I use the flexible version, where the size of transients give competetive advantage entering the selection field\nIn V6, used fixed ordering\n\n- For action cut, how to realise it?\n",
             "font size": "14",
             "color red": "110",
             "color green": "110",
@@ -10728,6 +10844,42 @@
             "font size": "20",
             "color red": "255",
             "color green": "110",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "120",
+            "height": "70",
+            "x": "598",
+            "y": "-2422",
+            "text": "need discrete 2d synaptic implementation",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "120",
+            "height": "70",
+            "x": "477",
+            "y": "-1625",
+            "text": "resetting of weights in scripting",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "120",
+            "height": "70",
+            "x": "4354",
+            "y": "42",
+            "text": "- typical problem that tracking and transient doesn't completely overlap",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
             "color blue": "110"
         },
         {
@@ -11720,6 +11872,15 @@
         },
         {
             "type": "step",
+            "step": "Projection 16",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4158",
+            "positionY": "154"
+        },
+        {
+            "type": "step",
             "step": "Projection 17",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -12683,6 +12844,15 @@
         },
         {
             "type": "step",
+            "step": "Static Gain 37",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4242",
+            "positionY": "154"
+        },
+        {
+            "type": "step",
             "step": "Static Gain 38",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -12734,6 +12904,15 @@
             "height": "40",
             "positionX": "2646",
             "positionY": "-1680"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 43",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "4242",
+            "positionY": "70"
         },
         {
             "type": "step",
@@ -13753,6 +13932,15 @@
         },
         {
             "type": "step",
+            "step": "movement at toolz",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "4340",
+            "positionY": "154"
+        },
+        {
+            "type": "step",
             "step": "near",
             "display style": "ICON_AND_TEXT",
             "width": "124",
@@ -13811,7 +13999,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3920",
+            "positionX": "3878",
             "positionY": "-1050"
         },
         {
@@ -14293,11 +14481,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "2452",
-        "ScrollBarY": "-1394",
-        "SliderPosX": "2452",
-        "SliderPosY": "-1394",
-        "Zoom": "0.85999999999999999"
+        "ScrollBarX": "304",
+        "ScrollBarY": "-799",
+        "SliderPosX": "304",
+        "SliderPosY": "-799",
+        "Zoom": "0.60999999999999999"
     },
     "ui generic": {
         "group": "element",
@@ -14449,14 +14637,14 @@
             "default": {
                 "IoRWidget0": {
                     "step": "IoR",
-                    "position_x": "221",
-                    "position_y": "424",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.11510416666666666",
-                    "position_relative_y": "0.41732283464566927",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
+                    "position_x": "248",
+                    "position_y": "486",
+                    "width": "247",
+                    "height": "239",
+                    "position_relative_x": "0.12916666666666668",
+                    "position_relative_y": "0.47834645669291337",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.23523622047244094",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14485,14 +14673,14 @@
                 },
                 "Webots CameraWidget0": {
                     "step": "Webots Camera",
-                    "position_x": "7",
-                    "position_y": "226",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.0036458333333333334",
-                    "position_relative_y": "0.22244094488188976",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
+                    "position_x": "8",
+                    "position_y": "227",
+                    "width": "247",
+                    "height": "239",
+                    "position_relative_x": "0.0041666666666666666",
+                    "position_relative_y": "0.22342519685039369",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.23523622047244094",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14521,14 +14709,14 @@
                 },
                 "action conceptsWidget0": {
                     "step": "action concepts",
-                    "position_x": "1169",
-                    "position_y": "240",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.6088541666666667",
-                    "position_relative_y": "0.23622047244094488",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
+                    "position_x": "1098",
+                    "position_y": "461",
+                    "width": "247",
+                    "height": "239",
+                    "position_relative_x": "0.57187500000000002",
+                    "position_relative_y": "0.45374015748031499",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.23523622047244094",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14556,14 +14744,14 @@
                 },
                 "selected hueWidget0": {
                     "step": "selected hue",
-                    "position_x": "748",
-                    "position_y": "414",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.38958333333333334",
-                    "position_relative_y": "0.40748031496062992",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
+                    "position_x": "844",
+                    "position_y": "465",
+                    "width": "247",
+                    "height": "239",
+                    "position_relative_x": "0.43958333333333333",
+                    "position_relative_y": "0.45767716535433073",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.23523622047244094",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14591,14 +14779,14 @@
                 },
                 "single object selectionWidget0": {
                     "step": "single object selection",
-                    "position_x": "421",
-                    "position_y": "226",
-                    "width": "363",
-                    "height": "336",
-                    "position_relative_x": "0.21927083333333333",
-                    "position_relative_y": "0.22244094488188976",
-                    "width_relative": "0.18906249999999999",
-                    "height_relative": "0.33070866141732286",
+                    "position_x": "482",
+                    "position_y": "216",
+                    "width": "435",
+                    "height": "402",
+                    "position_relative_x": "0.25104166666666666",
+                    "position_relative_y": "0.2125984251968504",
+                    "width_relative": "0.2265625",
+                    "height_relative": "0.3956692913385827",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14629,14 +14817,14 @@
                 },
                 "target repr wm Widget0": {
                     "step": "target repr wm ",
-                    "position_x": "976",
-                    "position_y": "220",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.5083333333333333",
-                    "position_relative_y": "0.21653543307086615",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
+                    "position_x": "1054",
+                    "position_y": "228",
+                    "width": "247",
+                    "height": "239",
+                    "position_relative_x": "0.54895833333333333",
+                    "position_relative_y": "0.22440944881889763",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.23523622047244094",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14665,14 +14853,14 @@
                 },
                 "tool repr wmWidget0": {
                     "step": "tool repr wm",
-                    "position_x": "773",
-                    "position_y": "224",
-                    "width": "206",
-                    "height": "193",
-                    "position_relative_x": "0.40260416666666665",
-                    "position_relative_y": "0.22047244094488189",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.18996062992125984",
+                    "position_x": "861",
+                    "position_y": "230",
+                    "width": "247",
+                    "height": "231",
+                    "position_relative_x": "0.44843749999999999",
+                    "position_relative_y": "0.2263779527559055",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.22736220472440946",
                     "data_list": [
                         {
                             "id": "OUTPUT",
@@ -14701,86 +14889,14 @@
                 },
                 "transients WMWidget0": {
                     "step": "transients WM",
-                    "position_x": "212",
-                    "position_y": "225",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.11041666666666666",
-                    "position_relative_y": "0.22145669291338582",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "transients WMWidget1": {
-                    "step": "transients WM",
-                    "position_x": "212",
-                    "position_y": "225",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.11041666666666666",
-                    "position_relative_y": "0.22145669291338582",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
-                    "data_list": [
-                        {
-                            "id": "OUTPUT",
-                            "name": "sigmoided activation",
-                            "ignoreIfMissing": "false",
-                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
-                        }
-                    ],
-                    "plot configurations": [
-                        {
-                            "row": "1",
-                            "col": "0",
-                            "plot configuration": {
-                                "smooth scaling": "true",
-                                "keep aspect ratio": "true",
-                                "automatic value scaling": "false",
-                                "show legend": "true",
-                                "value limits": {
-                                    "lower limit": "0",
-                                    "upper limit": "1"
-                                },
-                                "color jet": "PlotDefault"
-                            }
-                        }
-                    ]
-                },
-                "transients WMWidget2": {
-                    "step": "transients WM",
-                    "position_x": "212",
-                    "position_y": "225",
-                    "width": "206",
-                    "height": "200",
-                    "position_relative_x": "0.11041666666666666",
-                    "position_relative_y": "0.22145669291338582",
-                    "width_relative": "0.10729166666666666",
-                    "height_relative": "0.19685039370078741",
+                    "position_x": "238",
+                    "position_y": "232",
+                    "width": "247",
+                    "height": "239",
+                    "position_relative_x": "0.12395833333333334",
+                    "position_relative_y": "0.2283464566929134",
+                    "width_relative": "0.12864583333333332",
+                    "height_relative": "0.23523622047244094",
                     "data_list": [
                         {
                             "id": "OUTPUT",

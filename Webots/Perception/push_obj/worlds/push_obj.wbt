@@ -1,0 +1,174 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 1 0 0 4.71238898038469
+  position 0.02764895422651298 4.534236123576614 -0.030644729356385514
+}
+TexturedBackground {
+}
+DEF table Solid {
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 1
+        }
+      }
+      geometry Box {
+        size 4 0.2 2
+      }
+    }
+  ]
+  name "table"
+  boundingObject Box {
+    size 4 0.2 2
+  }
+  locked TRUE
+}
+DEF camera Robot {
+  translation 0 1.2 0
+  children [
+    Solid {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.827451 0.843137 0.811765
+          }
+          geometry Capsule {
+            height 0.1
+            radius 0.05
+          }
+          castShadows FALSE
+        }
+        Camera {
+          rotation 1 0 0 -1.57
+          name "camera_center"
+          fieldOfView 1.5
+          width 128
+          height 128
+          antiAliasing TRUE
+          recognition Recognition {
+          }
+        }
+      ]
+    }
+  ]
+  controller "comm"
+  battery [
+    0
+  ]
+}
+DEF hand Robot {
+  translation 0.1 0.2 0.4
+  rotation 1 0 0 -1.5707953071795862
+  children [
+    DEF hand_solid Solid {
+      scale 0.003 0.003 0.003
+      children [
+        DEF hand_shape Shape {
+          appearance Appearance {
+            material DEF hand_appearance Material {
+              emissiveColor 0 0 1
+            }
+          }
+          geometry DEF hand_mesh Mesh {
+            url [
+              "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
+            ]
+          }
+          castShadows FALSE
+        }
+      ]
+    }
+  ]
+  name "hand"
+  controller "my_controller"
+  supervisor TRUE
+}
+DEF apple Robot {
+  translation 0.4 0.2 -0.2
+  children [
+    Solid {
+      children [
+        Shape {
+          appearance Appearance {
+            material DEF apple_appearance Material {
+              emissiveColor 1 0 0
+            }
+          }
+          geometry Plane {
+            size 0.1 0.1
+          }
+          castShadows FALSE
+        }
+      ]
+    }
+  ]
+  name "ball1"
+  controller ""
+}
+DEF knife Robot {
+  translation -0.5 0.3 0
+  rotation 0.19611613513818404 0.9805806756909201 0 1.5707996938995747
+  children [
+    Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
+      children [
+        Shape {
+          appearance Appearance {
+            material DEF knife_appearance Material {
+              emissiveColor 0 1 0
+            }
+          }
+          geometry Plane {
+          }
+          castShadows FALSE
+        }
+      ]
+      name "solid(1)"
+    }
+  ]
+  name "robot(1)"
+}
+DEF hand_folded Robot {
+  translation 0.948371 0.6 0.299392
+  rotation 1 0 0 -1.5707953071795862
+  children [
+    DEF hand Solid {
+      scale 0.01 0.01 0.01
+      children [
+        DEF hand_shape Shape {
+          appearance PBRAppearance {
+            baseColor 0.913725 0.72549 0.431373
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/hand_folded/Hand_v2_L1.123c375ab4c6-0874-4531-aaf7-b165f7450ed2/11538_Hand_v2.obj"
+            ]
+          }
+          castShadows FALSE
+        }
+      ]
+    }
+  ]
+  name "hand(1)"
+}
+DEF distractor_1 Solid {
+  translation -0.191291 0.2 -0.65044
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.8 0.6
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 0.1
+      }
+      castShadows FALSE
+    }
+  ]
+}
