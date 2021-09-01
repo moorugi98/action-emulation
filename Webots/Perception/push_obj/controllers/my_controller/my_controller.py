@@ -150,11 +150,19 @@ def x_move_to_y(x_indices, y_index, n_step=1000, eta=0.15):
 
 
 reset()
-x_move_to_y([0], 2)  # hand move_to apple
-x_move_to_y([0], 1)  # hand move_to knife
-# hand connect knife
-x_move_to_y([0,1], 2)  # knife move_to apple
-x_move_to_y([0,1], 3)  # knife move_to freespace 0
-# hand release knife
-x_move_to_y([0], 4)  # hand move_to freespace 1
+# x_move_to_y([0], 2)  # hand move_to apple
+# x_move_to_y([0], 1)  # hand move_to knife
+# # hand connect knife
+# x_move_to_y([0,1], 2)  # knife move_to apple
+# x_move_to_y([0,1], 3)  # knife move_to freespace 0
+# # hand release knife
+# x_move_to_y([0], 4)  # hand move_to freespace 1
 
+n_step = 1000
+dx = 0.0005
+dz = 0
+counter = 0
+while (supervisor.step(timestep) != -1) and (counter < n_step):
+    get_knife_pos = [get_knife_pos[0] + dx, get_knife_pos[1], get_knife_pos[2] + dz]
+    getfield_knife_pos.setSFVec3f(get_knife_pos)
+    counter += 1
