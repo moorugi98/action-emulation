@@ -159,8 +159,8 @@ reset()
 # x_move_to_y([0], 4)  # hand move_to freespace 1
 
 n_step = 1000
-dx = 0.0005
-dz = 0
+dz = 0.0005
+dx = 0
 counter = 0
 while (supervisor.step(timestep) != -1) and (counter < n_step):
     get_knife_pos = [get_knife_pos[0] + dx, get_knife_pos[1], get_knife_pos[2] + dz]
