@@ -274,34 +274,6 @@
             "comments": ""
         },
         "cedar.processing.steps.Convolution": {
-            "name": "Convolution",
-            "kernels": {
-                "cedar.aux.kernel.Box": {
-                    "dimensionality": "3",
-                    "anchor": [
-                        "0",
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "3",
-                    "widths": [
-                        "2",
-                        "2",
-                        "3"
-                    ]
-                }
-            },
-            "convolution": {
-                "borderType": "Cyclic",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.FFTW"
-                },
-                "alternate even kernel center": "false"
-            },
-            "comments": ""
-        },
-        "cedar.processing.steps.Convolution": {
             "name": "Convolution 12",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
@@ -442,6 +414,28 @@
                 "true",
                 "true"
             ],
+            "comments": ""
+        },
+        "cedar.processing.sources.GaussInput": {
+            "name": "Gauss Input",
+            "dimensionality": "3",
+            "sizes": [
+                "50",
+                "50",
+                "50"
+            ],
+            "amplitude": "1",
+            "centers": [
+                "24",
+                "24",
+                "24"
+            ],
+            "sigma": [
+                "3",
+                "3",
+                "3"
+            ],
+            "cyclic": "false",
             "comments": ""
         },
         "cedar.dynamics.HebbianConnection": {
@@ -1670,6 +1664,16 @@
             "comments": ""
         },
         "cedar.processing.Resize": {
+            "name": "Resize 11",
+            "output size": [
+                "25",
+                "25",
+                "50"
+            ],
+            "interpolation": "LINEAR",
+            "comments": ""
+        },
+        "cedar.processing.Resize": {
             "name": "Resize 2",
             "output size": [
                 "50",
@@ -1736,7 +1740,11 @@
         },
         "cedar.processing.Resize": {
             "name": "Resize 9",
-            "output size": "",
+            "output size": [
+                "50",
+                "50",
+                "36"
+            ],
             "interpolation": "LINEAR",
             "comments": ""
         },
@@ -1958,7 +1966,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 22",
-            "gain factor": "4",
+            "gain factor": "10",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -7760,14 +7768,6 @@
             "target": "Color Conversion 2.input image"
         },
         {
-            "source": "Convolution.result",
-            "target": "Static Gain 22.input"
-        },
-        {
-            "source": "Shifted Multiplication.output",
-            "target": "Convolution.matrix"
-        },
-        {
             "source": "Resize 2.output",
             "target": "tool centered objects.input"
         },
@@ -8030,10 +8030,6 @@
         {
             "source": "fast onset .sigmoided activation",
             "target": "Projection 5.input"
-        },
-        {
-            "source": "Shifted Multiplication.output",
-            "target": "Projection 22.input"
         },
         {
             "source": "Noop 16.output",
@@ -8324,25 +8320,41 @@
             "target": "Resize 7.input"
         },
         {
-            "source": "Resize 7.output",
-            "target": "Shifted Multiplication.toward signal"
-        },
-        {
             "source": "Projection 6.output",
             "target": "Resize 10.input"
         },
         {
-            "source": "Resize 10.output",
+            "source": "Gauss Input.Gauss input",
+            "target": "Resize 11.input"
+        },
+        {
+            "source": "Projection 6.output",
             "target": "Shifted Multiplication.away signal"
         },
         {
+            "source": "Projection 5.output",
+            "target": "Shifted Multiplication.toward signal"
+        },
+        {
             "source": "Static Gain 22.output",
+            "target": "Resize 9.input"
+        },
+        {
+            "source": "Resize 9.output",
             "target": "direction\/space perception.input"
+        },
+        {
+            "source": "Shifted Multiplication.output",
+            "target": "Static Gain 22.input"
+        },
+        {
+            "source": "Shifted Multiplication.output",
+            "target": "Projection 22.input"
         }
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -8768,15 +8780,6 @@
         },
         {
             "type": "step",
-            "step": "Convolution",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "-4452",
-            "positionY": "294"
-        },
-        {
-            "type": "step",
             "step": "Convolution 12",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -8864,6 +8867,15 @@
             "height": "40",
             "positionX": "-2786",
             "positionY": "1022"
+        },
+        {
+            "type": "step",
+            "step": "Gauss Input",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-4228",
+            "positionY": "-28"
         },
         {
             "type": "step",
@@ -9502,7 +9514,16 @@
             "width": "40",
             "height": "40",
             "positionX": "-4564",
-            "positionY": "350"
+            "positionY": "378"
+        },
+        {
+            "type": "step",
+            "step": "Resize 11",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-4144",
+            "positionY": "-42"
         },
         {
             "type": "step",
@@ -9574,7 +9595,7 @@
             "width": "40",
             "height": "40",
             "positionX": "-4256",
-            "positionY": "252"
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -11377,11 +11398,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "-1676",
-        "ScrollBarY": "-398",
-        "SliderPosX": "-1676",
-        "SliderPosY": "-398",
-        "Zoom": "0.34999999999999998"
+        "ScrollBarX": "-4022",
+        "ScrollBarY": "-319",
+        "SliderPosX": "-4022",
+        "SliderPosY": "-319",
+        "Zoom": "0.83999999999999997"
     },
     "ui generic": {
         "group": "element",
@@ -11899,12 +11920,12 @@
             "motion perception": {
                 "Projection 22Widget0": {
                     "step": "Projection 22",
-                    "position_x": "2105",
-                    "position_y": "436",
+                    "position_x": "1974",
+                    "position_y": "536",
                     "width": "206",
                     "height": "200",
-                    "position_relative_x": "1.0963541666666667",
-                    "position_relative_y": "0.42913385826771655",
+                    "position_relative_x": "1.028125",
+                    "position_relative_y": "0.52755905511811019",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.19685039370078741",
                     "data_list": [
@@ -11934,12 +11955,12 @@
                 },
                 "Shifted MultiplicationWidget0": {
                     "step": "Shifted Multiplication",
-                    "position_x": "1803",
-                    "position_y": "221",
+                    "position_x": "1773",
+                    "position_y": "236",
                     "width": "408",
                     "height": "400",
-                    "position_relative_x": "0.93906250000000002",
-                    "position_relative_y": "0.21751968503937008",
+                    "position_relative_x": "0.92343750000000002",
+                    "position_relative_y": "0.23228346456692914",
                     "width_relative": "0.21249999999999999",
                     "height_relative": "0.39370078740157483",
                     "data_list": [
@@ -12014,12 +12035,12 @@
                 },
                 "Webots CameraWidget0": {
                     "step": "Webots Camera",
-                    "position_x": "1627",
-                    "position_y": "238",
+                    "position_x": "1598",
+                    "position_y": "232",
                     "width": "206",
                     "height": "200",
-                    "position_relative_x": "0.84739583333333335",
-                    "position_relative_y": "0.23425196850393701",
+                    "position_relative_x": "0.83229166666666665",
+                    "position_relative_y": "0.2283464566929134",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.19685039370078741",
                     "data_list": [
@@ -12050,12 +12071,12 @@
                 },
                 "direction selectionWidget0": {
                     "step": "direction selection",
-                    "position_x": "2807",
-                    "position_y": "610",
+                    "position_x": "2752",
+                    "position_y": "196",
                     "width": "206",
                     "height": "193",
-                    "position_relative_x": "1.4619791666666666",
-                    "position_relative_y": "0.60039370078740162",
+                    "position_relative_x": "1.4333333333333333",
+                    "position_relative_y": "0.19291338582677164",
                     "width_relative": "0.10729166666666666",
                     "height_relative": "0.18996062992125984",
                     "data_list": [
@@ -12085,12 +12106,12 @@
                 },
                 "direction\/space perceptionWidget0": {
                     "step": "direction\/space perception",
-                    "position_x": "2314",
-                    "position_y": "178",
+                    "position_x": "2180",
+                    "position_y": "169",
                     "width": "629",
                     "height": "485",
-                    "position_relative_x": "1.2052083333333334",
-                    "position_relative_y": "0.17519685039370078",
+                    "position_relative_x": "1.1354166666666667",
+                    "position_relative_y": "0.16633858267716536",
                     "width_relative": "0.32760416666666664",
                     "height_relative": "0.47736220472440943",
                     "data_list": [
@@ -12121,7 +12142,7 @@
                         }
                     ]
                 },
-                "visible": "false"
+                "visible": "true"
             }
         },
         "architecture widgets": "",
