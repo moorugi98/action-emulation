@@ -158,7 +158,7 @@ reset()
 # # hand release knife
 # x_move_to_y([0], 4)  # hand move_to freespace 1
 
-n_step = 3000
+n_step = 2000
 dx = 0.0005
 dz = 0
 counter = 0
