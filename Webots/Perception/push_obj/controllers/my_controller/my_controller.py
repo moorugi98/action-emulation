@@ -52,7 +52,7 @@ color_hand_normal = [0, 0, 1]  # 14
 
 # starting pos
 init_hand_pos = [0.1, 0.2, 0.4]
-init_apple_pos = [0.4, 0.2, -0.2]
+init_apple_pos = [0.4, 0.2, 0]
 init_knife_pos = [-0.5, 0.3, 0]
 
 
@@ -166,6 +166,6 @@ pause(500)
 while (supervisor.step(timestep) != -1) and (counter < n_step):
     get_knife_pos = [get_knife_pos[0] + dx, get_knife_pos[1], get_knife_pos[2] + dz]
     getfield_knife_pos.setSFVec3f(get_knife_pos)
-    get_apple_pos = [get_apple_pos[0] + dz, get_apple_pos[1], get_apple_pos[2] + dx]
-    getfield_apple_pos.setSFVec3f(get_apple_pos)
+    # get_apple_pos = [get_apple_pos[0] + dz, get_apple_pos[1], get_apple_pos[2] + dx]
+    # getfield_apple_pos.setSFVec3f(get_apple_pos)
     counter += 1
