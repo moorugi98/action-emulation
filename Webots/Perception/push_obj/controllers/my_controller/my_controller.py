@@ -51,9 +51,9 @@ color_hand_normal = [0, 0, 1]  # 14
 
 
 # starting pos
-init_hand_pos = [0.1, 0.2, 0.4]
-init_apple_pos = [0.4, 0.2, 0]
-init_knife_pos = [-0.5, 0.3, 0]
+init_hand_pos = [0.38, 0.2, 0.4]
+init_apple_pos = [0.4, 0.2, -0.55]
+init_knife_pos = [-0.55, 0.3, 0.3]
 
 
 def pause(n_step=200):
@@ -159,13 +159,13 @@ reset()
 # x_move_to_y([0], 4)  # hand move_to freespace 1
 
 n_step = 2000
-dx = 0.0005
-dz = 0
+dz = 0.0005
+dx = 0
 counter = 0
 pause(500)
 while (supervisor.step(timestep) != -1) and (counter < n_step):
-    get_knife_pos = [get_knife_pos[0] + dx, get_knife_pos[1], get_knife_pos[2] + dz]
+    get_knife_pos = [get_knife_pos[0] + dx, get_knife_pos[1], get_knife_pos[2] - dz]
     getfield_knife_pos.setSFVec3f(get_knife_pos)
-    # get_apple_pos = [get_apple_pos[0] + dz, get_apple_pos[1], get_apple_pos[2] + dx]
-    # getfield_apple_pos.setSFVec3f(get_apple_pos)
+    get_apple_pos = [get_apple_pos[0] + dx, get_apple_pos[1], get_apple_pos[2] + dz]
+    getfield_apple_pos.setSFVec3f(get_apple_pos)
     counter += 1

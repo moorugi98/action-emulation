@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 1 0 0 4.71238898038469
-  position -2.4813021748723836e-16 4.487445704844093 -7.473098314909766e-16
+  orientation 0.9999750005208198 -0.00499991666864578 -0.004999916668645781 4.71236398059302
+  position -0.004565660088772239 4.576059461413989 0.0010714736822768427
 }
 TexturedBackground {
 }
@@ -61,26 +61,26 @@ DEF camera Robot {
   ]
 }
 DEF hand Robot {
-  translation 0.1 0.2 0.4
+  translation 0.3866 0.2 0.397134
   rotation 1 0 0 -1.5707953071795862
   children [
-    DEF hand_solid Solid {
-      scale 0.003 0.003 0.003
+    Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
       children [
-        DEF hand_shape Shape {
+        Shape {
           appearance Appearance {
             material DEF hand_appearance Material {
               emissiveColor 0 0 1
             }
           }
-          geometry DEF hand_mesh Mesh {
-            url [
-              "/home/minseok/D/Uni/10/Masterarbeit/Main/Webots/Perception/one_hand/3dmodel/one_hand/hand_v1_L1.123c38c9cfe4-2d46-434b-995c-4f7cd8b7ab01/12683_hand_v1_FINAL.obj"
-            ]
+          geometry Sphere {
+            radius 0.5
           }
           castShadows FALSE
         }
       ]
+      name "solid(1)"
     }
   ]
   name "hand"
@@ -88,9 +88,11 @@ DEF hand Robot {
   supervisor TRUE
 }
 DEF apple Robot {
-  translation 0.40539 0.2 -0.0383079
+  translation 0.4 0.2 -0.55
   children [
     Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
       children [
         Shape {
           appearance Appearance {
@@ -99,18 +101,19 @@ DEF apple Robot {
             }
           }
           geometry Sphere {
-            radius 0.05
+            radius 0.5
           }
           castShadows FALSE
         }
       ]
+      name "solid(1)"
     }
   ]
   name "ball1"
   controller ""
 }
 DEF knife Robot {
-  translation -0.5 0.3 0
+  translation -0.55 0.3 0.3
   rotation 0.19611613513818404 0.9805806756909201 0 1.5707996938995747
   children [
     Solid {
@@ -159,7 +162,7 @@ DEF hand_folded Robot {
   name "hand(1)"
 }
 DEF distractor_1 Solid {
-  translation -0.191291 0.2 -0.65044
+  translation -0.0810537 0.2 -0.0793961
   children [
     Shape {
       appearance PBRAppearance {
