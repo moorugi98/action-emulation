@@ -51,7 +51,7 @@ color_hand_normal = [0, 0, 1]  # 14
 
 
 # starting pos
-init_hand_pos = [0.38, 0.2, 0.4]
+init_hand_pos = [0.38, 0.2, 0.6]
 init_apple_pos = [0.4, 0.2, -0.55]
 init_knife_pos = [-0.55, 0.3, 0.3]
 
