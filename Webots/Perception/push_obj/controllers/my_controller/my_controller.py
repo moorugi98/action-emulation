@@ -174,8 +174,8 @@ pause(500)
 while (supervisor.step(timestep) != -1) and (counter < n_step):
     get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - dz]
     getfield_green_pos.setSFVec3f(get_green_pos)
-    get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
-    getfield_hand_pos.setSFVec3f(get_hand_pos)
+    # get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
+    # getfield_hand_pos.setSFVec3f(get_hand_pos)
     counter += 1
 
 n_step = 2000
