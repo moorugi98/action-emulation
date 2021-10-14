@@ -1,0 +1,194 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 1 0 0 4.71238898038469
+  position -0.033755793236788956 3.654307778269384 -0.03141666104089513
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  luminosity 0.5
+}
+DEF table Solid {
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 0
+        }
+      }
+      geometry Box {
+        size 2.5 0.2 2.5
+      }
+    }
+  ]
+  name "table"
+  locked TRUE
+}
+DEF camera Robot {
+  translation 0 1.2 0
+  children [
+    DEF open_emitter Emitter {
+      channel 1
+    }
+    DEF close_emitter Emitter {
+      name "emitter(1)"
+      channel 2
+    }
+    DEF open_receiver Receiver {
+      name "open_receiver"
+      channel 1
+    }
+    DEF close_receiver Receiver {
+      name "close_receiver"
+      channel 2
+    }
+    Solid {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.827451 0.843137 0.811765
+          }
+          geometry Capsule {
+            height 0.1
+            radius 0.05
+          }
+          castShadows FALSE
+        }
+        Camera {
+          rotation 1 0 0 -1.57
+          name "camera_center"
+          fieldOfView 1.5
+          width 200
+          height 200
+          antiAliasing TRUE
+          recognition Recognition {
+          }
+        }
+      ]
+    }
+  ]
+  controller "comm"
+  battery [
+    0
+  ]
+}
+DEF hand Robot {
+  translation 0.4 0.3 -0.3
+  rotation 1 0 0 -1.5707953071795862
+  children [
+    Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
+      children [
+        Shape {
+          appearance Appearance {
+            material DEF hand_appearance Material {
+              emissiveColor 0 0 1
+            }
+          }
+          geometry Sphere {
+            radius 0.5
+          }
+          castShadows FALSE
+        }
+      ]
+      name "solid(1)"
+    }
+  ]
+  name "hand"
+  controller "my_controller"
+  supervisor TRUE
+}
+DEF red Robot {
+  translation 0.4 0.3 0.6
+  children [
+    Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
+      children [
+        Shape {
+          appearance Appearance {
+            material DEF red_appearance Material {
+              emissiveColor 1 0 0
+            }
+          }
+          geometry Sphere {
+            radius 0.5
+          }
+          castShadows FALSE
+        }
+      ]
+      name "solid(1)"
+    }
+  ]
+  name "ball1"
+  controller ""
+}
+DEF green Robot {
+  translation -0.55 0.3 0.3
+  rotation 0.19611613513818404 0.9805806756909201 0 1.5707996938995747
+  children [
+    Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
+      children [
+        Shape {
+          appearance Appearance {
+            material DEF green_appearance Material {
+              emissiveColor 0 1 0
+            }
+          }
+          geometry Sphere {
+            radius 0.5
+          }
+          castShadows FALSE
+        }
+      ]
+      name "solid(1)"
+    }
+  ]
+  name "robot(1)"
+}
+DEF yellow Robot {
+  translation 0.268397 0.3 -0.300677
+  children [
+    Solid {
+      rotation -0.1201799016173378 0.9894008247019193 -0.08150337003099246 1.6866355731805152
+      scale 0.1 0.1 0.1
+      children [
+        Shape {
+          appearance Appearance {
+            material DEF yellow_appearance Material {
+              emissiveColor 1 1 0
+            }
+          }
+          geometry Sphere {
+            radius 0.5
+          }
+          castShadows FALSE
+        }
+      ]
+      name "solid(1)"
+    }
+  ]
+  name "ball1(1)"
+  controller ""
+}
+DEF distractor_1 Solid {
+  translation 0.326205 0.2 0.795793
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.8 0.6
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 0.1
+      }
+      castShadows FALSE
+    }
+  ]
+}

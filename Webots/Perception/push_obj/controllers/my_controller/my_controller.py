@@ -166,36 +166,45 @@ reset()
 # # hand release green
 # x_move_to_y([0], 4)  # hand move_to freespace 1
 
-n_step = 500
+n_step = 1900
 dz = 0.0005
 dx = 0
 counter = 0
-pause(500)
+pause(100)
 while (supervisor.step(timestep) != -1) and (counter < n_step):
-    get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - 2*dz]
+    get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - dz]
     getfield_green_pos.setSFVec3f(get_green_pos)
-    # get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
-    # getfield_hand_pos.setSFVec3f(get_hand_pos)
+    get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
+    getfield_hand_pos.setSFVec3f(get_hand_pos)
     counter += 1
     
 # change velocity
-counter = 0
-while (supervisor.step(timestep) != -1) and (counter < n_step):
-    get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - 0.8*dz]
-    getfield_green_pos.setSFVec3f(get_green_pos)
+# counter = 0
+# while (supervisor.step(timestep) != -1) and (counter < n_step):
+    # get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - 0.8*dz]
+    # getfield_green_pos.setSFVec3f(get_green_pos)
     # get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
     # getfield_hand_pos.setSFVec3f(get_hand_pos)
-    counter += 1
+    # counter += 1
 
 n_step = 2000
 dz = 0
 dx = -0.0003
 counter = 0
-pause(500)
+pause(100)
 while (supervisor.step(timestep) != -1) and (counter < n_step):
     get_red_pos = [get_red_pos[0] + dx, get_red_pos[1], get_red_pos[2] + dz]
     getfield_red_pos.setSFVec3f(get_red_pos)
     get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
     getfield_hand_pos.setSFVec3f(get_hand_pos)
     counter += 1
-
+    
+n_step = 1800
+dz = -0.0005
+dx = 0
+counter = 0
+pause(100)
+while (supervisor.step(timestep) != -1) and (counter < n_step):
+    get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
+    getfield_hand_pos.setSFVec3f(get_hand_pos)
+    counter += 1
