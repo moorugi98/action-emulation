@@ -57,8 +57,8 @@ color_hand_normal = [0, 0, 1]  # 14
 # starting pos
 init_hand_pos = [0.4, 0.3, -0.6]
 init_red_pos = [0.4, 0.3, 0.55]
-init_green_pos = [-0.55, 0.3, 0.3]
-init_yellow_pos = [0.25, 0.3, -0.6]
+init_green_pos = [-0.35, 0.3, 0.4]
+init_yellow_pos = [0.4, 0.3, -0.75]
 
 
 def pause(n_step=200):
@@ -174,28 +174,28 @@ dz = 0.0005
 dx = 0
 counter = 0
 while (supervisor.step(timestep) != -1) and (counter < n_step):
-    get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - dz]
-    getfield_green_pos.setSFVec3f(get_green_pos)
+    # get_green_pos = [get_green_pos[0] + dx, get_green_pos[1], get_green_pos[2] - dz]
+    # getfield_green_pos.setSFVec3f(get_green_pos)
     get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
     getfield_hand_pos.setSFVec3f(get_hand_pos)
     get_yellow_pos = [get_yellow_pos[0] + dx, get_yellow_pos[1], get_yellow_pos[2] + dz]
     getfield_yellow_pos.setSFVec3f(get_yellow_pos)
     counter += 1
 
-pause(700)
+pause(5000)
 
 n_step = 2000
 dz = 0
 dx = -0.0003
 counter = 0
 while (supervisor.step(timestep) != -1) and (counter < n_step):
-    get_red_pos = [get_red_pos[0] + dx, get_red_pos[1], get_red_pos[2] + dz]
-    getfield_red_pos.setSFVec3f(get_red_pos)
+    # get_red_pos = [get_red_pos[0] + dx, get_red_pos[1], get_red_pos[2] + dz]
+    # getfield_red_pos.setSFVec3f(get_red_pos)
     get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
     getfield_hand_pos.setSFVec3f(get_hand_pos)
     counter += 1
 
-pause(700)
+pause(2000)
     
 n_step = 1800
 dz = -0.0005
