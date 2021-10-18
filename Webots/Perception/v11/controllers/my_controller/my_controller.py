@@ -167,7 +167,6 @@ reset()
 # x_move_to_y([0], 4)  # hand move_to freespace 1
 
 
-pause(100)
 
 n_step = 2000
 dz = 0.0005
