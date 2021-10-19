@@ -168,6 +168,8 @@ reset()
 
 
 
+pause(2000)
+
 n_step = 2000
 dz = 0.0005
 dx = 0
@@ -181,7 +183,7 @@ while (supervisor.step(timestep) != -1) and (counter < n_step):
     getfield_yellow_pos.setSFVec3f(get_yellow_pos)
     counter += 1
 
-pause(5000)
+pause(3000)
 
 n_step = 2000
 dz = 0
@@ -194,13 +196,13 @@ while (supervisor.step(timestep) != -1) and (counter < n_step):
     getfield_hand_pos.setSFVec3f(get_hand_pos)
     counter += 1
 
-pause(2000)
+# pause(2000)
     
-n_step = 1800
-dz = -0.0005
-dx = 0
-counter = 0
-while (supervisor.step(timestep) != -1) and (counter < n_step):
-    get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
-    getfield_hand_pos.setSFVec3f(get_hand_pos)
-    counter += 1
+# n_step = 1800
+# dz = -0.0005
+# dx = 0
+# counter = 0
+# while (supervisor.step(timestep) != -1) and (counter < n_step):
+    # get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
+    # getfield_hand_pos.setSFVec3f(get_hand_pos)
+    # counter += 1
