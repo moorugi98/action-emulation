@@ -168,7 +168,7 @@ reset()
 
 
 
-pause(2000)
+pause(1000)
 
 n_step = 2000
 dz = 0.0005
@@ -183,7 +183,7 @@ while (supervisor.step(timestep) != -1) and (counter < n_step):
     getfield_yellow_pos.setSFVec3f(get_yellow_pos)
     counter += 1
 
-pause(3000)
+pause(2000)
 
 n_step = 2000
 dz = 0
