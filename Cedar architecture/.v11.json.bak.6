@@ -455,7 +455,7 @@
             "threshold for updating the stepIcon": "0.80000000000000004",
             "dimensionality": "0",
             "sizes": "",
-            "time scale": "100",
+            "time scale": "200",
             "resting level": "-5",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
@@ -2955,6 +2955,11 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain 116",
+            "gain factor": "5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 117",
             "gain factor": "3",
             "comments": ""
@@ -3391,7 +3396,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 55",
-            "gain factor": "2",
+            "gain factor": "4",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3411,7 +3416,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 59",
-            "gain factor": "4.0000000000000027",
+            "gain factor": "2",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -4931,7 +4936,7 @@
             "threshold for updating the stepIcon": "0.80000000000000004",
             "dimensionality": "0",
             "sizes": "",
-            "time scale": "1500",
+            "time scale": "100",
             "resting level": "-3",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
@@ -4948,7 +4953,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "10",
+                    "amplitude": "5",
                     "widths": [
                         "1"
                     ]
@@ -4977,7 +4982,7 @@
                 ],
                 "limit": "5"
             },
-            "comments": "timer based"
+            "comments": "timer based\n\n[input]\nclean after a phrase\nfix to NONE in case of pick up\ntimer\ninhibit timer"
         },
         "cedar.dynamics.NeuralField": {
             "name": "carried abs coord",
@@ -8076,6 +8081,62 @@
             },
             "comments": ""
         },
+        "cedar.dynamics.NeuralField": {
+            "name": "none timer",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "1500",
+            "resting level": "-3",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "1",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
         "cedar.processing.StaticGain": {
             "name": "none-carried",
             "gain factor": "1.5",
@@ -10750,7 +10811,8 @@
                 "boost LOCATION",
                 "start moving (active trans)",
                 "v memory",
-                "double inh"
+                "double inh",
+                "none timer"
             ]
         }
     },
@@ -12124,14 +12186,6 @@
             "target": "Static Gain 93.input"
         },
         {
-            "source": "Static Gain 53.output",
-            "target": "carried NONE.input"
-        },
-        {
-            "source": "Static Gain 93.output",
-            "target": "carried NONE.input"
-        },
-        {
             "source": "Noop.output",
             "target": "carried NONE.input"
         },
@@ -13030,11 +13084,27 @@
         {
             "source": "reset ordinal memory \/ start new.boost",
             "target": "clean location\/carried.input"
+        },
+        {
+            "source": "Static Gain 53.output",
+            "target": "none timer.input"
+        },
+        {
+            "source": "none timer.sigmoided activation",
+            "target": "Static Gain 116.input"
+        },
+        {
+            "source": "Static Gain 116.output",
+            "target": "carried NONE.input"
+        },
+        {
+            "source": "Static Gain 93.output",
+            "target": "carried NONE.input"
         }
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -13067,7 +13137,7 @@
             "height": "70",
             "x": "-1106",
             "y": "1106",
-            "text": "rotationdefajultuncecesary?",
+            "text": "rotation defajult uncecesary?",
             "font size": "10",
             "color red": "255",
             "color green": "255",
@@ -13211,7 +13281,7 @@
             "height": "73",
             "x": "2744",
             "y": "756",
-            "text": "should delete AGENT istead of hand\nneeded to get all objects except the AGENT itself",
+            "text": "should delete AGENT istead of hand by getting the colour\nneeded to get all objects except the AGENT itself",
             "font size": "10",
             "color red": "255",
             "color green": "255",
@@ -13428,6 +13498,30 @@
             "x": "1932",
             "y": "294",
             "text": "GATING depending on primitive",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "120",
+            "height": "70",
+            "x": "1708",
+            "y": "-2366",
+            "text": "This dies out too fast?\nchanged time scale of CoS",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
+            "color blue": "110"
+        },
+        {
+            "type": "stickyNote",
+            "width": "120",
+            "height": "70",
+            "x": "4368",
+            "y": "490",
+            "text": "direction-spatial",
             "font size": "10",
             "color red": "255",
             "color green": "255",
@@ -14449,8 +14543,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2968",
-            "positionY": "-938"
+            "positionX": "3150",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -14829,6 +14923,15 @@
             "height": "40",
             "positionX": "3304",
             "positionY": "-2016"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 116",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "3010",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -15997,8 +16100,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3052",
-            "positionY": "-938"
+            "positionX": "3234",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -16901,6 +17004,15 @@
         },
         {
             "type": "step",
+            "step": "none timer",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "2968",
+            "positionY": "-868"
+        },
+        {
+            "type": "step",
             "step": "none-carried",
             "display style": "ICON_AND_TEXT",
             "width": "124",
@@ -17378,11 +17490,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "1726",
-        "ScrollBarY": "-1494",
-        "SliderPosX": "1726",
-        "SliderPosY": "-1494",
-        "Zoom": "0.72999999999999998"
+        "ScrollBarX": "1743",
+        "ScrollBarY": "-1041",
+        "SliderPosX": "1743",
+        "SliderPosY": "-1041",
+        "Zoom": "0.62"
     },
     "ui generic": {
         "group": "element",
@@ -18534,7 +18646,7 @@
                         }
                     ]
                 },
-                "visible": "false"
+                "visible": "true"
             }
         },
         "architecture widgets": "",
