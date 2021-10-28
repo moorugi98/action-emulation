@@ -58,7 +58,7 @@ color_hand_normal = [0, 0, 1]  # 14
 init_hand_pos = [0.4, 0.3, -0.6]
 init_red_pos = [0.4, 0.3, 0.55]
 init_green_pos = [-0.35, 0.3, 0.4]
-init_yellow_pos = [0.4, 0.3, -0.75]
+init_yellow_pos = [0.55, 0.3, -0.6]
 
 
 def pause(n_step=200):
