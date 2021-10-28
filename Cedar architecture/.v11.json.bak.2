@@ -1103,7 +1103,7 @@
             "comments": ""
         },
         "cedar.processing.steps.Convolution": {
-            "name": "Convolution 10",
+            "name": "Convolution 11",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
                     "dimensionality": "2",
@@ -1111,7 +1111,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "3.5",
+                    "amplitude": "2",
                     "sigmas": [
                         "1.5",
                         "1.5"
@@ -1241,21 +1241,18 @@
             "name": "Convolution 6",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "3",
+                    "dimensionality": "2",
                     "anchor": [
-                        "0",
                         "0",
                         "0"
                     ],
                     "amplitude": "200",
                     "sigmas": [
                         "3",
-                        "3",
-                        "0.01"
+                        "3"
                     ],
                     "normalize": "true",
                     "shifts": [
-                        "0",
                         "0",
                         "0"
                     ],
@@ -2961,11 +2958,7 @@
         },
         "cedar.processing.Resize": {
             "name": "Resize 9",
-            "output size": [
-                "50",
-                "50",
-                "36"
-            ],
+            "output size": "",
             "interpolation": "LINEAR",
             "comments": ""
         },
@@ -11044,10 +11037,6 @@
             "target": "Resize 2.input"
         },
         {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Flip 2.input"
-        },
-        {
             "source": "Static Gain 64.output",
             "target": "Near .input"
         },
@@ -11186,10 +11175,6 @@
         {
             "source": "Convolution 3.result",
             "target": "Static Gain 90.input"
-        },
-        {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Static Gain 84.input"
         },
         {
             "source": "stabilized transient onset.sigmoided activation",
@@ -11376,10 +11361,6 @@
             "target": "Static Gain 39.input"
         },
         {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Static Gain 40.input"
-        },
-        {
             "source": "Static Gain 40.output",
             "target": "agent selection.input"
         },
@@ -11432,10 +11413,6 @@
             "target": "Static Gain 47.input"
         },
         {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Convolution 5.matrix"
-        },
-        {
             "source": "centered LOCATION WM.sigmoided activation",
             "target": "Convolution 5.kernel"
         },
@@ -11454,10 +11431,6 @@
         {
             "source": "Projection 31.output",
             "target": "Static Gain 52.input"
-        },
-        {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Convolution 4.matrix"
         },
         {
             "source": "centered CARRIED WM.sigmoided activation",
@@ -11808,10 +11781,6 @@
             "target": "rotated objects.input"
         },
         {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Projection 8.input"
-        },
-        {
             "source": "agent centered obj.sigmoided activation",
             "target": "Static Gain 18.input"
         },
@@ -11860,10 +11829,6 @@
             "target": "Convolution 8.matrix"
         },
         {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Flip 6.input"
-        },
-        {
             "source": "Convolution 8.result",
             "target": "Resize 10.input"
         },
@@ -11886,10 +11851,6 @@
         {
             "source": "stabilized transient onset.sigmoided activation",
             "target": "Static Gain 107.input"
-        },
-        {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Convolution 9.matrix"
         },
         {
             "source": "Convolution 9.result",
@@ -12796,10 +12757,6 @@
             "target": "AGENT WM.input"
         },
         {
-            "source": "AGENT WM.sigmoided activation",
-            "target": "Projection 34.input"
-        },
-        {
             "source": "Projection 34.output",
             "target": "Static Gain 171.input"
         },
@@ -12916,10 +12873,6 @@
             "target": "Convolution 7.matrix"
         },
         {
-            "source": "Static Gain 84.output",
-            "target": "Convolution 10.matrix"
-        },
-        {
             "source": "agent moved.sigmoided activation",
             "target": "Convolution 3.matrix"
         },
@@ -12928,8 +12881,48 @@
             "target": "agent moved.input"
         },
         {
-            "source": "Convolution 10.result",
+            "source": "AGENT WM.sigmoided activation",
+            "target": "Convolution 11.matrix"
+        },
+        {
+            "source": "Static Gain 84.output",
             "target": "agent moved.input"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Static Gain 84.input"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Flip 6.input"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Convolution 9.matrix"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Flip 2.input"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Projection 8.input"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Static Gain 40.input"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Convolution 5.matrix"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Convolution 4.matrix"
+        },
+        {
+            "source": "Convolution 11.result",
+            "target": "Projection 34.input"
         }
     ],
     "name": "element",
@@ -13346,6 +13339,18 @@
             "color blue": "110"
         },
         {
+            "type": "stickyNote",
+            "width": "120",
+            "height": "70",
+            "x": "-1006",
+            "y": "-368",
+            "text": "if unlucky, offset sums out onset of object that is folowing",
+            "font size": "10",
+            "color red": "255",
+            "color green": "255",
+            "color blue": "110"
+        },
+        {
             "type": "connections",
             "connections": ""
         },
@@ -13612,12 +13617,12 @@
         },
         {
             "type": "step",
-            "step": "Convolution 10",
+            "step": "Convolution 11",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3094",
-            "positionY": "-280"
+            "positionX": "1302",
+            "positionY": "238"
         },
         {
             "type": "step",
@@ -17247,11 +17252,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "-721",
-        "ScrollBarY": "-252",
-        "SliderPosX": "-721",
-        "SliderPosY": "-252",
-        "Zoom": "0.5"
+        "ScrollBarX": "166",
+        "ScrollBarY": "-342",
+        "SliderPosX": "166",
+        "SliderPosY": "-342",
+        "Zoom": "0.20000000000000001"
     },
     "ui generic": {
         "group": "element",

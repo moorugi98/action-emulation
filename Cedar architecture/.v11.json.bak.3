@@ -1111,7 +1111,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "13",
+                    "amplitude": "2",
                     "sigmas": [
                         "1.5",
                         "1.5"
@@ -1241,21 +1241,18 @@
             "name": "Convolution 6",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "3",
+                    "dimensionality": "2",
                     "anchor": [
-                        "0",
                         "0",
                         "0"
                     ],
                     "amplitude": "200",
                     "sigmas": [
                         "3",
-                        "3",
-                        "0.01"
+                        "3"
                     ],
                     "normalize": "true",
                     "shifts": [
-                        "0",
                         "0",
                         "0"
                     ],
@@ -2212,76 +2209,6 @@
             },
             "comments": ""
         },
-        "cedar.dynamics.NeuralField": {
-            "name": "Neural Field 2",
-            "activation as output": "false",
-            "discrete metric (workaround)": "false",
-            "update stepIcon according to output": "true",
-            "threshold for updating the stepIcon": "0.80000000000000004",
-            "dimensionality": "2",
-            "sizes": [
-                "50",
-                "50"
-            ],
-            "time scale": "100",
-            "resting level": "-5",
-            "input noise gain": "0.10000000000000001",
-            "multiplicative noise (input)": "false",
-            "multiplicative noise (activation)": "false",
-            "sigmoid": {
-                "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "0",
-                "beta": "100"
-            },
-            "global inhibition": "-0.01",
-            "lateral kernels": {
-                "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "2",
-                    "anchor": [
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "1",
-                    "sigmas": [
-                        "3",
-                        "3"
-                    ],
-                    "normalize": "true",
-                    "shifts": [
-                        "0",
-                        "0"
-                    ],
-                    "limit": "5"
-                }
-            },
-            "lateral kernel convolution": {
-                "borderType": "Zero",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.OpenCV"
-                },
-                "alternate even kernel center": "false"
-            },
-            "noise correlation kernel": {
-                "dimensionality": "2",
-                "anchor": [
-                    "0",
-                    "0"
-                ],
-                "amplitude": "0",
-                "sigmas": [
-                    "3",
-                    "3"
-                ],
-                "normalize": "true",
-                "shifts": [
-                    "0",
-                    "0"
-                ],
-                "limit": "5"
-            },
-            "comments": ""
-        },
         "cedar.processing.steps.Noop": {
             "name": "Noop",
             "comments": ""
@@ -3031,11 +2958,7 @@
         },
         "cedar.processing.Resize": {
             "name": "Resize 9",
-            "output size": [
-                "50",
-                "50",
-                "36"
-            ],
+            "output size": "",
             "interpolation": "LINEAR",
             "comments": ""
         },
@@ -10684,8 +10607,7 @@
                 "memory 7",
                 "memory 8",
                 "find agent",
-                "find carried",
-                "Neural Field 2"
+                "find carried"
             ]
         }
     },
@@ -13001,15 +12923,11 @@
         {
             "source": "Convolution 11.result",
             "target": "Projection 34.input"
-        },
-        {
-            "source": "Convolution 11.result",
-            "target": "Neural Field 2.input"
         }
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -14092,15 +14010,6 @@
             "height": "40",
             "positionX": "-140",
             "positionY": "714"
-        },
-        {
-            "type": "step",
-            "step": "Neural Field 2",
-            "display style": "ICON_AND_TEXT",
-            "width": "124",
-            "height": "40",
-            "positionX": "1344",
-            "positionY": "308"
         },
         {
             "type": "step",
@@ -17343,11 +17252,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "256",
-        "ScrollBarY": "-86",
-        "SliderPosX": "256",
-        "SliderPosY": "-86",
-        "Zoom": "0.65000000000000002"
+        "ScrollBarX": "166",
+        "ScrollBarY": "-342",
+        "SliderPosX": "166",
+        "SliderPosY": "-342",
+        "Zoom": "0.20000000000000001"
     },
     "ui generic": {
         "group": "element",
