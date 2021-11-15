@@ -200,6 +200,62 @@
             "comments": "- resizing often is problematic, use camera of 50 x 50"
         },
         "cedar.dynamics.NeuralField": {
+            "name": "a not b",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "100",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "4.5000000000000044",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": "turned on if both intention and signal is on without b\nonce b is on, cannot be turned on\nonce turned on, sustained until intention is gone"
+        },
+        "cedar.dynamics.NeuralField": {
             "name": "fast movement",
             "activation as output": "false",
             "discrete metric (workaround)": "false",
@@ -318,6 +374,27 @@
                 ],
                 "limit": "5"
             },
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "inhibition from b",
+            "strength": "-3",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "intention",
+            "strength": "4",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "signal",
+            "strength": "2",
+            "active": "false",
+            "deactivate on reset": "false",
             "comments": ""
         },
         "cedar.dynamics.NeuralField": {
@@ -537,7 +614,8 @@
                 "hue ++",
                 "slow movement",
                 "space-color perception",
-                "Webots Camera"
+                "Webots Camera",
+                "a not b"
             ]
         }
     },
@@ -641,6 +719,18 @@
         {
             "source": "space-color perception.sigmoided activation",
             "target": "Projection 13.input"
+        },
+        {
+            "source": "intention.boost",
+            "target": "a not b.input"
+        },
+        {
+            "source": "signal.boost",
+            "target": "a not b.input"
+        },
+        {
+            "source": "inhibition from b.boost",
+            "target": "a not b.input"
         }
     ],
     "name": "element",
@@ -652,8 +742,8 @@
             "type": "stickyNote",
             "width": "142",
             "height": "98",
-            "x": "355",
-            "y": "-105",
+            "x": "350",
+            "y": "-98",
             "text": "movement\ndetector",
             "font size": "14",
             "color red": "190",
@@ -667,6 +757,18 @@
             "x": "-406",
             "y": "-154",
             "text": "hue change\ndetector",
+            "font size": "14",
+            "color red": "190",
+            "color green": "242",
+            "color blue": "161"
+        },
+        {
+            "type": "stickyNote",
+            "width": "142",
+            "height": "98",
+            "x": "756",
+            "y": "742",
+            "text": "a then b with automatic turn off",
             "font size": "14",
             "color red": "190",
             "color green": "242",
@@ -830,6 +932,15 @@
             "positionY": "563.23809523809518"
         },
         {
+            "type": "step",
+            "step": "a not b",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "885.58695652173958",
+            "positionY": "870.67391304347882"
+        },
+        {
             "type": "trigger",
             "trigger": "default thread",
             "width": "30",
@@ -854,6 +965,33 @@
             "height": "40",
             "positionX": "-176.33333333333326",
             "positionY": "62.933333333333337"
+        },
+        {
+            "type": "step",
+            "step": "inhibition from b",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "927.58695652173958",
+            "positionY": "940.67391304347882"
+        },
+        {
+            "type": "step",
+            "step": "intention",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "745.58695652173958",
+            "positionY": "856.67391304347882"
+        },
+        {
+            "type": "step",
+            "step": "signal",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "742",
+            "positionY": "924"
         },
         {
             "type": "step",
@@ -884,11 +1022,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "-439",
-        "ScrollBarY": "-102",
-        "SliderPosX": "-439",
-        "SliderPosY": "-102",
-        "Zoom": "0.66000000000000003"
+        "ScrollBarX": "109",
+        "ScrollBarY": "644",
+        "SliderPosX": "109",
+        "SliderPosY": "644",
+        "Zoom": "0.95999999999999996"
     },
     "ui generic": {
         "group": "element",
