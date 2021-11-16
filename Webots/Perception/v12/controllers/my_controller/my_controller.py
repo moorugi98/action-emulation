@@ -95,51 +95,53 @@ pause(10)
     
     
 
-# ### hand grasps yellow
-# print('hand grasps yellow')
-# openclose_step = 50
-# pushpull_dist = 0.4
-#
-# #open hand
-# ds = (big_hand_size - get_hand_size) / openclose_step
-# counter = 0
-# while (supervisor.step(timestep) != -1) and (counter < openclose_step):
-    # get_hand_size += ds
-    # get_field_hand_size.setSFFloat(get_hand_size)
-    # counter += 1
-#
-# #close hand pull
-# ds = (get_hand_size - init_hand_size) / openclose_step
-# dx = pushpull_dist * (get_yellow_pos[0] - get_hand_pos[0]) / openclose_step  # not vectorized cuz list needed
-# dz = pushpull_dist * (get_yellow_pos[2] - get_hand_pos[2]) / openclose_step
-# counter = 0
-# while (supervisor.step(timestep) != -1) and (counter < openclose_step):
-    # get_hand_size -= ds
-    # get_field_hand_size.setSFFloat(get_hand_size)
-    # get_yellow_pos[0] -= dx
-    # get_yellow_pos[2] -= dz
-    # get_field_yellow_pos.setSFVec3f(get_yellow_pos)
-    # counter += 1
-
-
-
-
-
-
-
-
-### hand transports yellow to red
-n_step = 120
-dz = 0.005
-dx = 0
+### hand grasps yellow
+print('hand grasps yellow')
+openclose_step = 50
+pushpull_dist = 0.4
+# #
+#open hand
+ds = (big_hand_size - get_hand_size) / openclose_step
 counter = 0
-while (supervisor.step(timestep) != -1) and (counter < n_step):
-
-    get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
-    get_field_hand_pos.setSFVec3f(get_hand_pos)
-    get_yellow_pos = [get_yellow_pos[0] + dx, get_yellow_pos[1], get_yellow_pos[2] + dz]
+while (supervisor.step(timestep) != -1) and (counter < openclose_step):
+    get_hand_size += ds
+    get_field_hand_size.setSFFloat(get_hand_size)
+    counter += 1
+# #
+#close hand pull
+ds = (get_hand_size - init_hand_size) / openclose_step
+dx = pushpull_dist * (get_yellow_pos[0] - get_hand_pos[0]) / openclose_step  # not vectorized cuz list needed
+dz = pushpull_dist * (get_yellow_pos[2] - get_hand_pos[2]) / openclose_step
+counter = 0
+while (supervisor.step(timestep) != -1) and (counter < openclose_step):
+    get_hand_size -= ds
+    get_field_hand_size.setSFFloat(get_hand_size)
+    get_yellow_pos[0] -= dx
+    get_yellow_pos[2] -= dz
     get_field_yellow_pos.setSFVec3f(get_yellow_pos)
     counter += 1
+
+
+
+
+
+
+
+
+# ### hand transports yellow to red
+# n_step = 120
+# dz = 0.005
+# dx = 0
+# counter = 0
+# while (supervisor.step(timestep) != -1) and (counter < n_step):
+
+    # get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
+    # get_field_hand_pos.setSFVec3f(get_hand_pos)
+    # get_yellow_pos = [get_yellow_pos[0] + dx, get_yellow_pos[1], get_yellow_pos[2] + dz]
+    # get_field_yellow_pos.setSFVec3f(get_yellow_pos)
+    # counter += 1
+    
+    
 #
 # pause(2000)
 #
