@@ -26,15 +26,14 @@ get_field_hand_size = supervisor.getFromDef("hand_geom").getField("radius")
 get_hand_size = get_field_hand_size.getSFFloat()
 
 # starting values
-# size of a ball is 0.1, meaning 0.1 distance is just touching
+# diam. of a ball is 0.1, meaning 0.1 distance is just touching
+# use 0.15 for close, 0.3 for far distance
 init_hand_pos = [0.4, 0.3, -0.6]
-init_red_pos = [0.4, 0.3, 0.5] # -0.4 next to hand
+init_red_pos = [0.4, 0.3, 0.5] 
 init_green_pos = [-0.35, 0.3, 0.4]
-# 0.75~0.8 mid?
-init_yellow_pos = [0.7, 0.3, -0.6]  # 0.5, 0.7,-0.75, 0.9
+init_yellow_pos = [0.1, 0.3, -0.6]  
 init_hand_size = 0.5
 big_hand_size = 1
-small_hand_size = 0.25
 
 
 def pause(n_step=200):
@@ -70,16 +69,17 @@ pause(10)
 
     
 
-drop = True
+grasp = True
 ### hand drops/grasps yellow
-if drop:
-    print('hand drops yellow')
-else:
+if grasp:
     print('hand grasps yellow')
+else:
+    print('hand drops yellow')
+    
 openclose_step = 50
-pushpull_dist = 0.2  # 0.1 would be diameter of a ball
+pushpull_dist = 0.15  # 0.1 would be diameter of a ball
 # #
-#open hand
+# open hand
 ds = (big_hand_size - get_hand_size) / openclose_step
 counter = 0
 while (supervisor.step(timestep) != -1) and (counter < openclose_step):
@@ -87,14 +87,14 @@ while (supervisor.step(timestep) != -1) and (counter < openclose_step):
     get_field_hand_size.setSFFloat(get_hand_size)
     counter += 1
 # #
-#close hand pull
+# close hand pull
 ds = (get_hand_size - init_hand_size) / openclose_step
 cur_x = (get_yellow_pos[0] - get_hand_pos[0])
 cur_z = (get_yellow_pos[2] - get_hand_pos[2])
 cur_hypote = math.sqrt(cur_x**2 + cur_z**2) # Pytagoras
 dx = cur_x * pushpull_dist / cur_hypote / openclose_step
 dz = cur_z * pushpull_dist / cur_hypote / openclose_step
-if drop:
+if not grasp:
     dx = -1 * dx
     dz = -1 * dz
 print(cur_x, cur_z, cur_hypote, dx, dz)
@@ -115,7 +115,7 @@ while (supervisor.step(timestep) != -1) and (counter < openclose_step):
 
 
 # ### hand transports yellow to red
-# n_step = 200
+# n_step = 160
 # dz = 0.005
 # dx = 0
 # counter = 0
