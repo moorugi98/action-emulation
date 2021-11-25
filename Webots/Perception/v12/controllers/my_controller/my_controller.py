@@ -29,9 +29,9 @@ get_hand_size = get_field_hand_size.getSFFloat()
 # diam. of a ball is 0.1, meaning 0.1 distance is just touching
 # use 0.15 for close, 0.3 for far distance
 init_hand_pos = [0.4, 0.3, -0.6]
-init_red_pos = [0.4, 0.3, 0.5] 
+init_red_pos = [0.4, 0.3, 0.4] 
 init_green_pos = [-0.35, 0.3, 0.4]
-init_yellow_pos = [0.1, 0.3, -0.6]  
+init_yellow_pos = [0.25, 0.3, -0.6]  
 init_hand_size = 0.5
 big_hand_size = 1
 
@@ -65,67 +65,67 @@ def reset():
 
 
 reset()
-pause(10)
+pause(20)
 
     
 
-grasp = True
-### hand drops/grasps yellow
-if grasp:
-    print('hand grasps yellow')
-else:
-    print('hand drops yellow')
+# grasp = False
+# ### hand drops/grasps yellow
+# if grasp:
+    # print('hand grasps yellow')
+# else:
+    # print('hand drops yellow')
     
-openclose_step = 50
-pushpull_dist = 0.15  # 0.1 would be diameter of a ball
-# #
-# open hand
-ds = (big_hand_size - get_hand_size) / openclose_step
-counter = 0
-while (supervisor.step(timestep) != -1) and (counter < openclose_step):
-    get_hand_size += ds
-    get_field_hand_size.setSFFloat(get_hand_size)
-    counter += 1
-# #
-# close hand pull
-ds = (get_hand_size - init_hand_size) / openclose_step
-cur_x = (get_yellow_pos[0] - get_hand_pos[0])
-cur_z = (get_yellow_pos[2] - get_hand_pos[2])
-cur_hypote = math.sqrt(cur_x**2 + cur_z**2) # Pytagoras
-dx = cur_x * pushpull_dist / cur_hypote / openclose_step
-dz = cur_z * pushpull_dist / cur_hypote / openclose_step
-if not grasp:
-    dx = -1 * dx
-    dz = -1 * dz
-print(cur_x, cur_z, cur_hypote, dx, dz)
-counter = 0
-while (supervisor.step(timestep) != -1) and (counter < openclose_step):
-    get_hand_size -= ds
-    get_field_hand_size.setSFFloat(get_hand_size)
-    get_yellow_pos[0] -= dx
-    get_yellow_pos[2] -= dz
-    get_field_yellow_pos.setSFVec3f(get_yellow_pos)
-    counter += 1
-
-
-
-
-
-
-
-
-# ### hand transports yellow to red
-# n_step = 160
-# dz = 0.005
-# dx = 0
+# openclose_step = 50
+# pushpull_dist = 0.15  # 0.1 would be diameter of a ball
+#
+# # open hand
+# ds = (big_hand_size - get_hand_size) / openclose_step
 # counter = 0
-# while (supervisor.step(timestep) != -1) and (counter < n_step):
-
-    # get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
-    # get_field_hand_pos.setSFVec3f(get_hand_pos)
-    # get_yellow_pos = [get_yellow_pos[0] + dx, get_yellow_pos[1], get_yellow_pos[2] + dz]
+# while (supervisor.step(timestep) != -1) and (counter < openclose_step):
+    # get_hand_size += ds
+    # get_field_hand_size.setSFFloat(get_hand_size)
+    # counter += 1
+#
+# # close hand pull
+# ds = (get_hand_size - init_hand_size) / openclose_step
+# cur_x = (get_yellow_pos[0] - get_hand_pos[0])
+# cur_z = (get_yellow_pos[2] - get_hand_pos[2])
+# cur_hypote = math.sqrt(cur_x**2 + cur_z**2) # Pytagoras
+# dx = cur_x * pushpull_dist / cur_hypote / openclose_step
+# dz = cur_z * pushpull_dist / cur_hypote / openclose_step
+# if not grasp:
+    # dx = -1 * dx
+    # dz = -1 * dz
+# print(cur_x, cur_z, cur_hypote, dx, dz)
+# counter = 0
+# while (supervisor.step(timestep) != -1) and (counter < openclose_step):
+    # get_hand_size -= ds
+    # get_field_hand_size.setSFFloat(get_hand_size)
+    # get_yellow_pos[0] -= dx
+    # get_yellow_pos[2] -= dz
     # get_field_yellow_pos.setSFVec3f(get_yellow_pos)
     # counter += 1
+
+
+
+
+
+
+
+
+### hand transports yellow to red
+n_step = 140
+dz = 0.005
+dx = 0
+counter = 0
+while (supervisor.step(timestep) != -1) and (counter < n_step):
+
+    get_hand_pos = [get_hand_pos[0] + dx, get_hand_pos[1], get_hand_pos[2] + dz]
+    get_field_hand_pos.setSFVec3f(get_hand_pos)
+    # get_yellow_pos = [get_yellow_pos[0] + dx, get_yellow_pos[1], get_yellow_pos[2] + dz]
+    # get_field_yellow_pos.setSFVec3f(get_yellow_pos)
+    counter += 1
     
     
 #
