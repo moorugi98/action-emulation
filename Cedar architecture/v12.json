@@ -1184,7 +1184,7 @@
                     "sigmas": [
                         "1",
                         "1",
-                        "0.10000000000000001"
+                        "3"
                     ],
                     "normalize": "true",
                     "shifts": [
@@ -12036,7 +12036,6 @@
                 "loc green",
                 "carried yellow",
                 "agent hand (blue)",
-                "fast moving centered",
                 "slow moving centered",
                 "agent-centered trans",
                 "node 2",
@@ -12145,7 +12144,8 @@
                 "video",
                 "transport to red with none",
                 "grasp red",
-                "Hebbian Connection 7"
+                "Hebbian Connection 7",
+                "fast moving centered"
             ]
         }
     },
@@ -12763,24 +12763,12 @@
             "target": "slow moving centered.input"
         },
         {
-            "source": "Static Gain 29.output",
-            "target": "fast moving centered.input"
-        },
-        {
-            "source": "Static Gain 106.output",
-            "target": "fast moving centered.input"
-        },
-        {
             "source": "Resize 10.output",
             "target": "Static Gain 102.input"
         },
         {
             "source": "Static Gain 102.output",
             "target": "agent-centered trans.input"
-        },
-        {
-            "source": "fast moving centered.sigmoided activation",
-            "target": "Static Gain 22.input"
         },
         {
             "source": "stabilized direction.sigmoided activation",
@@ -15077,6 +15065,18 @@
         {
             "source": "Hebbian Connection 7.learned output",
             "target": "action concepts.input"
+        },
+        {
+            "source": "fast moving centered.sigmoided activation",
+            "target": "Static Gain 22.input"
+        },
+        {
+            "source": "Static Gain 106.output",
+            "target": "fast moving centered.input"
+        },
+        {
+            "source": "Static Gain 29.output",
+            "target": "fast moving centered.input"
         }
     ],
     "scripts": [
@@ -15097,7 +15097,7 @@
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -15598,7 +15598,7 @@
             "height": "70",
             "x": "2716",
             "y": "476",
-            "text": "tuning of WM could be better",
+            "text": "if WM isn't tracking, continuuous sequence might e possible?",
             "font size": "10",
             "color red": "255",
             "color green": "110",
@@ -19783,7 +19783,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-98",
+            "positionX": "-602",
             "positionY": "784"
         },
         {
@@ -20265,25 +20265,25 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "425",
-        "ScrollBarY": "-1042",
-        "SliderPosX": "425",
-        "SliderPosY": "-1042",
-        "Zoom": "0.47999999999999998"
+        "ScrollBarX": "259",
+        "ScrollBarY": "425",
+        "SliderPosX": "259",
+        "SliderPosY": "425",
+        "Zoom": "0.54000000000000004"
     },
     "ui generic": {
         "group": "element",
         "open plots": {
-            "Agent size normalizedWidget0": {
-                "step": "Agent size normalized",
-                "position_x": "2767",
-                "position_y": "247",
-                "width": "206",
-                "height": "244",
-                "position_relative_x": "1.4411458333333333",
-                "position_relative_y": "0.24311023622047245",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24015748031496062",
+            "CARRIEDWidget0": {
+                "step": "CARRIED",
+                "position_x": "2130",
+                "position_y": "211",
+                "width": "174",
+                "height": "209",
+                "position_relative_x": "1.33125",
+                "position_relative_y": "0.24449594438006952",
+                "width_relative": "0.10875",
+                "height_relative": "0.24217844727694091",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20310,16 +20310,16 @@
                     }
                 ]
             },
-            "CARRIEDWidget0": {
-                "step": "CARRIED",
-                "position_x": "2557",
-                "position_y": "249",
-                "width": "206",
-                "height": "247",
-                "position_relative_x": "1.3317708333333333",
-                "position_relative_y": "0.24507874015748032",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24311023622047245",
+            "Agent size normalizedWidget0": {
+                "step": "Agent size normalized",
+                "position_x": "2305",
+                "position_y": "209",
+                "width": "186",
+                "height": "207",
+                "position_relative_x": "1.440625",
+                "position_relative_y": "0.24217844727694091",
+                "width_relative": "0.11625000000000001",
+                "height_relative": "0.23986095017381229",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20348,14 +20348,14 @@
             },
             "DROPWidget0": {
                 "step": "DROP",
-                "position_x": "1921",
-                "position_y": "685",
-                "width": "206",
-                "height": "193",
-                "position_relative_x": "1.0005208333333333",
-                "position_relative_y": "0.67421259842519687",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_x": "1600",
+                "position_y": "581",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1",
+                "position_relative_y": "0.67323290845886441",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20383,14 +20383,14 @@
             },
             "GRASPWidget0": {
                 "step": "GRASP",
-                "position_x": "1920",
-                "position_y": "475",
-                "width": "206",
-                "height": "193",
+                "position_x": "1600",
+                "position_y": "403",
+                "width": "172",
+                "height": "171",
                 "position_relative_x": "1",
-                "position_relative_y": "0.46751968503937008",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_relative_y": "0.46697566628041715",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20418,14 +20418,14 @@
             },
             "Near Widget0": {
                 "step": "Near ",
-                "position_x": "2422",
+                "position_x": "2018",
                 "position_y": "0",
-                "width": "206",
-                "height": "247",
-                "position_relative_x": "1.2614583333333333",
+                "width": "174",
+                "height": "209",
+                "position_relative_x": "1.26125",
                 "position_relative_y": "0",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24311023622047245",
+                "width_relative": "0.10875",
+                "height_relative": "0.24217844727694091",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20455,13 +20455,13 @@
             "Projection obj interestWidget0": {
                 "step": "Projection obj interest",
                 "position_x": "0",
-                "position_y": "269",
-                "width": "206",
-                "height": "200",
+                "position_y": "227",
+                "width": "187",
+                "height": "171",
                 "position_relative_x": "0",
-                "position_relative_y": "0.26476377952755903",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_relative_y": "0.2630359212050985",
+                "width_relative": "0.11687500000000001",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20489,14 +20489,14 @@
             },
             "REFERENCEWidget0": {
                 "step": "REFERENCE",
-                "position_x": "2346",
-                "position_y": "252",
-                "width": "206",
-                "height": "245",
+                "position_x": "1955",
+                "position_y": "214",
+                "width": "174",
+                "height": "208",
                 "position_relative_x": "1.221875",
-                "position_relative_y": "0.24803149606299213",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24114173228346455",
+                "position_relative_y": "0.24797219003476245",
+                "width_relative": "0.10875",
+                "height_relative": "0.2410196987253766",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20525,14 +20525,14 @@
             },
             "TRANSPORTWidget0": {
                 "step": "TRANSPORT",
-                "position_x": "1920",
-                "position_y": "271",
-                "width": "206",
-                "height": "193",
+                "position_x": "1600",
+                "position_y": "229",
+                "width": "172",
+                "height": "171",
                 "position_relative_x": "1",
-                "position_relative_y": "0.26673228346456695",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_relative_y": "0.26535341830822712",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20560,14 +20560,14 @@
             },
             "action conceptsWidget0": {
                 "step": "action concepts",
-                "position_x": "3311",
-                "position_y": "698",
-                "width": "206",
-                "height": "200",
-                "position_relative_x": "1.7244791666666666",
-                "position_relative_y": "0.68700787401574803",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_x": "2759",
+                "position_y": "592",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.724375",
+                "position_relative_y": "0.68597914252607184",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20593,16 +20593,156 @@
                     }
                 ]
             },
+            "action-o 2Widget0": {
+                "step": "action-o 2",
+                "position_x": "1913",
+                "position_y": "192",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.1956249999999999",
+                "position_relative_y": "0.22247972190034762",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
+                "data_list": [
+                    {
+                        "id": "BUFFER",
+                        "name": "weights",
+                        "ignoreIfMissing": "false",
+                        "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                    }
+                ],
+                "plot configurations": [
+                    {
+                        "row": "1",
+                        "col": "0",
+                        "plot configuration": {
+                            "autoscaling": "true",
+                            "major grid visible": "false",
+                            "minor grid visible": "false",
+                            "y axis limits": {
+                                "lower limit": "0",
+                                "upper limit": "1"
+                            },
+                            "discrete plot": "false"
+                        }
+                    }
+                ]
+            },
+            "action-o 3Widget0": {
+                "step": "action-o 3",
+                "position_x": "2143",
+                "position_y": "196",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.339375",
+                "position_relative_y": "0.22711471610660486",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
+                "data_list": [
+                    {
+                        "id": "BUFFER",
+                        "name": "weights",
+                        "ignoreIfMissing": "false",
+                        "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                    }
+                ],
+                "plot configurations": [
+                    {
+                        "row": "1",
+                        "col": "0",
+                        "plot configuration": {
+                            "autoscaling": "true",
+                            "major grid visible": "false",
+                            "minor grid visible": "false",
+                            "y axis limits": {
+                                "lower limit": "0",
+                                "upper limit": "1"
+                            },
+                            "discrete plot": "false"
+                        }
+                    }
+                ]
+            },
+            "action-o 4Widget0": {
+                "step": "action-o 4",
+                "position_x": "2353",
+                "position_y": "198",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.4706250000000001",
+                "position_relative_y": "0.22943221320973348",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
+                "data_list": [
+                    {
+                        "id": "BUFFER",
+                        "name": "weights",
+                        "ignoreIfMissing": "false",
+                        "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                    }
+                ],
+                "plot configurations": [
+                    {
+                        "row": "1",
+                        "col": "0",
+                        "plot configuration": {
+                            "autoscaling": "true",
+                            "major grid visible": "false",
+                            "minor grid visible": "false",
+                            "y axis limits": {
+                                "lower limit": "0",
+                                "upper limit": "1"
+                            },
+                            "discrete plot": "false"
+                        }
+                    }
+                ]
+            },
+            "action-o1Widget0": {
+                "step": "action-o1",
+                "position_x": "1700",
+                "position_y": "200",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.0625",
+                "position_relative_y": "0.23174971031286212",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
+                "data_list": [
+                    {
+                        "id": "BUFFER",
+                        "name": "weights",
+                        "ignoreIfMissing": "false",
+                        "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                    }
+                ],
+                "plot configurations": [
+                    {
+                        "row": "1",
+                        "col": "0",
+                        "plot configuration": {
+                            "autoscaling": "true",
+                            "major grid visible": "false",
+                            "minor grid visible": "false",
+                            "y axis limits": {
+                                "lower limit": "0",
+                                "upper limit": "1"
+                            },
+                            "discrete plot": "false"
+                        }
+                    }
+                ]
+            },
             "carried WMWidget0": {
                 "step": "carried WM",
-                "position_x": "2561",
-                "position_y": "499",
-                "width": "206",
-                "height": "247",
-                "position_relative_x": "1.3338541666666666",
-                "position_relative_y": "0.49114173228346458",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24311023622047245",
+                "position_x": "2134",
+                "position_y": "423",
+                "width": "174",
+                "height": "209",
+                "position_relative_x": "1.33375",
+                "position_relative_y": "0.49015063731170339",
+                "width_relative": "0.10875",
+                "height_relative": "0.24217844727694091",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20631,14 +20771,14 @@
             },
             "color selectionWidget0": {
                 "step": "color selection",
-                "position_x": "3093",
-                "position_y": "697",
-                "width": "206",
-                "height": "193",
-                "position_relative_x": "1.6109374999999999",
-                "position_relative_y": "0.6860236220472441",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_x": "2577",
+                "position_y": "592",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.610625",
+                "position_relative_y": "0.68597914252607184",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -20666,14 +20806,14 @@
             },
             "fast pulledWidget0": {
                 "step": "fast pulled",
-                "position_x": "632",
-                "position_y": "467",
-                "width": "206",
-                "height": "200",
-                "position_relative_x": "0.32916666666666666",
-                "position_relative_y": "0.4596456692913386",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_x": "526",
+                "position_y": "396",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "0.32874999999999999",
+                "position_relative_y": "0.45886442641946695",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -20701,14 +20841,14 @@
             },
             "fast pushedWidget0": {
                 "step": "fast pushed",
-                "position_x": "423",
-                "position_y": "466",
-                "width": "206",
-                "height": "200",
-                "position_relative_x": "0.22031249999999999",
-                "position_relative_y": "0.45866141732283466",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_x": "352",
+                "position_y": "395",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "0.22",
+                "position_relative_y": "0.45770567786790267",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -20736,14 +20876,14 @@
             },
             "inhi from fast  Widget0": {
                 "step": "inhi from fast  ",
-                "position_x": "216",
-                "position_y": "264",
-                "width": "206",
-                "height": "200",
+                "position_x": "180",
+                "position_y": "223",
+                "width": "172",
+                "height": "171",
                 "position_relative_x": "0.1125",
-                "position_relative_y": "0.25984251968503935",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_relative_y": "0.25840092699884126",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20771,14 +20911,14 @@
             },
             "limited WM pushpullWidget0": {
                 "step": "limited WM pushpull",
-                "position_x": "3271",
+                "position_x": "2725",
                 "position_y": "0",
-                "width": "206",
-                "height": "241",
-                "position_relative_x": "1.7036458333333333",
+                "width": "175",
+                "height": "204",
+                "position_relative_x": "1.703125",
                 "position_relative_y": "0",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.23720472440944881",
+                "width_relative": "0.109375",
+                "height_relative": "0.23638470451911936",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20807,14 +20947,14 @@
             },
             "limited WM size changeWidget0": {
                 "step": "limited WM size change",
-                "position_x": "836",
-                "position_y": "471",
-                "width": "222",
-                "height": "193",
-                "position_relative_x": "0.43541666666666667",
-                "position_relative_y": "0.46358267716535434",
-                "width_relative": "0.11562500000000001",
-                "height_relative": "0.18996062992125984",
+                "position_x": "696",
+                "position_y": "400",
+                "width": "194",
+                "height": "171",
+                "position_relative_x": "0.435",
+                "position_relative_y": "0.46349942062572425",
+                "width_relative": "0.12125",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20842,14 +20982,14 @@
             },
             "limited WM togetherWidget0": {
                 "step": "limited WM together",
-                "position_x": "2841",
+                "position_x": "2367",
                 "position_y": "0",
-                "width": "206",
-                "height": "244",
-                "position_relative_x": "1.4796875",
+                "width": "174",
+                "height": "207",
+                "position_relative_x": "1.4793750000000001",
                 "position_relative_y": "0",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24015748031496062",
+                "width_relative": "0.10875",
+                "height_relative": "0.23986095017381229",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20878,14 +21018,14 @@
             },
             "limited WM towardWidget0": {
                 "step": "limited WM toward",
-                "position_x": "2631",
+                "position_x": "2192",
                 "position_y": "0",
-                "width": "206",
-                "height": "244",
-                "position_relative_x": "1.3703125",
+                "width": "174",
+                "height": "207",
+                "position_relative_x": "1.3700000000000001",
                 "position_relative_y": "0",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24015748031496062",
+                "width_relative": "0.10875",
+                "height_relative": "0.23986095017381229",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -20914,14 +21054,14 @@
             },
             "mid matchWidget0": {
                 "step": "mid match",
-                "position_x": "215",
-                "position_y": "469",
-                "width": "206",
-                "height": "193",
-                "position_relative_x": "0.11197916666666667",
-                "position_relative_y": "0.46161417322834647",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_x": "179",
+                "position_y": "398",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "0.111875",
+                "position_relative_y": "0.46118192352259557",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -20950,14 +21090,14 @@
             },
             "near matchWidget0": {
                 "step": "near match",
-                "position_x": "5",
-                "position_y": "468",
-                "width": "206",
-                "height": "200",
-                "position_relative_x": "0.0026041666666666665",
-                "position_relative_y": "0.46062992125984253",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_x": "4",
+                "position_y": "397",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "0.0025000000000000001",
+                "position_relative_y": "0.46002317497103129",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -20986,14 +21126,14 @@
             },
             "pulled no side effectWidget0": {
                 "step": "pulled no side effect",
-                "position_x": "638",
-                "position_y": "257",
-                "width": "206",
-                "height": "200",
-                "position_relative_x": "0.33229166666666665",
-                "position_relative_y": "0.25295275590551181",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_x": "531",
+                "position_y": "218",
+                "width": "175",
+                "height": "171",
+                "position_relative_x": "0.33187499999999998",
+                "position_relative_y": "0.25260718424101969",
+                "width_relative": "0.109375",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -21021,14 +21161,14 @@
             },
             "pushed no side effectWidget0": {
                 "step": "pushed no side effect",
-                "position_x": "425",
-                "position_y": "266",
-                "width": "206",
-                "height": "200",
-                "position_relative_x": "0.22135416666666666",
-                "position_relative_y": "0.26181102362204722",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.19685039370078741",
+                "position_x": "354",
+                "position_y": "225",
+                "width": "183",
+                "height": "171",
+                "position_relative_x": "0.22125",
+                "position_relative_y": "0.26071842410196988",
+                "width_relative": "0.114375",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "BUFFER",
@@ -21056,14 +21196,14 @@
             },
             "reference WMWidget0": {
                 "step": "reference WM",
-                "position_x": "2349",
-                "position_y": "502",
-                "width": "206",
-                "height": "238",
-                "position_relative_x": "1.2234375",
-                "position_relative_y": "0.49409448818897639",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.23425196850393701",
+                "position_x": "1957",
+                "position_y": "426",
+                "width": "174",
+                "height": "202",
+                "position_relative_x": "1.223125",
+                "position_relative_y": "0.49362688296639629",
+                "width_relative": "0.10875",
+                "height_relative": "0.23406720741599074",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21092,14 +21232,14 @@
             },
             "size changeWidget0": {
                 "step": "size change",
-                "position_x": "3053",
+                "position_x": "2544",
                 "position_y": "0",
-                "width": "206",
-                "height": "193",
-                "position_relative_x": "1.5901041666666667",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.5900000000000001",
                 "position_relative_y": "0",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21127,14 +21267,14 @@
             },
             "space-color selectionWidget0": {
                 "step": "space-color selection",
-                "position_x": "3088",
-                "position_y": "241",
-                "width": "429",
-                "height": "448",
-                "position_relative_x": "1.6083333333333334",
-                "position_relative_y": "0.23720472440944881",
-                "width_relative": "0.22343750000000001",
-                "height_relative": "0.44094488188976377",
+                "position_x": "2573",
+                "position_y": "204",
+                "width": "363",
+                "height": "380",
+                "position_relative_x": "1.608125",
+                "position_relative_y": "0.23638470451911936",
+                "width_relative": "0.22687499999999999",
+                "height_relative": "0.44032444959443801",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21165,14 +21305,14 @@
             },
             "spatial selectionWidget0": {
                 "step": "spatial selection",
-                "position_x": "2875",
-                "position_y": "494",
-                "width": "206",
-                "height": "244",
-                "position_relative_x": "1.4973958333333333",
-                "position_relative_y": "0.48622047244094491",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24015748031496062",
+                "position_x": "2395",
+                "position_y": "419",
+                "width": "174",
+                "height": "207",
+                "position_relative_x": "1.496875",
+                "position_relative_y": "0.48551564310544609",
+                "width_relative": "0.10875",
+                "height_relative": "0.23986095017381229",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21201,14 +21341,14 @@
             },
             "terminate dropWidget0": {
                 "step": "terminate drop",
-                "position_x": "2135",
-                "position_y": "685",
-                "width": "206",
-                "height": "193",
-                "position_relative_x": "1.1119791666666667",
-                "position_relative_y": "0.67421259842519687",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_x": "1779",
+                "position_y": "581",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.1118749999999999",
+                "position_relative_y": "0.67323290845886441",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21236,14 +21376,14 @@
             },
             "terminate graspWidget0": {
                 "step": "terminate grasp",
-                "position_x": "2136",
-                "position_y": "476",
-                "width": "206",
-                "height": "193",
+                "position_x": "1780",
+                "position_y": "404",
+                "width": "172",
+                "height": "171",
                 "position_relative_x": "1.1125",
-                "position_relative_y": "0.46850393700787402",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_relative_y": "0.46813441483198148",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21271,14 +21411,14 @@
             },
             "terminate move_toWidget0": {
                 "step": "terminate move_to",
-                "position_x": "2134",
-                "position_y": "273",
-                "width": "206",
-                "height": "193",
-                "position_relative_x": "1.1114583333333334",
-                "position_relative_y": "0.26870078740157483",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.18996062992125984",
+                "position_x": "1778",
+                "position_y": "231",
+                "width": "172",
+                "height": "171",
+                "position_relative_x": "1.1112500000000001",
+                "position_relative_y": "0.26767091541135574",
+                "width_relative": "0.1075",
+                "height_relative": "0.1981460023174971",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21306,14 +21446,14 @@
             },
             "transientWidget0": {
                 "step": "transient",
-                "position_x": "2212",
-                "position_y": "0",
-                "width": "206",
-                "height": "246",
-                "position_relative_x": "1.1520833333333333",
-                "position_relative_y": "0",
-                "width_relative": "0.10729166666666666",
-                "height_relative": "0.24212598425196849",
+                "position_x": "1843",
+                "position_y": "27",
+                "width": "174",
+                "height": "208",
+                "position_relative_x": "1.151875",
+                "position_relative_y": "0.031286210892236384",
+                "width_relative": "0.10875",
+                "height_relative": "0.2410196987253766",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -21342,14 +21482,14 @@
             },
             "videoWidget0": {
                 "step": "video",
-                "position_x": "1920",
-                "position_y": "0",
-                "width": "291",
-                "height": "260",
+                "position_x": "1600",
+                "position_y": "27",
+                "width": "242",
+                "height": "215",
                 "position_relative_x": "1",
-                "position_relative_y": "0",
-                "width_relative": "0.15156249999999999",
-                "height_relative": "0.25590551181102361",
+                "position_relative_y": "0.031286210892236384",
+                "width_relative": "0.15125",
+                "height_relative": "0.24913093858632676",
                 "data_list": [
                     {
                         "id": "OUTPUT",
@@ -22484,7 +22624,150 @@
                         }
                     ]
                 },
-                "visible": "true"
+                "visible": "false"
+            },
+            "weights": {
+                "action-o 2Widget0": {
+                    "step": "action-o 2",
+                    "position_x": "2296",
+                    "position_y": "227",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.4350000000000001",
+                    "position_relative_y": "0.2630359212050985",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 3Widget0": {
+                    "step": "action-o 3",
+                    "position_x": "2572",
+                    "position_y": "231",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.6074999999999999",
+                    "position_relative_y": "0.26767091541135574",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 4Widget0": {
+                    "step": "action-o 4",
+                    "position_x": "2824",
+                    "position_y": "234",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.7649999999999999",
+                    "position_relative_y": "0.27114716106604869",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o1Widget0": {
+                    "step": "action-o1",
+                    "position_x": "2040",
+                    "position_y": "236",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.2749999999999999",
+                    "position_relative_y": "0.27346465816917731",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "visible": "false"
             }
         },
         "architecture widgets": "",

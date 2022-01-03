@@ -1174,21 +1174,18 @@
             "name": "Convolution 6",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "3",
+                    "dimensionality": "2",
                     "anchor": [
-                        "0",
                         "0",
                         "0"
                     ],
                     "amplitude": "100",
                     "sigmas": [
                         "1",
-                        "1",
-                        "0.10000000000000001"
+                        "1"
                     ],
                     "normalize": "true",
                     "shifts": [
-                        "0",
                         "0",
                         "0"
                     ],
@@ -11099,7 +11096,7 @@
                 "threshold": "0",
                 "beta": "100"
             },
-            "global inhibition": "-0.80000000000000004",
+            "global inhibition": "-0.75",
             "lateral kernels": {
                 "cedar.aux.kernel.Gauss": {
                     "dimensionality": "2",
@@ -12036,7 +12033,6 @@
                 "loc green",
                 "carried yellow",
                 "agent hand (blue)",
-                "fast moving centered",
                 "slow moving centered",
                 "agent-centered trans",
                 "node 2",
@@ -12145,7 +12141,8 @@
                 "video",
                 "transport to red with none",
                 "grasp red",
-                "Hebbian Connection 7"
+                "Hebbian Connection 7",
+                "fast moving centered"
             ]
         }
     },
@@ -12763,24 +12760,12 @@
             "target": "slow moving centered.input"
         },
         {
-            "source": "Static Gain 29.output",
-            "target": "fast moving centered.input"
-        },
-        {
-            "source": "Static Gain 106.output",
-            "target": "fast moving centered.input"
-        },
-        {
             "source": "Resize 10.output",
             "target": "Static Gain 102.input"
         },
         {
             "source": "Static Gain 102.output",
             "target": "agent-centered trans.input"
-        },
-        {
-            "source": "fast moving centered.sigmoided activation",
-            "target": "Static Gain 22.input"
         },
         {
             "source": "stabilized direction.sigmoided activation",
@@ -15077,6 +15062,18 @@
         {
             "source": "Hebbian Connection 7.learned output",
             "target": "action concepts.input"
+        },
+        {
+            "source": "fast moving centered.sigmoided activation",
+            "target": "Static Gain 22.input"
+        },
+        {
+            "source": "Static Gain 106.output",
+            "target": "fast moving centered.input"
+        },
+        {
+            "source": "Static Gain 29.output",
+            "target": "fast moving centered.input"
         }
     ],
     "scripts": [
@@ -15097,7 +15094,7 @@
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -15234,8 +15231,8 @@
         },
         {
             "type": "stickyNote",
-            "width": "218",
-            "height": "88",
+            "width": "297",
+            "height": "170",
             "x": "1386",
             "y": "1176",
             "text": "only when there's significant overlap between slow and fast  centered field (= object stays in same place)\n\nusing conventional transient detector on the other hand (using difference) doesn't work due to instable repr of object moving together (register that object is moving in centered frame when it isn't)",
@@ -15598,7 +15595,7 @@
             "height": "70",
             "x": "2716",
             "y": "476",
-            "text": "tuning of WM could be better",
+            "text": "if WM isn't tracking, continuuous sequence might e possible?",
             "font size": "10",
             "color red": "255",
             "color green": "110",
@@ -19783,7 +19780,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-98",
+            "positionX": "-602",
             "positionY": "784"
         },
         {
@@ -20265,11 +20262,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "221",
-        "ScrollBarY": "-1103",
-        "SliderPosX": "221",
-        "SliderPosY": "-1103",
-        "Zoom": "0.47999999999999998"
+        "ScrollBarX": "1317",
+        "ScrollBarY": "784",
+        "SliderPosX": "1317",
+        "SliderPosY": "784",
+        "Zoom": "1"
     },
     "ui generic": {
         "group": "element",
@@ -21381,7 +21378,150 @@
                         }
                     ]
                 },
-                "visible": "true"
+                "visible": "false"
+            },
+            "weights": {
+                "action-o 2Widget0": {
+                    "step": "action-o 2",
+                    "position_x": "2296",
+                    "position_y": "227",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.4350000000000001",
+                    "position_relative_y": "0.2630359212050985",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 3Widget0": {
+                    "step": "action-o 3",
+                    "position_x": "2572",
+                    "position_y": "231",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.6074999999999999",
+                    "position_relative_y": "0.26767091541135574",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o 4Widget0": {
+                    "step": "action-o 4",
+                    "position_x": "2824",
+                    "position_y": "234",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.7649999999999999",
+                    "position_relative_y": "0.27114716106604869",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "action-o1Widget0": {
+                    "step": "action-o1",
+                    "position_x": "2040",
+                    "position_y": "236",
+                    "width": "200",
+                    "height": "200",
+                    "position_relative_x": "1.2749999999999999",
+                    "position_relative_y": "0.27346465816917731",
+                    "width_relative": "0.125",
+                    "height_relative": "0.23174971031286212",
+                    "data_list": [
+                        {
+                            "id": "BUFFER",
+                            "name": "weights",
+                            "ignoreIfMissing": "false",
+                            "plotDeclaration": "cedar::aux::gui::MatDataPlot"
+                        }
+                    ],
+                    "plot configurations": [
+                        {
+                            "row": "1",
+                            "col": "0",
+                            "plot configuration": {
+                                "autoscaling": "true",
+                                "major grid visible": "false",
+                                "minor grid visible": "false",
+                                "y axis limits": {
+                                    "lower limit": "0",
+                                    "upper limit": "1"
+                                },
+                                "discrete plot": "false"
+                            }
+                        }
+                    ]
+                },
+                "visible": "false"
             }
         },
         "architecture widgets": "",
