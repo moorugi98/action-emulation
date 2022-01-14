@@ -3716,11 +3716,6 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
-            "name": "Static Gain 93",
-            "gain factor": "3.5",
-            "comments": ""
-        },
-        "cedar.processing.StaticGain": {
             "name": "Static Gain 94",
             "gain factor": "4",
             "comments": ""
@@ -6579,115 +6574,8 @@
             },
             "comments": ""
         },
-        "cedar.dynamics.NeuralField": {
-            "name": "near WM 2",
-            "activation as output": "false",
-            "discrete metric (workaround)": "false",
-            "update stepIcon according to output": "true",
-            "threshold for updating the stepIcon": "0.80000000000000004",
-            "dimensionality": "2",
-            "sizes": [
-                "50",
-                "50"
-            ],
-            "time scale": "100",
-            "resting level": "-5",
-            "input noise gain": "0.10000000000000001",
-            "multiplicative noise (input)": "false",
-            "multiplicative noise (activation)": "false",
-            "sigmoid": {
-                "type": "cedar.aux.math.AbsSigmoid",
-                "threshold": "0",
-                "beta": "100"
-            },
-            "global inhibition": "-0.01",
-            "lateral kernels": {
-                "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "2",
-                    "anchor": [
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "25",
-                    "sigmas": [
-                        "1",
-                        "1"
-                    ],
-                    "normalize": "true",
-                    "shifts": [
-                        "0",
-                        "0"
-                    ],
-                    "limit": "5"
-                },
-                "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "2",
-                    "anchor": [
-                        "0",
-                        "0"
-                    ],
-                    "amplitude": "-22",
-                    "sigmas": [
-                        "1.5",
-                        "1.5"
-                    ],
-                    "normalize": "true",
-                    "shifts": [
-                        "0",
-                        "0"
-                    ],
-                    "limit": "5"
-                }
-            },
-            "lateral kernel convolution": {
-                "borderType": "Zero",
-                "mode": "Same",
-                "engine": {
-                    "type": "cedar.aux.conv.OpenCV"
-                },
-                "alternate even kernel center": "false"
-            },
-            "noise correlation kernel": {
-                "dimensionality": "2",
-                "anchor": [
-                    "0",
-                    "0"
-                ],
-                "amplitude": "0",
-                "sigmas": [
-                    "3",
-                    "3"
-                ],
-                "normalize": "true",
-                "shifts": [
-                    "0",
-                    "0"
-                ],
-                "limit": "5"
-            },
-            "comments": ""
-        },
         "cedar.processing.sources.GaussInput": {
             "name": "near spatial template",
-            "dimensionality": "2",
-            "sizes": [
-                "50",
-                "50"
-            ],
-            "amplitude": "4",
-            "centers": [
-                "24",
-                "24"
-            ],
-            "sigma": [
-                "5",
-                "5"
-            ],
-            "cyclic": "false",
-            "comments": ""
-        },
-        "cedar.processing.sources.GaussInput": {
-            "name": "near spatial template 2",
             "dimensionality": "2",
             "sizes": [
                 "50",
@@ -11166,8 +11054,7 @@
                 "hand velocity WM",
                 "tool velocity WM",
                 "mismatch velocity tool",
-                "tool CoD",
-                "near WM 2"
+                "tool CoD"
             ]
         }
     },
@@ -13639,19 +13526,11 @@
         {
             "source": "Static Gain 165.output",
             "target": "tool CoD.input"
-        },
-        {
-            "source": "Static Gain 93.output",
-            "target": "near WM 2.input"
-        },
-        {
-            "source": "near spatial template 2.Gauss input",
-            "target": "near WM 2.input"
         }
     ],
     "name": "element",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
@@ -16915,15 +16794,6 @@
         },
         {
             "type": "step",
-            "step": "Static Gain 93",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "1269.5903614457848",
-            "positionY": "834.17670682731023"
-        },
-        {
-            "type": "step",
             "step": "Static Gain 94",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -17606,30 +17476,12 @@
         },
         {
             "type": "step",
-            "step": "near WM 2",
-            "display style": "ICON_AND_TEXT",
-            "width": "124",
-            "height": "40",
-            "positionX": "1353.5903614457848",
-            "positionY": "834.17670682731023"
-        },
-        {
-            "type": "step",
             "step": "near spatial template",
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
             "positionX": "2828",
             "positionY": "504"
-        },
-        {
-            "type": "step",
-            "step": "near spatial template 2",
-            "display style": "ICON_ONLY",
-            "width": "40",
-            "height": "40",
-            "positionX": "1269.5903614457848",
-            "positionY": "764.17670682731023"
         },
         {
             "type": "step",
@@ -18362,11 +18214,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "388",
-        "ScrollBarY": "-880",
-        "SliderPosX": "388",
-        "SliderPosY": "-880",
-        "Zoom": "0.47999999999999998"
+        "ScrollBarX": "2271",
+        "ScrollBarY": "30",
+        "SliderPosX": "2271",
+        "SliderPosY": "30",
+        "Zoom": "1"
     },
     "ui generic": {
         "group": "element",
@@ -19066,7 +18918,11 @@
             }
         },
         "architecture widgets": "",
-        "robots": "",
+        "robots": {
+            "robot": {
+                "name": "new robot 2"
+            }
+        },
         "width": "250",
         "height": "250",
         "smart mode": "false",
