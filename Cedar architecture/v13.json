@@ -1939,7 +1939,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "20",
+                    "amplitude": "10",
                     "widths": [
                         "1"
                     ]
@@ -2043,7 +2043,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "20",
+                    "amplitude": "10",
                     "widths": [
                         "1"
                     ]
@@ -3550,6 +3550,11 @@
             "comments": ""
         },
         "cedar.processing.StaticGain": {
+            "name": "Static Gain",
+            "gain factor": "10",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
             "name": "Static Gain 10",
             "gain factor": "6",
             "comments": ""
@@ -3876,7 +3881,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 170",
-            "gain factor": "25",
+            "gain factor": "15",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3886,7 +3891,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 175",
-            "gain factor": "25",
+            "gain factor": "15",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -4186,8 +4191,8 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 53",
-            "gain factor": "-12",
-            "comments": ""
+            "gain factor": "-14.499999999999943",
+            "comments": "-12"
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 54",
@@ -4201,7 +4206,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 56",
-            "gain factor": "25",
+            "gain factor": "15",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -4504,7 +4509,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "20",
+                    "amplitude": "10",
                     "widths": [
                         "1"
                     ]
@@ -7594,7 +7599,7 @@
             "dimensionality": "0",
             "sizes": "",
             "time scale": "25",
-            "resting level": "-0.5",
+            "resting level": "0",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
             "multiplicative noise (activation)": "false",
@@ -7604,7 +7609,23 @@
                 "beta": "100"
             },
             "global inhibition": "0",
-            "lateral kernels": "",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "1",
+                    "sigmas": [
+                        "3"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
             "lateral kernel convolution": {
                 "borderType": "Zero",
                 "mode": "Same",
@@ -15486,10 +15507,6 @@
             "target": "Static Gain 53.input"
         },
         {
-            "source": "Sum 10.sum",
-            "target": "global inhi 2.input"
-        },
-        {
             "source": "TRANSPORT.sigmoided activation",
             "target": "Sum 10.terms"
         },
@@ -18332,6 +18349,22 @@
         {
             "source": "Noop 26.output",
             "target": "Noop 28.input"
+        },
+        {
+            "source": "confirm  primitive.sigmoided activation",
+            "target": "Static Gain.input"
+        },
+        {
+            "source": "Static Gain.output",
+            "target": "TRANSPORT.input"
+        },
+        {
+            "source": "Static Gain.output",
+            "target": "GRASP.input"
+        },
+        {
+            "source": "Static Gain.output",
+            "target": "DROP.input"
         }
     ],
     "scripts": [
@@ -20453,6 +20486,15 @@
         },
         {
             "type": "step",
+            "step": "Static Gain",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-462",
+            "positionY": "-1358"
+        },
+        {
+            "type": "step",
             "step": "Static Gain 10",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -21600,8 +21642,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-756",
-            "positionY": "-1232"
+            "positionX": "-868",
+            "positionY": "-1260"
         },
         {
             "type": "step",
@@ -22059,8 +22101,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-1008",
-            "positionY": "-1232"
+            "positionX": "-1092",
+            "positionY": "-1400"
         },
         {
             "type": "step",
@@ -22706,8 +22748,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-924",
-            "positionY": "-1232"
+            "positionX": "-1036",
+            "positionY": "-1260"
         },
         {
             "type": "step",
@@ -23916,11 +23958,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "-815",
-        "ScrollBarY": "-751",
-        "SliderPosX": "-815",
-        "SliderPosY": "-751",
-        "Zoom": "0.37"
+        "ScrollBarX": "-306",
+        "ScrollBarY": "-579",
+        "SliderPosX": "-306",
+        "SliderPosY": "-579",
+        "Zoom": "0.40999999999999998"
     },
     "ui generic": {
         "group": "element",
@@ -26061,7 +26103,7 @@
                         }
                     ]
                 },
-                "visible": "true"
+                "visible": "false"
             }
         },
         "architecture widgets": "",
