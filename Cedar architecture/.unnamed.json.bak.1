@@ -2,21 +2,118 @@
     "meta": {
         "format": "1"
     },
+    "steps": {
+        "cedar.processing.ConstVector": {
+            "name": "Const Vector",
+            "number of vector entries": "1",
+            "entries": [
+                "9"
+            ],
+            "comments": ""
+        },
+        "cedar.dynamics.RateToSpaceCode": {
+            "name": "Rate To Space Code",
+            "output sizes": [
+                "50"
+            ],
+            "amplitude": "1",
+            "lower limits": [
+                "0"
+            ],
+            "upper limits": [
+                "10"
+            ],
+            "sigma": [
+                "3"
+            ],
+            "cyclic": "false",
+            "comments": ""
+        },
+        "cedar.dynamics.SpaceToRateCode": {
+            "name": "Space To Rate Code",
+            "tau": "0.1 s",
+            "lowerLimit": "0",
+            "upperLimit": "1",
+            "jump to fixed point": "false",
+            "use cyclic mean": "false",
+            "comments": ""
+        }
+    },
+    "triggers": {
+        "cedar.processing.LoopedTrigger": {
+            "name": "default thread",
+            "step size": "0.02 s",
+            "fake Euler step size": "0.02 s",
+            "minimum sleep time": "0.0002 s",
+            "idle time": "1e-05 s",
+            "simulated time": "0.001 s",
+            "loop mode": "real deltaT",
+            "start with all": "true",
+            "listeners": [
+                "Space To Rate Code"
+            ]
+        }
+    },
+    "connections": [
+        {
+            "source": "Const Vector.vector",
+            "target": "Rate To Space Code.input"
+        },
+        {
+            "source": "Rate To Space Code.output",
+            "target": "Space To Rate Code.input"
+        }
+    ],
     "name": "",
     "connectors": "",
-    "is looped": "false",
+    "is looped": "true",
     "time factor": "1",
     "ui": [
         {
             "type": "connections",
             "connections": ""
+        },
+        {
+            "type": "step",
+            "step": "Const Vector",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-532",
+            "positionY": "-98"
+        },
+        {
+            "type": "step",
+            "step": "Rate To Space Code",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-420",
+            "positionY": "-112"
+        },
+        {
+            "type": "step",
+            "step": "Space To Rate Code",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-182",
+            "positionY": "-126"
+        },
+        {
+            "type": "trigger",
+            "trigger": "default thread",
+            "width": "30",
+            "height": "30",
+            "positionX": "0",
+            "positionY": "0"
         }
     ],
     "ui view": {
         "ScrollBarX": "0",
-        "ScrollBarY": "0",
+        "ScrollBarY": "-153",
         "SliderPosX": "0",
-        "SliderPosY": "0",
+        "SliderPosY": "-153",
         "Zoom": "1"
     },
     "ui generic": {
