@@ -124,6 +124,62 @@
             },
             "comments": "[function] \nnormalize the blob size of agent invariant of its size"
         },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 2",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 3",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 4",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 5",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 6",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 7",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
+        "cedar.processing.sources.Boost": {
+            "name": "Boost 8",
+            "strength": "1",
+            "active": "false",
+            "deactivate on reset": "false",
+            "comments": ""
+        },
         "cedar.dynamics.NeuralField": {
             "name": "CARRIED",
             "activation as output": "false",
@@ -1907,7 +1963,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "40",
+                    "amplitude": "20",
                     "widths": [
                         "1"
                     ]
@@ -1963,7 +2019,63 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "40",
+                    "amplitude": "20",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": "hand size changed then pushed"
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "DROP 3",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "20",
                     "widths": [
                         "1"
                     ]
@@ -2067,7 +2179,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "40",
+                    "amplitude": "20",
                     "widths": [
                         "1"
                     ]
@@ -2123,7 +2235,63 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "40",
+                    "amplitude": "20",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": "hand size changed then pulled"
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "GRASP 3",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "20",
                     "widths": [
                         "1"
                     ]
@@ -3702,7 +3870,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 125",
-            "gain factor": "-15",
+            "gain factor": "-5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3717,7 +3885,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 128",
-            "gain factor": "-15",
+            "gain factor": "-5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3817,7 +3985,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 146",
-            "gain factor": "1",
+            "gain factor": "6",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3842,22 +4010,22 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 150",
-            "gain factor": "-1",
+            "gain factor": "-3",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 151",
-            "gain factor": "-19.800000000000001",
+            "gain factor": "-12.199999999999999",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 152",
-            "gain factor": "-15",
+            "gain factor": "-5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 153",
-            "gain factor": "-15",
+            "gain factor": "-5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3867,12 +4035,12 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 155",
-            "gain factor": "-15",
+            "gain factor": "-5",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 156",
-            "gain factor": "1",
+            "gain factor": "19",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3887,7 +4055,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 159",
-            "gain factor": "1",
+            "gain factor": "19.000000000000021",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3907,12 +4075,17 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 162",
-            "gain factor": "1",
+            "gain factor": "19",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 163",
-            "gain factor": "1",
+            "gain factor": "19",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 164",
+            "gain factor": "6",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3927,12 +4100,57 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 167",
-            "gain factor": "-15",
+            "gain factor": "-5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 168",
+            "gain factor": "-3",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 169",
+            "gain factor": "-12",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 17",
             "gain factor": "6",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 171",
+            "gain factor": "-5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 172",
+            "gain factor": "25",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 174",
+            "gain factor": "25",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 176",
+            "gain factor": "-5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 177",
+            "gain factor": "-5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 178",
+            "gain factor": "25",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 179",
+            "gain factor": "-3",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -3963,6 +4181,11 @@
         "cedar.processing.StaticGain": {
             "name": "Static Gain 184",
             "gain factor": "8.5",
+            "comments": ""
+        },
+        "cedar.processing.StaticGain": {
+            "name": "Static Gain 185",
+            "gain factor": "6",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -4252,7 +4475,7 @@
         },
         "cedar.processing.StaticGain": {
             "name": "Static Gain 53",
-            "gain factor": "-19.800000000000001",
+            "gain factor": "-12",
             "comments": ""
         },
         "cedar.processing.StaticGain": {
@@ -4506,6 +4729,10 @@
             "comments": ""
         },
         "cedar.processing.steps.Sum": {
+            "name": "Sum",
+            "comments": ""
+        },
+        "cedar.processing.steps.Sum": {
             "name": "Sum 10",
             "comments": ""
         },
@@ -4515,6 +4742,10 @@
         },
         "cedar.processing.steps.Sum": {
             "name": "Sum 12",
+            "comments": ""
+        },
+        "cedar.processing.steps.Sum": {
+            "name": "Sum 13",
             "comments": ""
         },
         "cedar.processing.steps.Sum": {
@@ -4574,7 +4805,7 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "40",
+                    "amplitude": "20",
                     "widths": [
                         "1"
                     ]
@@ -4630,7 +4861,63 @@
                     "anchor": [
                         "0"
                     ],
-                    "amplitude": "40",
+                    "amplitude": "20",
+                    "widths": [
+                        "1"
+                    ]
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": "when hand movement is detected"
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "TRANSPORT 3",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Box": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "20",
                     "widths": [
                         "1"
                     ]
@@ -7858,6 +8145,51 @@
             "comments": ""
         },
         "cedar.dynamics.NeuralField": {
+            "name": "global inhi 4",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": "",
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
             "name": "grasp\/drop",
             "activation as output": "false",
             "discrete metric (workaround)": "false",
@@ -9910,7 +10242,52 @@
             "dimensionality": "0",
             "sizes": "",
             "time scale": "25",
-            "resting level": "-5",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": "",
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "p motion 2",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
             "multiplicative noise (activation)": "false",
@@ -9992,7 +10369,7 @@
             "comments": ""
         },
         "cedar.dynamics.NeuralField": {
-            "name": "p pull",
+            "name": "p motion\\size change 2",
             "activation as output": "false",
             "discrete metric (workaround)": "false",
             "update stepIcon according to output": "true",
@@ -10001,6 +10378,96 @@
             "sizes": "",
             "time scale": "25",
             "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": "",
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "p pull",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": "",
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "p pull 2",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
             "multiplicative noise (activation)": "false",
@@ -10045,7 +10512,52 @@
             "dimensionality": "0",
             "sizes": "",
             "time scale": "25",
-            "resting level": "-5",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": "",
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "p push 2",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
             "multiplicative noise (activation)": "false",
@@ -10090,7 +10602,52 @@
             "dimensionality": "0",
             "sizes": "",
             "time scale": "25",
-            "resting level": "-5",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": "",
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "p size change 2",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
             "input noise gain": "0.10000000000000001",
             "multiplicative noise (input)": "false",
             "multiplicative noise (activation)": "false",
@@ -14596,6 +15153,250 @@
                 "speed factor": "0.5"
             },
             "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "w pull",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "10",
+                    "sigmas": [
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "w push",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "10",
+                    "sigmas": [
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "w size change",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "10",
+                    "sigmas": [
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": "WM of size change"
+        },
+        "cedar.dynamics.NeuralField": {
+            "name": "w size change 2",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "0",
+            "sizes": "",
+            "time scale": "25",
+            "resting level": "-0.5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "0",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "1",
+                    "anchor": [
+                        "0"
+                    ],
+                    "amplitude": "10",
+                    "sigmas": [
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "1",
+                "anchor": [
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
         }
     },
     "triggers": {
@@ -14814,16 +15615,41 @@
                 "verb transport 4",
                 "verb transport",
                 "node 5",
-                "p motion",
-                "p size change",
-                "p pull",
-                "p push",
-                "p motion\\size change",
-                "p size change\\pushpull",
-                "GRASP 2",
-                "DROP 2",
+                "w size change",
+                "GRASP 3",
+                "p motion\\size change 2",
+                "p motion 2",
+                "DROP 3",
+                "TRANSPORT 3",
+                "w size change 2",
+                "p push 2",
+                "global inhi 4",
+                "p size change 2",
+                "p pull 2"
+            ]
+        },
+        "cedar.processing.LoopedTrigger": {
+            "name": "new thread",
+            "step size": "0.02 s",
+            "fake Euler step size": "0.02 s",
+            "minimum sleep time": "0.0002 s",
+            "idle time": "1e-05 s",
+            "simulated time": "0.001 s",
+            "loop mode": "fake deltaT",
+            "start with all": "true",
+            "listeners": [
                 "TRANSPORT 2",
-                "global inhi 3"
+                "p size change\\pushpull",
+                "p pull",
+                "p size change",
+                "GRASP 2",
+                "p motion\\size change",
+                "global inhi 3",
+                "w pull",
+                "p motion",
+                "DROP 2",
+                "p push",
+                "w push"
             ]
         }
     },
@@ -15011,10 +15837,6 @@
         {
             "source": "Static Gain 14.output",
             "target": "hand location.input"
-        },
-        {
-            "source": "Static Gain 2.output",
-            "target": "TRANSPORT.input"
         },
         {
             "source": "memory.sigmoided activation",
@@ -15481,10 +16303,6 @@
             "target": "memory.input"
         },
         {
-            "source": "Static Gain 99.output",
-            "target": "Noop 4.input"
-        },
-        {
             "source": "reset ordinal memory \/ start new.boost",
             "target": "clean for next action.input"
         },
@@ -15795,22 +16613,6 @@
         {
             "source": "memory.sigmoided activation",
             "target": "Static Gain 57.input"
-        },
-        {
-            "source": "Static Gain 47.output",
-            "target": "GRASP.input"
-        },
-        {
-            "source": "Static Gain 47.output",
-            "target": "DROP.input"
-        },
-        {
-            "source": "Static Gain 48.output",
-            "target": "GRASP.input"
-        },
-        {
-            "source": "Static Gain 52.output",
-            "target": "DROP.input"
         },
         {
             "source": "global inhi 2.sigmoided activation",
@@ -18625,10 +19427,6 @@
             "target": "p motion\\size change.input"
         },
         {
-            "source": "p size change.sigmoided activation",
-            "target": "Static Gain 150.input"
-        },
-        {
             "source": "Static Gain 150.output",
             "target": "p motion\\size change.input"
         },
@@ -18713,16 +19511,8 @@
             "target": "Static Gain 159.input"
         },
         {
-            "source": "Static Gain 159.output",
-            "target": "GRASP 2.input"
-        },
-        {
             "source": "p pull.sigmoided activation",
             "target": "Static Gain 162.input"
-        },
-        {
-            "source": "Static Gain 159.output",
-            "target": "DROP 2.input"
         },
         {
             "source": "Static Gain 162.output",
@@ -18735,6 +19525,202 @@
         {
             "source": "Static Gain 163.output",
             "target": "DROP 2.input"
+        },
+        {
+            "source": "Boost.boost",
+            "target": "p motion.input"
+        },
+        {
+            "source": "Boost 2.boost",
+            "target": "p pull.input"
+        },
+        {
+            "source": "Boost 3.boost",
+            "target": "p size change.input"
+        },
+        {
+            "source": "Boost 4.boost",
+            "target": "p push.input"
+        },
+        {
+            "source": "p pull.sigmoided activation",
+            "target": "w pull.input"
+        },
+        {
+            "source": "p push.sigmoided activation",
+            "target": "w push.input"
+        },
+        {
+            "source": "Static Gain 164.output",
+            "target": "p size change\\pushpull.input"
+        },
+        {
+            "source": "Static Gain 168.output",
+            "target": "p size change\\pushpull.input"
+        },
+        {
+            "source": "p size change.sigmoided activation",
+            "target": "Static Gain 164.input"
+        },
+        {
+            "source": "w pull.sigmoided activation",
+            "target": "Sum.terms"
+        },
+        {
+            "source": "w push.sigmoided activation",
+            "target": "Sum.terms"
+        },
+        {
+            "source": "Sum.sum",
+            "target": "Static Gain 168.input"
+        },
+        {
+            "source": "w size change.sigmoided activation",
+            "target": "Static Gain 150.input"
+        },
+        {
+            "source": "p size change.sigmoided activation",
+            "target": "w size change.input"
+        },
+        {
+            "source": "p motion 2.sigmoided activation",
+            "target": "Static Gain 185.input"
+        },
+        {
+            "source": "Static Gain 185.output",
+            "target": "p motion\\size change 2.input"
+        },
+        {
+            "source": "Static Gain 179.output",
+            "target": "p motion\\size change 2.input"
+        },
+        {
+            "source": "TRANSPORT 3.sigmoided activation",
+            "target": "Static Gain 176.input"
+        },
+        {
+            "source": "Static Gain 176.output",
+            "target": "GRASP 3.input"
+        },
+        {
+            "source": "Static Gain 176.output",
+            "target": "DROP 3.input"
+        },
+        {
+            "source": "GRASP 3.sigmoided activation",
+            "target": "Static Gain 177.input"
+        },
+        {
+            "source": "Static Gain 177.output",
+            "target": "TRANSPORT 3.input"
+        },
+        {
+            "source": "Static Gain 177.output",
+            "target": "DROP 3.input"
+        },
+        {
+            "source": "DROP 3.sigmoided activation",
+            "target": "Static Gain 171.input"
+        },
+        {
+            "source": "Static Gain 171.output",
+            "target": "TRANSPORT 3.input"
+        },
+        {
+            "source": "Static Gain 171.output",
+            "target": "GRASP 3.input"
+        },
+        {
+            "source": "global inhi 4.sigmoided activation",
+            "target": "Static Gain 169.input"
+        },
+        {
+            "source": "Sum 13.sum",
+            "target": "global inhi 4.input"
+        },
+        {
+            "source": "TRANSPORT 3.sigmoided activation",
+            "target": "Sum 13.terms"
+        },
+        {
+            "source": "GRASP 3.sigmoided activation",
+            "target": "Sum 13.terms"
+        },
+        {
+            "source": "DROP 3.sigmoided activation",
+            "target": "Sum 13.terms"
+        },
+        {
+            "source": "Static Gain 169.output",
+            "target": "TRANSPORT 3.input"
+        },
+        {
+            "source": "Static Gain 169.output",
+            "target": "GRASP 3.input"
+        },
+        {
+            "source": "Static Gain 169.output",
+            "target": "DROP 3.input"
+        },
+        {
+            "source": "p motion\\size change 2.sigmoided activation",
+            "target": "Static Gain 174.input"
+        },
+        {
+            "source": "Static Gain 174.output",
+            "target": "TRANSPORT 3.input"
+        },
+        {
+            "source": "p pull 2.sigmoided activation",
+            "target": "Static Gain 178.input"
+        },
+        {
+            "source": "Static Gain 178.output",
+            "target": "GRASP 3.input"
+        },
+        {
+            "source": "p push 2.sigmoided activation",
+            "target": "Static Gain 172.input"
+        },
+        {
+            "source": "Static Gain 172.output",
+            "target": "DROP 3.input"
+        },
+        {
+            "source": "Boost 5.boost",
+            "target": "p motion 2.input"
+        },
+        {
+            "source": "Boost 7.boost",
+            "target": "p pull 2.input"
+        },
+        {
+            "source": "Boost 8.boost",
+            "target": "p size change 2.input"
+        },
+        {
+            "source": "Boost 6.boost",
+            "target": "p push 2.input"
+        },
+        {
+            "source": "w size change 2.sigmoided activation",
+            "target": "Static Gain 179.input"
+        },
+        {
+            "source": "p size change 2.sigmoided activation",
+            "target": "w size change 2.input"
+        },
+        {
+            "source": "Static Gain 159.output",
+            "target": "GRASP 2.input"
+        },
+        {
+            "source": "Static Gain 159.output",
+            "target": "DROP 2.input"
+        },
+        {
+            "source": "Noop 5.output",
+            "target": "Noop 4.input"
         }
     ],
     "scripts": [
@@ -18942,8 +19928,8 @@
             "type": "stickyNote",
             "width": "404",
             "height": "257",
-            "x": "-336",
-            "y": "-2086",
+            "x": "238",
+            "y": "-1946",
             "text": "MOVE_TO: AGENT \/ LOCATION \/ (CARRIED)\nagent: hand\nlocation: near + toward\ncarried: near + together\ntermination: object near agent + agent stopped moving\n\nDROP_OFF: AGENT \/ LOCATON \/ CARRIED\nagent: hand\nlocation: from previous move_to\ncarried: from previous move_to\ntermination: hand doesn't open anymore (simply done by boost node)\n",
             "font size": "10",
             "color red": "110",
@@ -18966,8 +19952,8 @@
             "type": "stickyNote",
             "width": "296",
             "height": "161",
-            "x": "4102",
-            "y": "-1470",
+            "x": "-196",
+            "y": "-1554",
             "text": "Concept copies",
             "font size": "40",
             "color red": "110",
@@ -18990,8 +19976,8 @@
             "type": "stickyNote",
             "width": "346",
             "height": "103",
-            "x": "-812",
-            "y": "-2212",
+            "x": "-196",
+            "y": "-2072",
             "text": "Modules",
             "font size": "40",
             "color red": "110",
@@ -19002,8 +19988,8 @@
             "type": "stickyNote",
             "width": "215",
             "height": "99",
-            "x": "-742",
-            "y": "-2072",
+            "x": "-126",
+            "y": "-1932",
             "text": "future modifications",
             "font size": "20",
             "color red": "255",
@@ -19014,8 +20000,8 @@
             "type": "stickyNote",
             "width": "224",
             "height": "72",
-            "x": "-756",
-            "y": "-1946",
+            "x": "-140",
+            "y": "-1806",
             "text": "explanations",
             "font size": "20",
             "color red": "110",
@@ -19026,8 +20012,8 @@
             "type": "stickyNote",
             "width": "184",
             "height": "76",
-            "x": "-742",
-            "y": "-1848",
+            "x": "-126",
+            "y": "-1708",
             "text": "ToDo now",
             "font size": "20",
             "color red": "255",
@@ -19206,7 +20192,7 @@
             "type": "stickyNote",
             "width": "185",
             "height": "70",
-            "x": "1078",
+            "x": "1512",
             "y": "-882",
             "text": "CoS is done by taking 'current' index nodes into account, not all of them ",
             "font size": "10",
@@ -19242,7 +20228,7 @@
             "type": "stickyNote",
             "width": "185",
             "height": "70",
-            "x": "1358",
+            "x": "1792",
             "y": "-910",
             "text": "now remove instead of clean cuz memory stays within the same sequence",
             "font size": "10",
@@ -19254,8 +20240,8 @@
             "type": "stickyNote",
             "width": "347",
             "height": "175",
-            "x": "2660",
-            "y": "-1960",
+            "x": "1554",
+            "y": "-1918",
             "text": "Ordinal\nmemory",
             "font size": "40",
             "color red": "110",
@@ -19267,7 +20253,7 @@
             "width": "185",
             "height": "70",
             "x": "728",
-            "y": "-1652",
+            "y": "-1722",
             "text": "CoS is now CoS of all subprocesses",
             "font size": "10",
             "color red": "255",
@@ -19329,6 +20315,78 @@
         },
         {
             "type": "step",
+            "step": "Boost",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2912",
+            "positionY": "126"
+        },
+        {
+            "type": "step",
+            "step": "Boost 2",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2744",
+            "positionY": "126"
+        },
+        {
+            "type": "step",
+            "step": "Boost 3",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2576",
+            "positionY": "126"
+        },
+        {
+            "type": "step",
+            "step": "Boost 4",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2408",
+            "positionY": "126"
+        },
+        {
+            "type": "step",
+            "step": "Boost 5",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2828",
+            "positionY": "700"
+        },
+        {
+            "type": "step",
+            "step": "Boost 6",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2310",
+            "positionY": "700"
+        },
+        {
+            "type": "step",
+            "step": "Boost 7",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2646",
+            "positionY": "700"
+        },
+        {
+            "type": "step",
+            "step": "Boost 8",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2478",
+            "positionY": "700"
+        },
+        {
+            "type": "step",
             "step": "CARRIED",
             "display style": "ICON_AND_TEXT",
             "width": "124",
@@ -19351,7 +20409,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "98",
+            "positionX": "868",
             "positionY": "-1008"
         },
         {
@@ -19360,7 +20418,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1176",
+            "positionX": "1610",
             "positionY": "-1008"
         },
         {
@@ -19369,7 +20427,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1918",
+            "positionX": "2352",
             "positionY": "-994"
         },
         {
@@ -19378,7 +20436,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2702",
+            "positionX": "3136",
             "positionY": "-994"
         },
         {
@@ -19387,8 +20445,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "714",
-            "positionY": "-1722"
+            "positionX": "1204",
+            "positionY": "-1750"
         },
         {
             "type": "step",
@@ -19396,8 +20454,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2072",
-            "positionY": "-1428"
+            "positionX": "1176",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -19405,8 +20463,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2072",
-            "positionY": "-1512"
+            "positionX": "1176",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -19414,8 +20472,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2072",
-            "positionY": "-1596"
+            "positionX": "1176",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -19423,8 +20481,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3948",
-            "positionY": "-1344"
+            "positionX": "3052",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -19432,8 +20490,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2996",
-            "positionY": "-1344"
+            "positionX": "2100",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -19441,8 +20499,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2996",
-            "positionY": "-1428"
+            "positionX": "2100",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -19450,8 +20508,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2996",
-            "positionY": "-1512"
+            "positionX": "2100",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -19459,8 +20517,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2996",
-            "positionY": "-1596"
+            "positionX": "2100",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -19468,8 +20526,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1386",
-            "positionY": "-1988"
+            "positionX": "1946",
+            "positionY": "-1974"
         },
         {
             "type": "step",
@@ -19477,8 +20535,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2072",
-            "positionY": "-1344"
+            "positionX": "1176",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -19486,8 +20544,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3948",
-            "positionY": "-1428"
+            "positionX": "3052",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -19495,8 +20553,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3948",
-            "positionY": "-1512"
+            "positionX": "3052",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -19504,8 +20562,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1344"
+            "positionX": "742",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -19513,8 +20571,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1428"
+            "positionX": "742",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -19522,8 +20580,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1512"
+            "positionX": "742",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -19531,8 +20589,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1596"
+            "positionX": "742",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -19603,7 +20661,7 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "924",
+            "positionX": "1358",
             "positionY": "-1008"
         },
         {
@@ -19612,7 +20670,7 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2450",
+            "positionX": "2884",
             "positionY": "-994"
         },
         {
@@ -19621,7 +20679,7 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1666",
+            "positionX": "2100",
             "positionY": "-994"
         },
         {
@@ -19828,8 +20886,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3948",
-            "positionY": "-1596"
+            "positionX": "3052",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -19837,8 +20895,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "546",
-            "positionY": "-756"
+            "positionX": "504",
+            "positionY": "-840"
         },
         {
             "type": "step",
@@ -19848,6 +20906,15 @@
             "height": "40",
             "positionX": "-2534",
             "positionY": "-224"
+        },
+        {
+            "type": "step",
+            "step": "DROP 3",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2436",
+            "positionY": "350"
         },
         {
             "type": "step",
@@ -19909,8 +20976,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "378",
-            "positionY": "-756"
+            "positionX": "336",
+            "positionY": "-840"
         },
         {
             "type": "step",
@@ -19920,6 +20987,15 @@
             "height": "40",
             "positionX": "-2702",
             "positionY": "-224"
+        },
+        {
+            "type": "step",
+            "step": "GRASP 3",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2604",
+            "positionY": "350"
         },
         {
             "type": "step",
@@ -20044,8 +21120,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1918",
-            "positionY": "-1988"
+            "positionX": "2478",
+            "positionY": "-1974"
         },
         {
             "type": "step",
@@ -20053,8 +21129,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2198",
-            "positionY": "-1988"
+            "positionX": "2758",
+            "positionY": "-1974"
         },
         {
             "type": "step",
@@ -20062,8 +21138,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2478",
-            "positionY": "-1988"
+            "positionX": "3038",
+            "positionY": "-1974"
         },
         {
             "type": "step",
@@ -20071,8 +21147,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1988"
+            "positionX": "2198",
+            "positionY": "-1974"
         },
         {
             "type": "step",
@@ -20080,8 +21156,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1918"
+            "positionX": "2198",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -20089,8 +21165,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1820",
-            "positionY": "-1918"
+            "positionX": "2380",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -20098,8 +21174,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2100",
-            "positionY": "-1918"
+            "positionX": "2660",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -20107,8 +21183,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2380",
-            "positionY": "-1918"
+            "positionX": "2940",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -20143,8 +21219,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1932",
-            "positionY": "-1680"
+            "positionX": "1036",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -20188,8 +21264,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2520",
-            "positionY": "-1680"
+            "positionX": "1624",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -20197,8 +21273,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3374",
-            "positionY": "-1680"
+            "positionX": "2478",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -20251,8 +21327,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "448",
-            "positionY": "-532"
+            "positionX": "252",
+            "positionY": "-420"
         },
         {
             "type": "step",
@@ -20260,8 +21336,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "560",
-            "positionY": "-532"
+            "positionX": "364",
+            "positionY": "-420"
         },
         {
             "type": "step",
@@ -20269,8 +21345,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "336",
-            "positionY": "-532"
+            "positionX": "140",
+            "positionY": "-420"
         },
         {
             "type": "step",
@@ -20332,8 +21408,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1246",
-            "positionY": "-1680"
+            "positionX": "350",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -20350,7 +21426,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "14",
+            "positionX": "770",
             "positionY": "-1204"
         },
         {
@@ -20359,7 +21435,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1778",
+            "positionX": "2212",
             "positionY": "-1190"
         },
         {
@@ -20377,8 +21453,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2156",
-            "positionY": "-2086"
+            "positionX": "2716",
+            "positionY": "-2072"
         },
         {
             "type": "step",
@@ -20404,8 +21480,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1918",
-            "positionY": "-1848"
+            "positionX": "2478",
+            "positionY": "-1834"
         },
         {
             "type": "step",
@@ -20413,8 +21489,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2198",
-            "positionY": "-1848"
+            "positionX": "2758",
+            "positionY": "-1834"
         },
         {
             "type": "step",
@@ -20422,8 +21498,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2478",
-            "positionY": "-1848"
+            "positionX": "3038",
+            "positionY": "-1834"
         },
         {
             "type": "step",
@@ -20431,8 +21507,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1638",
-            "positionY": "-1848"
+            "positionX": "2198",
+            "positionY": "-1834"
         },
         {
             "type": "step",
@@ -20440,8 +21516,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1722",
-            "positionY": "-1918"
+            "positionX": "2282",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -20476,8 +21552,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-42",
-            "positionY": "-588"
+            "positionX": "-238",
+            "positionY": "-476"
         },
         {
             "type": "step",
@@ -20728,7 +21804,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1568",
+            "positionX": "2002",
             "positionY": "-882"
         },
         {
@@ -20827,8 +21903,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-308",
-            "positionY": "-728"
+            "positionX": "-322",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -20854,7 +21930,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1176",
+            "positionX": "1610",
             "positionY": "-1078"
         },
         {
@@ -20890,8 +21966,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1050",
-            "positionY": "-1512"
+            "positionX": "154",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -20944,8 +22020,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1050",
-            "positionY": "-1596"
+            "positionX": "154",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -20962,8 +22038,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1960",
-            "positionY": "-1778"
+            "positionX": "2520",
+            "positionY": "-1764"
         },
         {
             "type": "step",
@@ -20971,8 +22047,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "42",
-            "positionY": "-588"
+            "positionX": "-154",
+            "positionY": "-476"
         },
         {
             "type": "step",
@@ -20989,8 +22065,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2002",
-            "positionY": "-1918"
+            "positionX": "2562",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -21016,7 +22092,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1834",
+            "positionX": "2268",
             "positionY": "-924"
         },
         {
@@ -21025,8 +22101,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2198",
-            "positionY": "-1918"
+            "positionX": "2758",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -21043,8 +22119,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2520",
-            "positionY": "-1778"
+            "positionX": "3080",
+            "positionY": "-1764"
         },
         {
             "type": "step",
@@ -21088,8 +22164,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "252",
-            "positionY": "-798"
+            "positionX": "210",
+            "positionY": "-882"
         },
         {
             "type": "step",
@@ -21106,8 +22182,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "210",
-            "positionY": "-546"
+            "positionX": "14",
+            "positionY": "-434"
         },
         {
             "type": "step",
@@ -21115,8 +22191,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "420",
-            "positionY": "-798"
+            "positionX": "378",
+            "positionY": "-882"
         },
         {
             "type": "step",
@@ -21151,8 +22227,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1554",
-            "positionY": "-1848"
+            "positionX": "2114",
+            "positionY": "-1834"
         },
         {
             "type": "step",
@@ -21169,8 +22245,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "42",
-            "positionY": "-504"
+            "positionX": "-154",
+            "positionY": "-392"
         },
         {
             "type": "step",
@@ -21178,8 +22254,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1918",
-            "positionY": "-1918"
+            "positionX": "2478",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -21187,8 +22263,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2478",
-            "positionY": "-1918"
+            "positionX": "3038",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -21214,8 +22290,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2562",
-            "positionY": "-1918"
+            "positionX": "3122",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -21223,8 +22299,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2282",
-            "positionY": "-1918"
+            "positionX": "2842",
+            "positionY": "-1904"
         },
         {
             "type": "step",
@@ -21250,8 +22326,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "-1610"
+            "positionX": "1022",
+            "positionY": "-1708"
         },
         {
             "type": "step",
@@ -21259,8 +22335,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "-1568"
+            "positionX": "1064",
+            "positionY": "-1708"
         },
         {
             "type": "step",
@@ -21268,8 +22344,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "-1526"
+            "positionX": "1106",
+            "positionY": "-1708"
         },
         {
             "type": "step",
@@ -21277,8 +22353,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1526",
-            "positionY": "-1680"
+            "positionX": "630",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -21286,8 +22362,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "798",
-            "positionY": "-1442"
+            "positionX": "-98",
+            "positionY": "-1386"
         },
         {
             "type": "step",
@@ -21322,8 +22398,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1988",
-            "positionY": "-2086"
+            "positionX": "2548",
+            "positionY": "-2072"
         },
         {
             "type": "step",
@@ -21394,7 +22470,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-2912",
+            "positionX": "-2828",
             "positionY": "-168"
         },
         {
@@ -21457,7 +22533,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-2744",
+            "positionX": "-2660",
             "positionY": "-168"
         },
         {
@@ -21466,8 +22542,17 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-2408",
+            "positionX": "-2478",
             "positionY": "-168"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 164",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2660",
+            "positionY": "-56"
         },
         {
             "type": "step",
@@ -21493,8 +22578,26 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "588",
-            "positionY": "-798"
+            "positionX": "546",
+            "positionY": "-882"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 168",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2492",
+            "positionY": "-56"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 169",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2968",
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -21504,6 +22607,69 @@
             "height": "40",
             "positionX": "602",
             "positionY": "518"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 171",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2394",
+            "positionY": "308"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 172",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2380",
+            "positionY": "406"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 174",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2730",
+            "positionY": "406"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 176",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2730",
+            "positionY": "308"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 177",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2562",
+            "positionY": "308"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 178",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2562",
+            "positionY": "406"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 179",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2688",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -21558,6 +22724,15 @@
             "height": "40",
             "positionX": "2702",
             "positionY": "42"
+        },
+        {
+            "type": "step",
+            "step": "Static Gain 185",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2772",
+            "positionY": "532"
         },
         {
             "type": "step",
@@ -21682,8 +22857,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "168",
-            "positionY": "-658"
+            "positionX": "-28",
+            "positionY": "-546"
         },
         {
             "type": "step",
@@ -21745,8 +22920,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "756",
-            "positionY": "-1918"
+            "positionX": "1246",
+            "positionY": "-1946"
         },
         {
             "type": "step",
@@ -21763,7 +22938,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "14",
+            "positionX": "784",
             "positionY": "-952"
         },
         {
@@ -21799,7 +22974,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2492",
+            "positionX": "2926",
             "positionY": "-1064"
         },
         {
@@ -21808,7 +22983,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2366",
+            "positionX": "2800",
             "positionY": "-994"
         },
         {
@@ -21853,7 +23028,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2702",
+            "positionX": "3136",
             "positionY": "-1064"
         },
         {
@@ -21862,7 +23037,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2618",
+            "positionX": "3052",
             "positionY": "-994"
         },
         {
@@ -21898,7 +23073,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1330",
+            "positionX": "1764",
             "positionY": "-994"
         },
         {
@@ -21916,7 +23091,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2618",
+            "positionX": "3052",
             "positionY": "-924"
         },
         {
@@ -21925,7 +23100,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2618",
+            "positionX": "3052",
             "positionY": "-1064"
         },
         {
@@ -21934,7 +23109,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2114",
+            "positionX": "2548",
             "positionY": "-994"
         },
         {
@@ -22015,8 +23190,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "518",
-            "positionY": "-658"
+            "positionX": "322",
+            "positionY": "-546"
         },
         {
             "type": "step",
@@ -22024,8 +23199,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "406",
-            "positionY": "-658"
+            "positionX": "210",
+            "positionY": "-546"
         },
         {
             "type": "step",
@@ -22033,8 +23208,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2058",
-            "positionY": "-1680"
+            "positionX": "1162",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -22042,7 +23217,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-112",
+            "positionX": "658",
             "positionY": "-1078"
         },
         {
@@ -22051,8 +23226,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2730",
-            "positionY": "-1680"
+            "positionX": "1834",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -22060,8 +23235,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3668",
-            "positionY": "-1680"
+            "positionX": "2772",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -22069,8 +23244,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "630",
-            "positionY": "-658"
+            "positionX": "434",
+            "positionY": "-546"
         },
         {
             "type": "step",
@@ -22078,8 +23253,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-56",
-            "positionY": "-658"
+            "positionX": "-70",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -22096,8 +23271,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "-1722"
+            "positionX": "1106",
+            "positionY": "-1750"
         },
         {
             "type": "step",
@@ -22105,8 +23280,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-56",
-            "positionY": "-728"
+            "positionX": "-70",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -22114,7 +23289,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "574",
+            "positionX": "1008",
             "positionY": "-1008"
         },
         {
@@ -22123,8 +23298,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "-1792"
+            "positionX": "1106",
+            "positionY": "-1820"
         },
         {
             "type": "step",
@@ -22132,8 +23307,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "-1652"
+            "positionX": "980",
+            "positionY": "-1708"
         },
         {
             "type": "step",
@@ -22141,7 +23316,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "14",
+            "positionX": "784",
             "positionY": "-1008"
         },
         {
@@ -22195,7 +23370,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1582",
+            "positionX": "2016",
             "positionY": "-994"
         },
         {
@@ -22204,7 +23379,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "826",
+            "positionX": "1260",
             "positionY": "-1008"
         },
         {
@@ -22213,7 +23388,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1708",
+            "positionX": "2142",
             "positionY": "-1064"
         },
         {
@@ -22231,7 +23406,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1092",
+            "positionX": "1526",
             "positionY": "-938"
         },
         {
@@ -22240,7 +23415,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "98",
+            "positionX": "868",
             "positionY": "-1078"
         },
         {
@@ -22267,8 +23442,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "476",
-            "positionY": "-1792"
+            "positionX": "966",
+            "positionY": "-1820"
         },
         {
             "type": "step",
@@ -22285,8 +23460,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "756",
-            "positionY": "-1792"
+            "positionX": "1246",
+            "positionY": "-1820"
         },
         {
             "type": "step",
@@ -22303,7 +23478,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1834",
+            "positionX": "2268",
             "positionY": "-994"
         },
         {
@@ -22321,7 +23496,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1834",
+            "positionX": "2268",
             "positionY": "-1064"
         },
         {
@@ -22330,7 +23505,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1918",
+            "positionX": "2352",
             "positionY": "-1064"
         },
         {
@@ -22339,7 +23514,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "14",
+            "positionX": "784",
             "positionY": "-1078"
         },
         {
@@ -22348,7 +23523,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "966",
+            "positionX": "1400",
             "positionY": "-1078"
         },
         {
@@ -22456,8 +23631,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1050",
-            "positionY": "-1344"
+            "positionX": "154",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -22465,8 +23640,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "126",
-            "positionY": "-546"
+            "positionX": "-70",
+            "positionY": "-434"
         },
         {
             "type": "step",
@@ -22492,8 +23667,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2240",
-            "positionY": "-1778"
+            "positionX": "2800",
+            "positionY": "-1764"
         },
         {
             "type": "step",
@@ -22501,8 +23676,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1050",
-            "positionY": "-1428"
+            "positionX": "154",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -22510,7 +23685,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1092",
+            "positionX": "1526",
             "positionY": "-1008"
         },
         {
@@ -22519,7 +23694,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1092",
+            "positionX": "1526",
             "positionY": "-1078"
         },
         {
@@ -22528,8 +23703,17 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "966",
-            "positionY": "-2086"
+            "positionX": "1764",
+            "positionY": "-1988"
+        },
+        {
+            "type": "step",
+            "step": "Sum",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-2576",
+            "positionY": "-56"
         },
         {
             "type": "step",
@@ -22537,8 +23721,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-308",
-            "positionY": "-658"
+            "positionX": "-322",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -22557,6 +23741,15 @@
             "height": "40",
             "positionX": "28",
             "positionY": "-294"
+        },
+        {
+            "type": "step",
+            "step": "Sum 13",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "-3220",
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -22600,8 +23793,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1848",
-            "positionY": "-2086"
+            "positionX": "2408",
+            "positionY": "-2072"
         },
         {
             "type": "step",
@@ -22636,8 +23829,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "210",
-            "positionY": "-756"
+            "positionX": "168",
+            "positionY": "-840"
         },
         {
             "type": "step",
@@ -22647,6 +23840,15 @@
             "height": "40",
             "positionX": "-2870",
             "positionY": "-224"
+        },
+        {
+            "type": "step",
+            "step": "TRANSPORT 3",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2772",
+            "positionY": "350"
         },
         {
             "type": "step",
@@ -22663,8 +23865,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "126",
-            "positionY": "-588"
+            "positionX": "-70",
+            "positionY": "-476"
         },
         {
             "type": "step",
@@ -22681,8 +23883,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1904",
-            "positionY": "-1344"
+            "positionX": "1008",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -22690,8 +23892,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1904",
-            "positionY": "-1428"
+            "positionX": "1008",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -22699,8 +23901,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1904",
-            "positionY": "-1512"
+            "positionX": "1008",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -22708,8 +23910,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1904",
-            "positionY": "-1596"
+            "positionX": "1008",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -22825,8 +24027,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "728",
-            "positionY": "-2086"
+            "positionX": "1526",
+            "positionY": "-1988"
         },
         {
             "type": "step",
@@ -22843,8 +24045,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3612",
-            "positionY": "-1344"
+            "positionX": "2716",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -22852,8 +24054,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3612",
-            "positionY": "-1428"
+            "positionX": "2716",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -22861,8 +24063,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3612",
-            "positionY": "-1512"
+            "positionX": "2716",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -22870,8 +24072,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3612",
-            "positionY": "-1596"
+            "positionX": "2716",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -22888,8 +24090,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3276",
-            "positionY": "-1344"
+            "positionX": "2380",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -22897,8 +24099,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3276",
-            "positionY": "-1428"
+            "positionX": "2380",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -22906,8 +24108,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3276",
-            "positionY": "-1512"
+            "positionX": "2380",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -22915,8 +24117,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3276",
-            "positionY": "-1596"
+            "positionX": "2380",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -22924,8 +24126,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-1344"
+            "positionX": "2548",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -22933,8 +24135,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-1428"
+            "positionX": "2548",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -22942,8 +24144,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-1512"
+            "positionX": "2548",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -22951,8 +24153,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3444",
-            "positionY": "-1596"
+            "positionX": "2548",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -22960,8 +24162,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3780",
-            "positionY": "-1344"
+            "positionX": "2884",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -22969,8 +24171,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3780",
-            "positionY": "-1428"
+            "positionX": "2884",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -22978,8 +24180,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3780",
-            "positionY": "-1512"
+            "positionX": "2884",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -22987,8 +24189,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "3780",
-            "positionY": "-1596"
+            "positionX": "2884",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -22996,7 +24198,7 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-154",
+            "positionX": "616",
             "positionY": "-1008"
         },
         {
@@ -23058,8 +24260,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "714",
-            "positionY": "-1974"
+            "positionX": "1204",
+            "positionY": "-2002"
         },
         {
             "type": "step",
@@ -23076,8 +24278,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "434",
-            "positionY": "-2100"
+            "positionX": "672",
+            "positionY": "-2002"
         },
         {
             "type": "step",
@@ -23085,8 +24287,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-224",
-            "positionY": "-728"
+            "positionX": "-238",
+            "positionY": "-938"
         },
         {
             "type": "step",
@@ -23211,8 +24413,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-224",
-            "positionY": "-658"
+            "positionX": "-238",
+            "positionY": "-868"
         },
         {
             "type": "step",
@@ -23222,6 +24424,15 @@
             "height": "40",
             "positionX": "-3234",
             "positionY": "-280"
+        },
+        {
+            "type": "step",
+            "step": "global inhi 4",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-3136",
+            "positionY": "294"
         },
         {
             "type": "step",
@@ -23274,8 +24485,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "126",
-            "positionY": "-504"
+            "positionX": "-70",
+            "positionY": "-392"
         },
         {
             "type": "step",
@@ -23301,8 +24512,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "434",
-            "positionY": "-1722"
+            "positionX": "924",
+            "positionY": "-1750"
         },
         {
             "type": "step",
@@ -23310,8 +24521,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1680",
-            "positionY": "-1778"
+            "positionX": "2240",
+            "positionY": "-1764"
         },
         {
             "type": "step",
@@ -23355,7 +24566,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "98",
+            "positionX": "868",
             "positionY": "-1148"
         },
         {
@@ -23364,7 +24575,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1918",
+            "positionX": "2352",
             "positionY": "-1134"
         },
         {
@@ -23373,7 +24584,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2702",
+            "positionX": "3136",
             "positionY": "-1134"
         },
         {
@@ -23382,8 +24593,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "714",
-            "positionY": "-1862"
+            "positionX": "1204",
+            "positionY": "-1890"
         },
         {
             "type": "step",
@@ -23391,7 +24602,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1176",
+            "positionX": "1610",
             "positionY": "-1148"
         },
         {
@@ -23485,6 +24696,14 @@
             "positionY": "952"
         },
         {
+            "type": "trigger",
+            "trigger": "new thread",
+            "width": "30",
+            "height": "30",
+            "positionX": "0",
+            "positionY": "0"
+        },
+        {
             "type": "step",
             "step": "no tool movement",
             "display style": "ICON_AND_TEXT",
@@ -23499,8 +24718,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2156",
-            "positionY": "-1680"
+            "positionX": "1260",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -23517,8 +24736,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "3080",
-            "positionY": "-1680"
+            "positionX": "2184",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -23526,8 +24745,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "4032",
-            "positionY": "-1680"
+            "positionX": "3136",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -23535,8 +24754,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1722",
-            "positionY": "-1680"
+            "positionX": "826",
+            "positionY": "-1624"
         },
         {
             "type": "step",
@@ -23598,8 +24817,17 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-3038",
-            "positionY": "28"
+            "positionX": "-2954",
+            "positionY": "56"
+        },
+        {
+            "type": "step",
+            "step": "p motion 2",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2856",
+            "positionY": "630"
         },
         {
             "type": "step",
@@ -23612,12 +24840,30 @@
         },
         {
             "type": "step",
+            "step": "p motion\\size change 2",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2772",
+            "positionY": "462"
+        },
+        {
+            "type": "step",
             "step": "p pull",
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
             "positionX": "-2786",
-            "positionY": "-126"
+            "positionY": "56"
+        },
+        {
+            "type": "step",
+            "step": "p pull 2",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2688",
+            "positionY": "630"
         },
         {
             "type": "step",
@@ -23625,8 +24871,17 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-2450",
-            "positionY": "-126"
+            "positionX": "-2436",
+            "positionY": "56"
+        },
+        {
+            "type": "step",
+            "step": "p push 2",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2352",
+            "positionY": "630"
         },
         {
             "type": "step",
@@ -23634,8 +24889,17 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "-2870",
-            "positionY": "28"
+            "positionX": "-2618",
+            "positionY": "56"
+        },
+        {
+            "type": "step",
+            "step": "p size change 2",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2520",
+            "positionY": "630"
         },
         {
             "type": "step",
@@ -23652,7 +24916,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2240",
+            "positionX": "2674",
             "positionY": "-994"
         },
         {
@@ -23661,7 +24925,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1456",
+            "positionX": "1890",
             "positionY": "-994"
         },
         {
@@ -23670,7 +24934,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "700",
+            "positionX": "1134",
             "positionY": "-1008"
         },
         {
@@ -23688,7 +24952,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "-112",
+            "positionX": "658",
             "positionY": "-1148"
         },
         {
@@ -23697,7 +24961,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1708",
+            "positionX": "2142",
             "positionY": "-1134"
         },
         {
@@ -23706,7 +24970,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2492",
+            "positionX": "2926",
             "positionY": "-1134"
         },
         {
@@ -23715,8 +24979,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "434",
-            "positionY": "-1862"
+            "positionX": "924",
+            "positionY": "-1890"
         },
         {
             "type": "step",
@@ -23724,7 +24988,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "966",
+            "positionX": "1400",
             "positionY": "-1148"
         },
         {
@@ -23796,8 +25060,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2828",
-            "positionY": "-1344"
+            "positionX": "1932",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -23805,8 +25069,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2828",
-            "positionY": "-1428"
+            "positionX": "1932",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -23814,8 +25078,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2828",
-            "positionY": "-1512"
+            "positionX": "1932",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -23823,8 +25087,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2828",
-            "positionY": "-1596"
+            "positionX": "1932",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -23841,8 +25105,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2660",
-            "positionY": "-1344"
+            "positionX": "1764",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -23850,8 +25114,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2660",
-            "positionY": "-1428"
+            "positionX": "1764",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -23859,8 +25123,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2660",
-            "positionY": "-1512"
+            "positionX": "1764",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -23868,8 +25132,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2660",
-            "positionY": "-1596"
+            "positionX": "1764",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -23895,8 +25159,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2324",
-            "positionY": "-1344"
+            "positionX": "1428",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -23904,8 +25168,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2324",
-            "positionY": "-1428"
+            "positionX": "1428",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -23913,8 +25177,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2324",
-            "positionY": "-1512"
+            "positionX": "1428",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -23922,8 +25186,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2324",
-            "positionY": "-1596"
+            "positionX": "1428",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -23931,8 +25195,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2492",
-            "positionY": "-1344"
+            "positionX": "1596",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -23940,8 +25204,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2492",
-            "positionY": "-1428"
+            "positionX": "1596",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -23949,8 +25213,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2492",
-            "positionY": "-1512"
+            "positionX": "1596",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -23958,8 +25222,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2492",
-            "positionY": "-1596"
+            "positionX": "1596",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -23985,8 +25249,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1680",
-            "positionY": "-2086"
+            "positionX": "2240",
+            "positionY": "-2072"
         },
         {
             "type": "step",
@@ -24219,8 +25483,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1386",
-            "positionY": "-1848"
+            "positionX": "1946",
+            "positionY": "-1834"
         },
         {
             "type": "step",
@@ -24327,8 +25591,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1470",
-            "positionY": "-1344"
+            "positionX": "574",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -24336,8 +25600,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1470",
-            "positionY": "-1428"
+            "positionX": "574",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -24345,8 +25609,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1470",
-            "positionY": "-1512"
+            "positionX": "574",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -24354,8 +25618,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1470",
-            "positionY": "-1596"
+            "positionX": "574",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -24363,8 +25627,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1302",
-            "positionY": "-1344"
+            "positionX": "406",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -24372,8 +25636,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1302",
-            "positionY": "-1428"
+            "positionX": "406",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -24381,8 +25645,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1302",
-            "positionY": "-1512"
+            "positionX": "406",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -24390,8 +25654,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1302",
-            "positionY": "-1596"
+            "positionX": "406",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -24399,8 +25663,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1134",
-            "positionY": "-1344"
+            "positionX": "238",
+            "positionY": "-1288"
         },
         {
             "type": "step",
@@ -24408,8 +25672,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1134",
-            "positionY": "-1428"
+            "positionX": "238",
+            "positionY": "-1372"
         },
         {
             "type": "step",
@@ -24417,8 +25681,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1134",
-            "positionY": "-1512"
+            "positionX": "238",
+            "positionY": "-1456"
         },
         {
             "type": "step",
@@ -24426,8 +25690,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1134",
-            "positionY": "-1596"
+            "positionX": "238",
+            "positionY": "-1540"
         },
         {
             "type": "step",
@@ -24437,14 +25701,50 @@
             "height": "40",
             "positionX": "2310",
             "positionY": "1050"
+        },
+        {
+            "type": "step",
+            "step": "w pull",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2786",
+            "positionY": "14"
+        },
+        {
+            "type": "step",
+            "step": "w push",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2436",
+            "positionY": "14"
+        },
+        {
+            "type": "step",
+            "step": "w size change",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2618",
+            "positionY": "14"
+        },
+        {
+            "type": "step",
+            "step": "w size change 2",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "-2520",
+            "positionY": "588"
         }
     ],
     "ui view": {
-        "ScrollBarX": "-3449",
-        "ScrollBarY": "-519",
-        "SliderPosX": "-3449",
-        "SliderPosY": "-519",
-        "Zoom": "0.95999999999999996"
+        "ScrollBarX": "-799",
+        "ScrollBarY": "-841",
+        "SliderPosX": "-799",
+        "SliderPosY": "-841",
+        "Zoom": "0.54000000000000004"
     },
     "ui generic": {
         "group": "element",
@@ -25555,7 +26855,7 @@
                         }
                     ]
                 },
-                "visible": "true"
+                "visible": "false"
             }
         },
         "architecture widgets": "",
