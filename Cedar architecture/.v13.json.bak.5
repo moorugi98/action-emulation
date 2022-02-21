@@ -1653,21 +1653,18 @@
             "name": "Convolution 6",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "3",
+                    "dimensionality": "2",
                     "anchor": [
-                        "0",
                         "0",
                         "0"
                     ],
                     "amplitude": "100",
                     "sigmas": [
                         "1",
-                        "1",
-                        "3"
+                        "1"
                     ],
                     "normalize": "true",
                     "shifts": [
-                        "0",
                         "0",
                         "0"
                     ],
@@ -2151,6 +2148,25 @@
                 "limit": "5"
             },
             "comments": "hand size changed then pulled"
+        },
+        "cedar.processing.sources.GaussInput": {
+            "name": "Gauss Input",
+            "dimensionality": "2",
+            "sizes": [
+                "50",
+                "50"
+            ],
+            "amplitude": "7",
+            "centers": [
+                "8",
+                "32"
+            ],
+            "sigma": [
+                "1",
+                "1"
+            ],
+            "cyclic": "false",
+            "comments": ""
         },
         "cedar.processing.sources.GaussInput": {
             "name": "Gauss Input 10",
@@ -3836,7 +3852,7 @@
         "cedar.processing.sources.Boost": {
             "name": "Start new",
             "strength": "10",
-            "active": "false",
+            "active": "true",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -8884,7 +8900,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "27",
+                    "amplitude": "30",
                     "sigmas": [
                         "1",
                         "1"
@@ -8902,7 +8918,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "-22",
+                    "amplitude": "-20",
                     "sigmas": [
                         "1.5",
                         "1.5"
@@ -10267,7 +10283,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "27",
+                    "amplitude": "30",
                     "sigmas": [
                         "1",
                         "1"
@@ -10285,7 +10301,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "-22",
+                    "amplitude": "-20",
                     "sigmas": [
                         "1.5",
                         "1.5"
@@ -13570,6 +13586,94 @@
             },
             "comments": "make sure that location representations of objects are sustained until current action sentence is parsed sucessfully"
         },
+        "cedar.dynamics.NeuralField": {
+            "name": "tracking wm good params",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "2",
+            "sizes": [
+                "50",
+                "50"
+            ],
+            "time scale": "25",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "-0.060000000000000005",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "30",
+                    "sigmas": [
+                        "1",
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                },
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "-22.100000000000001",
+                    "sigmas": [
+                        "1.5",
+                        "1.5"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "2",
+                "anchor": [
+                    "0",
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3",
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0",
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
         "cedar.processing.StaticGain": {
             "name": "trans",
             "gain factor": "1",
@@ -14267,7 +14371,7 @@
             "record": "false",
             "VideoGrabber": {
                 "name": "VideoGrabber",
-                "step size": "0.0998217 s",
+                "step size": "0.0987952 s",
                 "fake Euler step size": "0.001 s",
                 "minimum sleep time": "0.0002 s",
                 "idle time": "1e-05 s",
@@ -14284,7 +14388,7 @@
                             "isRelative": "false"
                         },
                         "filename": {
-                            "path": "\/home\/minseok\/D\/Uni\/10\/Masterarbeit\/Main\/Videos\/simple_record\/07_combined.mp4",
+                            "path": "\/home\/minseok\/D\/Uni\/10\/Masterarbeit\/Main\/Videos\/simple_record\/06_drop_ref.mp4",
                             "isRelative": "false"
                         }
                     }
@@ -14575,7 +14679,8 @@
                 "GDr: contact stop motion",
                 "Tp\\(TqvTr)",
                 "Tq: no agent movement",
-                "Dq:pushed"
+                "Dq:pushed",
+                "tracking wm good params"
             ]
         },
         "cedar.processing.LoopedTrigger": {
@@ -18339,6 +18444,10 @@
             "target": "Projection 10.input"
         },
         {
+            "source": "Convolution 6.result",
+            "target": "agent space-direction perception.input"
+        },
+        {
             "source": "space-hue perception.sigmoided activation",
             "target": "space perception.input"
         },
@@ -18363,8 +18472,8 @@
             "target": "space-hue perception.input"
         },
         {
-            "source": "Convolution 6.result",
-            "target": "agent space-direction perception.input"
+            "source": "Gauss Input.Gauss input",
+            "target": "tracking wm good params.input"
         }
     ],
     "records": {
@@ -19541,6 +19650,15 @@
         },
         {
             "type": "step",
+            "step": "Gauss Input",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "2856",
+            "positionY": "420"
+        },
+        {
+            "type": "step",
             "step": "Gauss Input 10",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -19923,8 +20041,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1974",
-            "positionY": "140"
+            "positionX": "1876",
+            "positionY": "154"
         },
         {
             "type": "step",
@@ -19932,8 +20050,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1456",
-            "positionY": "-490"
+            "positionX": "1428",
+            "positionY": "-462"
         },
         {
             "type": "step",
@@ -19941,8 +20059,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1456",
-            "positionY": "-392"
+            "positionX": "924",
+            "positionY": "-588"
         },
         {
             "type": "step",
@@ -19959,7 +20077,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "910",
+            "positionX": "812",
             "positionY": "1316"
         },
         {
@@ -20157,8 +20275,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2030",
-            "positionY": "140"
+            "positionX": "2170",
+            "positionY": "154"
         },
         {
             "type": "step",
@@ -20185,7 +20303,7 @@
             "width": "40",
             "height": "40",
             "positionX": "1904",
-            "positionY": "1134"
+            "positionY": "1106"
         },
         {
             "type": "step",
@@ -20328,8 +20446,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "378",
-            "positionY": "1162"
+            "positionX": "434",
+            "positionY": "1204"
         },
         {
             "type": "step",
@@ -20355,8 +20473,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2044",
-            "positionY": "0"
+            "positionX": "1988",
+            "positionY": "70"
         },
         {
             "type": "step",
@@ -20365,7 +20483,7 @@
             "width": "40",
             "height": "40",
             "positionX": "532",
-            "positionY": "1218"
+            "positionY": "1232"
         },
         {
             "type": "step",
@@ -20661,7 +20779,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1904",
+            "positionX": "1960",
             "positionY": "1232"
         },
         {
@@ -20724,7 +20842,7 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2142",
+            "positionX": "2198",
             "positionY": "1190"
         },
         {
@@ -20859,8 +20977,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1988",
-            "positionY": "1134"
+            "positionX": "2044",
+            "positionY": "1106"
         },
         {
             "type": "step",
@@ -20895,8 +21013,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2100",
-            "positionY": "1190"
+            "positionX": "2142",
+            "positionY": "1148"
         },
         {
             "type": "step",
@@ -20976,8 +21094,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2128",
-            "positionY": "0"
+            "positionX": "2506",
+            "positionY": "-14"
         },
         {
             "type": "step",
@@ -21282,8 +21400,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2156",
-            "positionY": "-812"
+            "positionX": "2170",
+            "positionY": "-840"
         },
         {
             "type": "step",
@@ -21354,8 +21472,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1484",
-            "positionY": "-238"
+            "positionX": "1092",
+            "positionY": "-616"
         },
         {
             "type": "step",
@@ -21462,8 +21580,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1330",
-            "positionY": "-280"
+            "positionX": "812",
+            "positionY": "-588"
         },
         {
             "type": "step",
@@ -21588,8 +21706,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "616",
-            "positionY": "1218"
+            "positionX": "756",
+            "positionY": "1176"
         },
         {
             "type": "step",
@@ -21723,8 +21841,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1442",
-            "positionY": "-154"
+            "positionX": "1078",
+            "positionY": "-490"
         },
         {
             "type": "step",
@@ -21813,8 +21931,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "574",
-            "positionY": "1218"
+            "positionX": "588",
+            "positionY": "1176"
         },
         {
             "type": "step",
@@ -21831,8 +21949,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2086",
-            "positionY": "0"
+            "positionX": "2058",
+            "positionY": "-28"
         },
         {
             "type": "step",
@@ -21912,8 +22030,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "1400",
-            "positionY": "-238"
+            "positionX": "1260",
+            "positionY": "-630"
         },
         {
             "type": "step",
@@ -21930,8 +22048,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "462",
-            "positionY": "1162"
+            "positionX": "518",
+            "positionY": "1134"
         },
         {
             "type": "step",
@@ -22029,8 +22147,8 @@
             "display style": "ICON_ONLY",
             "width": "40",
             "height": "40",
-            "positionX": "2100",
-            "positionY": "140"
+            "positionX": "2198",
+            "positionY": "126"
         },
         {
             "type": "step",
@@ -22748,7 +22866,7 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2072",
+            "positionX": "2086",
             "positionY": "-756"
         },
         {
@@ -22865,7 +22983,7 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2044",
+            "positionX": "2408",
             "positionY": "42"
         },
         {
@@ -22874,8 +22992,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1400",
-            "positionY": "-196"
+            "positionX": "1148",
+            "positionY": "-574"
         },
         {
             "type": "step",
@@ -22883,8 +23001,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2058",
-            "positionY": "1232"
+            "positionX": "2044",
+            "positionY": "1288"
         },
         {
             "type": "step",
@@ -22892,8 +23010,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "532",
-            "positionY": "1274"
+            "positionX": "616",
+            "positionY": "1414"
         },
         {
             "type": "step",
@@ -23485,8 +23603,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1400",
-            "positionY": "-280"
+            "positionX": "966",
+            "positionY": "-658"
         },
         {
             "type": "step",
@@ -23494,8 +23612,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2044",
-            "positionY": "-42"
+            "positionX": "2296",
+            "positionY": "-28"
         },
         {
             "type": "step",
@@ -23503,8 +23621,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "532",
-            "positionY": "1162"
+            "positionX": "658",
+            "positionY": "1106"
         },
         {
             "type": "step",
@@ -23512,8 +23630,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "2058",
-            "positionY": "1134"
+            "positionX": "2184",
+            "positionY": "1064"
         },
         {
             "type": "step",
@@ -23751,6 +23869,15 @@
         },
         {
             "type": "step",
+            "step": "tracking wm good params",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "2954",
+            "positionY": "420"
+        },
+        {
+            "type": "step",
             "step": "trans",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -23895,11 +24022,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "-442",
-        "ScrollBarY": "94",
-        "SliderPosX": "-442",
-        "SliderPosY": "94",
-        "Zoom": "0.91000000000000003"
+        "ScrollBarX": "1866",
+        "ScrollBarY": "-916",
+        "SliderPosX": "1866",
+        "SliderPosY": "-916",
+        "Zoom": "1.0600000000000001"
     },
     "ui generic": {
         "group": "element",

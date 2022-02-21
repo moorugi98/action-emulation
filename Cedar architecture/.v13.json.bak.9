@@ -1653,21 +1653,18 @@
             "name": "Convolution 6",
             "kernels": {
                 "cedar.aux.kernel.Gauss": {
-                    "dimensionality": "3",
+                    "dimensionality": "2",
                     "anchor": [
-                        "0",
                         "0",
                         "0"
                     ],
                     "amplitude": "100",
                     "sigmas": [
                         "1",
-                        "1",
-                        "3"
+                        "1"
                     ],
                     "normalize": "true",
                     "shifts": [
-                        "0",
                         "0",
                         "0"
                     ],
@@ -2151,6 +2148,25 @@
                 "limit": "5"
             },
             "comments": "hand size changed then pulled"
+        },
+        "cedar.processing.sources.GaussInput": {
+            "name": "Gauss Input",
+            "dimensionality": "2",
+            "sizes": [
+                "50",
+                "50"
+            ],
+            "amplitude": "7",
+            "centers": [
+                "8",
+                "32"
+            ],
+            "sigma": [
+                "1",
+                "1"
+            ],
+            "cyclic": "false",
+            "comments": ""
         },
         "cedar.processing.sources.GaussInput": {
             "name": "Gauss Input 10",
@@ -3836,7 +3852,7 @@
         "cedar.processing.sources.Boost": {
             "name": "Start new",
             "strength": "10",
-            "active": "false",
+            "active": "true",
             "deactivate on reset": "false",
             "comments": ""
         },
@@ -8902,7 +8918,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "-27.200000000000049",
+                    "amplitude": "-20",
                     "sigmas": [
                         "1.5",
                         "1.5"
@@ -10285,7 +10301,7 @@
                         "0",
                         "0"
                     ],
-                    "amplitude": "-27",
+                    "amplitude": "-20",
                     "sigmas": [
                         "1.5",
                         "1.5"
@@ -13570,6 +13586,94 @@
             },
             "comments": "make sure that location representations of objects are sustained until current action sentence is parsed sucessfully"
         },
+        "cedar.dynamics.NeuralField": {
+            "name": "tracking wm good params",
+            "activation as output": "false",
+            "discrete metric (workaround)": "false",
+            "update stepIcon according to output": "true",
+            "threshold for updating the stepIcon": "0.80000000000000004",
+            "dimensionality": "2",
+            "sizes": [
+                "50",
+                "50"
+            ],
+            "time scale": "25",
+            "resting level": "-5",
+            "input noise gain": "0.10000000000000001",
+            "multiplicative noise (input)": "false",
+            "multiplicative noise (activation)": "false",
+            "sigmoid": {
+                "type": "cedar.aux.math.AbsSigmoid",
+                "threshold": "0",
+                "beta": "100"
+            },
+            "global inhibition": "-0.060000000000000005",
+            "lateral kernels": {
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "30",
+                    "sigmas": [
+                        "1",
+                        "1"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                },
+                "cedar.aux.kernel.Gauss": {
+                    "dimensionality": "2",
+                    "anchor": [
+                        "0",
+                        "0"
+                    ],
+                    "amplitude": "-22.100000000000001",
+                    "sigmas": [
+                        "1.5",
+                        "1.5"
+                    ],
+                    "normalize": "true",
+                    "shifts": [
+                        "0",
+                        "0"
+                    ],
+                    "limit": "5"
+                }
+            },
+            "lateral kernel convolution": {
+                "borderType": "Zero",
+                "mode": "Same",
+                "engine": {
+                    "type": "cedar.aux.conv.OpenCV"
+                },
+                "alternate even kernel center": "false"
+            },
+            "noise correlation kernel": {
+                "dimensionality": "2",
+                "anchor": [
+                    "0",
+                    "0"
+                ],
+                "amplitude": "0",
+                "sigmas": [
+                    "3",
+                    "3"
+                ],
+                "normalize": "true",
+                "shifts": [
+                    "0",
+                    "0"
+                ],
+                "limit": "5"
+            },
+            "comments": ""
+        },
         "cedar.processing.StaticGain": {
             "name": "trans",
             "gain factor": "1",
@@ -14267,7 +14371,7 @@
             "record": "false",
             "VideoGrabber": {
                 "name": "VideoGrabber",
-                "step size": "0.0998217 s",
+                "step size": "0.0987952 s",
                 "fake Euler step size": "0.001 s",
                 "minimum sleep time": "0.0002 s",
                 "idle time": "1e-05 s",
@@ -14284,7 +14388,7 @@
                             "isRelative": "false"
                         },
                         "filename": {
-                            "path": "\/home\/minseok\/D\/Uni\/10\/Masterarbeit\/Main\/Videos\/simple_record\/07_combined.mp4",
+                            "path": "\/home\/minseok\/D\/Uni\/10\/Masterarbeit\/Main\/Videos\/simple_record\/06_drop_ref.mp4",
                             "isRelative": "false"
                         }
                     }
@@ -14575,7 +14679,8 @@
                 "GDr: contact stop motion",
                 "Tp\\(TqvTr)",
                 "Tq: no agent movement",
-                "Dq:pushed"
+                "Dq:pushed",
+                "tracking wm good params"
             ]
         },
         "cedar.processing.LoopedTrigger": {
@@ -18365,6 +18470,10 @@
         {
             "source": "Projection 17.output",
             "target": "space-hue perception.input"
+        },
+        {
+            "source": "Gauss Input.Gauss input",
+            "target": "tracking wm good params.input"
         }
     ],
     "records": {
@@ -18756,18 +18865,6 @@
         },
         {
             "type": "stickyNote",
-            "width": "208",
-            "height": "123",
-            "x": "-1470",
-            "y": "-896",
-            "text": "prim_hypo_test\nrequires revisiting primitives to change if necessary..",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
             "width": "431",
             "height": "295",
             "x": "-1512",
@@ -18780,18 +18877,6 @@
         },
         {
             "type": "stickyNote",
-            "width": "192",
-            "height": "87",
-            "x": "70",
-            "y": "-588",
-            "text": "one can imagine whenever the reverse order occurs (b before a), this inihibits the current hypo",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
             "width": "494",
             "height": "322",
             "x": "2310",
@@ -18801,18 +18886,6 @@
             "color red": "110",
             "color green": "255",
             "color blue": "255"
-        },
-        {
-            "type": "stickyNote",
-            "width": "411",
-            "height": "168",
-            "x": "-1736",
-            "y": "-546",
-            "text": "It's not correct to check different stages from the start when primitive changes as some inital stages might already been surpassed\nworks now only because primitives change relatively early and all stages can be checked\nit also doesn't make sense that we can check different stages for all primitives at the same time\nneed to check for only later stages and omitting initial stages as necessary",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
         },
         {
             "type": "stickyNote",
@@ -18845,18 +18918,6 @@
             "x": "98",
             "y": "532",
             "text": "problem with multiple objects... spuorious effects..",
-            "font size": "10",
-            "color red": "255",
-            "color green": "255",
-            "color blue": "110"
-        },
-        {
-            "type": "stickyNote",
-            "width": "120",
-            "height": "70",
-            "x": "2842",
-            "y": "602",
-            "text": "note that gating fields might be needed theoretically",
             "font size": "10",
             "color red": "255",
             "color green": "255",
@@ -19586,6 +19647,15 @@
             "height": "40",
             "positionX": "-504",
             "positionY": "-1232"
+        },
+        {
+            "type": "step",
+            "step": "Gauss Input",
+            "display style": "ICON_ONLY",
+            "width": "40",
+            "height": "40",
+            "positionX": "2856",
+            "positionY": "420"
         },
         {
             "type": "step",
@@ -22679,8 +22749,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1162",
-            "positionY": "-196"
+            "positionX": "1190",
+            "positionY": "-182"
         },
         {
             "type": "step",
@@ -23164,8 +23234,8 @@
             "display style": "ICON_AND_TEXT",
             "width": "124",
             "height": "40",
-            "positionX": "1162",
-            "positionY": "-364"
+            "positionX": "1036",
+            "positionY": "-420"
         },
         {
             "type": "step",
@@ -23799,6 +23869,15 @@
         },
         {
             "type": "step",
+            "step": "tracking wm good params",
+            "display style": "ICON_AND_TEXT",
+            "width": "124",
+            "height": "40",
+            "positionX": "2954",
+            "positionY": "420"
+        },
+        {
+            "type": "step",
             "step": "trans",
             "display style": "ICON_ONLY",
             "width": "40",
@@ -23943,11 +24022,11 @@
         }
     ],
     "ui view": {
-        "ScrollBarX": "774",
-        "ScrollBarY": "3",
-        "SliderPosX": "774",
-        "SliderPosY": "3",
-        "Zoom": "0.62"
+        "ScrollBarX": "1192",
+        "ScrollBarY": "-332",
+        "SliderPosX": "1192",
+        "SliderPosY": "-332",
+        "Zoom": "1.1000000000000001"
     },
     "ui generic": {
         "group": "element",
